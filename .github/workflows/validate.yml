@@ -1,0 +1,24 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Validate skills
+        run: python scripts/validate.py
+      - name: Check generated plugins are up to date
+        run: python scripts/build_plugins.py --check
+      - name: Run tests
+        run: python -m unittest discover -s tests -v

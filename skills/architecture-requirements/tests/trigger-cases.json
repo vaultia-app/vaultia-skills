@@ -1,0 +1,18 @@
+{
+  "skill": "architecture-requirements",
+  "should_trigger": [
+    "Here's our PRD for team calendars. Write the technical design doc.",
+    "Design the system architecture for a multi-tenant invoicing SaaS.",
+    "What are the non-functional requirements and architecture constraints for this payments feature?",
+    "Review this architecture document and point out risks and gaps.",
+    "Turn this feature spec into components, APIs, and a data model before we start coding.",
+    "Write an ADR comparing a modular monolith and microservices for our new platform."
+  ],
+  "should_not_trigger": [
+    "Write a PRD for a habit-tracking app.",
+    "Who are the target users and what success metrics should we use for this feature?",
+    "Fix this SQL query that returns duplicate rows.",
+    "Rename the variable userId to accountId across the project.",
+    "Summarize this customer interview transcript."
+  ]
+}

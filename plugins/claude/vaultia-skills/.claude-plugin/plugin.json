@@ -1,0 +1,14 @@
+{
+  "name": "vaultia-skills",
+  "version": "0.1.0",
+  "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
+  "author": {
+    "name": "Vaultia"
+  },
+  "keywords": [
+    "requirements",
+    "product-management",
+    "architecture",
+    "software-design"
+  ]
+}

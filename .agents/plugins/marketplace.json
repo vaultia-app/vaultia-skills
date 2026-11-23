@@ -1,0 +1,44 @@
+{
+  "name": "vaultia-skills",
+  "interface": {
+    "displayName": "Vaultia Skills"
+  },
+  "plugins": [
+    {
+      "name": "architecture-requirements",
+      "source": {
+        "source": "local",
+        "path": "./plugins/openai/architecture-requirements"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "product-requirements",
+      "source": {
+        "source": "local",
+        "path": "./plugins/openai/product-requirements"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "vaultia-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/openai/vaultia-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

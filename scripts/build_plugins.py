@@ -1,0 +1,291 @@
+#!/usr/bin/env python3
+"""Build platform plugins and marketplaces from the canonical skills/.
+
+Generated output (never edit by hand):
+
+  plugins/claude/<plugin>/.claude-plugin/plugin.json   Claude Code plugin
+  plugins/claude/<plugin>/skills/<skill>/...
+  plugins/openai/<plugin>/plugin.json                  Codex / ChatGPT plugin
+  plugins/openai/<plugin>/skills/<skill>/...
+  .claude-plugin/marketplace.json                      Claude Code marketplace
+  .agents/plugins/marketplace.json                     Codex / ChatGPT marketplace
+  dist/skills/<skill>.zip                              (--zip) for manual upload
+                                                       to claude.ai / ChatGPT
+
+One plugin is built per skill, plus a bundle plugin containing every skill.
+
+Usage:
+  python3 scripts/build_plugins.py           # regenerate plugins and marketplaces
+  python3 scripts/build_plugins.py --zip     # also build dist/skills/*.zip
+  python3 scripts/build_plugins.py --check   # fail if generated files are stale
+
+Standard library only.
+"""
+
+from __future__ import annotations
+
+import argparse
+import filecmp
+import json
+import re
+import shutil
+import sys
+import tempfile
+import zipfile
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import validate  # noqa: E402
+
+MARKETPLACE_NAME = "vaultia-skills"
+BUNDLE_NAME = "vaultia-skills"
+BUNDLE_DISPLAY_NAME = "Vaultia Skills"
+BUNDLE_DESCRIPTION = "All Vaultia skills: product requirements and architecture requirements for software teams."
+AUTHOR = {"name": "Vaultia"}
+OPENAI_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+OPENAI_CATEGORY = "Productivity"
+KEYWORDS = ["requirements", "product-management", "architecture", "software-design"]
+
+# Skill content that is not shipped inside plugins or zips.
+EXCLUDED_FROM_DISTRIBUTION = ("tests", "__pycache__", ".DS_Store")
+
+GENERATED_PATHS = (
+    Path("plugins"),
+    Path(".claude-plugin") / "marketplace.json",
+    Path(".agents") / "plugins" / "marketplace.json",
+)
+
+
+# ---------------------------------------------------------------- metadata
+
+def project_version(root: Path = REPO_ROOT) -> str:
+    match = re.search(r'^version\s*=\s*"([^"]+)"', (root / "pyproject.toml").read_text(), re.M)
+    if not match:
+        raise SystemExit("version not found in pyproject.toml")
+    return match.group(1)
+
+
+def read_skill(skill_dir: Path) -> dict[str, str]:
+    block, _ = validate.split_frontmatter((skill_dir / "SKILL.md").read_text(encoding="utf-8"))
+    return validate.parse_frontmatter(block or "")
+
+
+def short_description(description: str) -> str:
+    """First clause of a skill description, suitable for a plugin listing."""
+    text = re.split(r" — |(?<=\.)\s", description, maxsplit=1)[0].strip().rstrip(".")
+    return text + "."
+
+
+def title_case(name: str) -> str:
+    return " ".join(word.capitalize() for word in name.split("-"))
+
+
+# ---------------------------------------------------------------- writers
+
+def write_json(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def copy_skill(skill_dir: Path, destination: Path) -> None:
+    shutil.copytree(skill_dir, destination, ignore=shutil.ignore_patterns(*EXCLUDED_FROM_DISTRIBUTION))
+
+
+def claude_manifest(name: str, description: str, version: str) -> dict:
+    return {
+        "name": name,
+        "version": version,
+        "description": description,
+        "author": AUTHOR,
+        "keywords": KEYWORDS,
+    }
+
+
+def openai_manifest(name: str, display_name: str, description: str, version: str) -> dict:
+    return {
+        "$schema": OPENAI_PLUGIN_SCHEMA,
+        "name": name,
+        "version": version,
+        "description": description,
+        "author": AUTHOR,
+        "keywords": KEYWORDS,
+        "extensions": {
+            "com.openai": {
+                "interface": {
+                    "displayName": display_name,
+                    "shortDescription": description,
+                    "developerName": AUTHOR["name"],
+                    "category": OPENAI_CATEGORY,
+                }
+            }
+        },
+    }
+
+
+def plan_plugins(skill_dirs: list[Path]) -> list[dict]:
+    """Return plugin specs: one per skill plus the bundle."""
+    plugins = []
+    for skill_dir in skill_dirs:
+        meta = read_skill(skill_dir)
+        plugins.append({
+            "name": meta["name"],
+            "display_name": title_case(meta["name"]),
+            "description": short_description(meta["description"]),
+            "skills": [skill_dir],
+        })
+    plugins.append({
+        "name": BUNDLE_NAME,
+        "display_name": BUNDLE_DISPLAY_NAME,
+        "description": BUNDLE_DESCRIPTION,
+        "skills": skill_dirs,
+    })
+    return plugins
+
+
+def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | None = None) -> list[dict]:
+    """Generate plugins and marketplaces into `out`. Returns the plugin specs."""
+    version = version or project_version()
+    skill_dirs = validate.discover_skills(skills_root)
+    if not skill_dirs:
+        raise SystemExit("no skills found")
+
+    failures = [r for r in map(validate.validate_skill, skill_dirs) if not r.ok]
+    if failures:
+        names = ", ".join(r.skill for r in failures)
+        raise SystemExit(f"invalid skills, run scripts/validate.py: {names}")
+
+    plugins_root = out / "plugins"
+    for platform in ("claude", "openai"):
+        shutil.rmtree(plugins_root / platform, ignore_errors=True)
+
+    plugins = plan_plugins(skill_dirs)
+    for spec in plugins:
+        name, description = spec["name"], spec["description"]
+
+        claude_dir = plugins_root / "claude" / name
+        write_json(claude_dir / ".claude-plugin" / "plugin.json", claude_manifest(name, description, version))
+
+        openai_dir = plugins_root / "openai" / name
+        write_json(openai_dir / "plugin.json", openai_manifest(name, spec["display_name"], description, version))
+
+        for skill_dir in spec["skills"]:
+            copy_skill(skill_dir, claude_dir / "skills" / skill_dir.name)
+            copy_skill(skill_dir, openai_dir / "skills" / skill_dir.name)
+
+    write_json(out / ".claude-plugin" / "marketplace.json", {
+        "name": MARKETPLACE_NAME,
+        "description": "Reusable AI Agent Skills for product and architecture requirements.",
+        "owner": AUTHOR,
+        "metadata": {"version": version},
+        "plugins": [
+            {
+                "name": spec["name"],
+                "source": f"./plugins/claude/{spec['name']}",
+                "description": spec["description"],
+                "version": version,
+                "category": "productivity",
+                "keywords": KEYWORDS,
+            }
+            for spec in plugins
+        ],
+    })
+
+    write_json(out / ".agents" / "plugins" / "marketplace.json", {
+        "name": MARKETPLACE_NAME,
+        "interface": {"displayName": BUNDLE_DISPLAY_NAME},
+        "plugins": [
+            {
+                "name": spec["name"],
+                "source": {"source": "local", "path": f"./plugins/openai/{spec['name']}"},
+                "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+                "category": OPENAI_CATEGORY,
+            }
+            for spec in plugins
+        ],
+    })
+    return plugins
+
+
+def build_zips(out: Path, skills_root: Path = validate.SKILLS_DIR) -> list[Path]:
+    """Zip each skill as <skill>/SKILL.md ... for upload to claude.ai or ChatGPT."""
+    dist = out / "dist" / "skills"
+    shutil.rmtree(dist, ignore_errors=True)
+    dist.mkdir(parents=True)
+    archives = []
+    for skill_dir in validate.discover_skills(skills_root):
+        archive = dist / f"{skill_dir.name}.zip"
+        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
+            for path in sorted(skill_dir.rglob("*")):
+                rel = path.relative_to(skill_dir)
+                if path.is_dir() or any(part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
+                    continue
+                zf.write(path, Path(skill_dir.name) / rel)
+        archives.append(archive)
+    return archives
+
+
+# ---------------------------------------------------------------- check
+
+def diff_trees(expected: Path, actual: Path) -> list[str]:
+    """List relative paths that differ between two files or directory trees."""
+    if expected.is_file() or actual.is_file():
+        if not (expected.is_file() and actual.is_file()):
+            return [str(actual)]
+        return [] if filecmp.cmp(expected, actual, shallow=False) else [str(actual)]
+    if not actual.is_dir():
+        return [str(actual)]
+    comparison = filecmp.dircmp(expected, actual, ignore=["__pycache__", ".DS_Store"])
+    problems = [str(actual / n) for n in comparison.left_only + comparison.right_only + comparison.funny_files]
+    for name in comparison.common_files:
+        if not filecmp.cmp(expected / name, actual / name, shallow=False):
+            problems.append(str(actual / name))
+    for name in comparison.common_dirs:
+        problems.extend(diff_trees(expected / name, actual / name))
+    return problems
+
+
+def check(root: Path = REPO_ROOT) -> list[str]:
+    with tempfile.TemporaryDirectory() as tmp:
+        expected = Path(tmp)
+        build(expected, root / "skills", project_version(root))
+        problems: list[str] = []
+        for rel in GENERATED_PATHS:
+            for platform_dir in ([rel / "claude", rel / "openai"] if rel == Path("plugins") else [rel]):
+                problems.extend(
+                    str(Path(p).relative_to(expected) if p.startswith(str(expected)) else Path(p).relative_to(root))
+                    for p in diff_trees(expected / platform_dir, root / platform_dir)
+                )
+        return problems
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Build plugins and marketplaces from skills/.")
+    parser.add_argument("--check", action="store_true", help="fail if generated files are out of date")
+    parser.add_argument("--zip", action="store_true", help="also build dist/skills/<skill>.zip")
+    args = parser.parse_args(argv)
+
+    if args.check:
+        problems = check()
+        if problems:
+            print("Generated plugins are out of date. Run: python3 scripts/build_plugins.py")
+            for path in problems:
+                print(f"  stale: {path}")
+            return 1
+        print("Generated plugins are up to date.")
+        return 0
+
+    plugins = build(REPO_ROOT)
+    for spec in plugins:
+        skills = ", ".join(p.name for p in spec["skills"])
+        print(f"built {spec['name']}  [{skills}]")
+    print("wrote .claude-plugin/marketplace.json and .agents/plugins/marketplace.json")
+    if args.zip:
+        for archive in build_zips(REPO_ROOT):
+            print(f"zipped {archive.relative_to(REPO_ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

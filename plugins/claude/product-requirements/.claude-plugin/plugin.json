@@ -1,0 +1,14 @@
+{
+  "name": "product-requirements",
+  "version": "0.1.0",
+  "description": "Create, refine, and review product requirements documents (PRDs) for software products and features.",
+  "author": {
+    "name": "Vaultia"
+  },
+  "keywords": [
+    "requirements",
+    "product-management",
+    "architecture",
+    "software-design"
+  ]
+}

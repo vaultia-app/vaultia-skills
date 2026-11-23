@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "architecture-requirements",
+  "version": "0.1.0",
+  "description": "Create, refine, and review software architecture requirements and system design documents.",
+  "author": {
+    "name": "Vaultia"
+  },
+  "keywords": [
+    "requirements",
+    "product-management",
+    "architecture",
+    "software-design"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Architecture Requirements",
+        "shortDescription": "Create, refine, and review software architecture requirements and system design documents.",
+        "developerName": "Vaultia",
+        "category": "Productivity"
+      }
+    }
+  }
+}

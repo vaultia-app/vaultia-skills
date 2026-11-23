@@ -1,0 +1,18 @@
+{
+  "skill": "product-requirements",
+  "should_trigger": [
+    "Write a PRD for a team calendar feature in our project management app.",
+    "Turn these meeting notes into product requirements with acceptance criteria.",
+    "Can you review this product spec and tell me what's missing?",
+    "I have an idea for a habit-tracking app. Help me define the requirements.",
+    "Write user stories and acceptance criteria for password reset.",
+    "We need a feature spec for exporting reports to CSV before sprint planning."
+  ],
+  "should_not_trigger": [
+    "Design the database schema and API endpoints for the calendar feature.",
+    "Which message queue should we use for this microservice architecture?",
+    "Fix the failing unit test in auth_service.py.",
+    "Review this pull request for bugs.",
+    "Write a marketing email announcing our new feature."
+  ]
+}
