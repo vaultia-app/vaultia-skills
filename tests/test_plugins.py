@@ -42,6 +42,8 @@ class BuildPluginsTest(unittest.TestCase):
                 self.assertEqual(manifest["name"], name)
                 self.assertEqual(manifest["version"], "9.9.9")
                 self.assertTrue(manifest["description"])
+                self.assertTrue(manifest["displayName"].strip())
+                self.assertTrue((root / manifest["icon"]).is_file())
                 self.assertTrue((root / "skills").is_dir())
 
     def test_openai_plugins(self) -> None:
@@ -141,6 +143,22 @@ class PluginZipTest(unittest.TestCase):
                 self.assertTrue(any(n.startswith("skills/") and n.endswith("/SKILL.md") for n in names))
                 logo = manifest["interface"]["logo"].removeprefix("./")
                 self.assertIn(logo, names)
+
+
+class ClaudePluginZipTest(unittest.TestCase):
+    def test_claude_plugin_zip_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            build_plugins.build(out, version="9.9.9")
+            archives = build_plugins.build_claude_plugin_zips(out)
+            self.assertEqual(sorted(a.stem for a in archives), sorted(PLUGINS))
+            for archive in archives:
+                with zipfile.ZipFile(archive) as zf:
+                    names = zf.namelist()
+                    manifest = json.loads(zf.read(".claude-plugin/plugin.json"))
+                self.assertEqual(manifest["name"], archive.stem)
+                self.assertIn(manifest["icon"].removeprefix("./"), names)
+                self.assertTrue(any(n.startswith("skills/") and n.endswith("/SKILL.md") for n in names))
 
 
 class HelpersTest(unittest.TestCase):

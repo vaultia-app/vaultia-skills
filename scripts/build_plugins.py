@@ -12,6 +12,7 @@ Generated output (never edit by hand):
   .agents/plugins/marketplace.json                     Codex / ChatGPT marketplace
   dist/skills/<skill>.zip                              (--zip) skill upload (claude.ai)
   dist/plugins/<plugin>.zip                            (--zip) plugin upload (ChatGPT / Codex)
+  dist/claude-plugins/<plugin>.zip                     (--zip) plugin upload (Claude Desktop / claude.ai)
 
 One plugin is built per skill, plus a bundle plugin containing every skill.
 
@@ -149,14 +150,20 @@ def copy_skill(skill_dir: Path, destination: Path) -> None:
     shutil.copytree(skill_dir, destination, ignore=shutil.ignore_patterns(*EXCLUDED_FROM_DISTRIBUTION))
 
 
-def claude_manifest(name: str, description: str, version: str) -> dict:
-    return {
+def claude_manifest(name: str, display_name: str, description: str, version: str,
+                    icon: str | None = None) -> dict:
+    manifest = {
         "name": name,
+        "displayName": display_name,
         "version": version,
         "description": description,
         "author": AUTHOR,
         "keywords": KEYWORDS,
     }
+    if icon:
+        # Read by Anthropic's plugin directory only; Claude Code ignores it.
+        manifest["icon"] = icon
+    return manifest
 
 
 def openai_branding(root: Path = REPO_ROOT) -> tuple[dict, list[Path]]:
@@ -247,7 +254,14 @@ def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | Non
         name, description = spec["name"], spec["description"]
 
         claude_dir = plugins_root / "claude" / name
-        write_json(claude_dir / ".claude-plugin" / "plugin.json", claude_manifest(name, description, version))
+        claude_icon = branding.get("logo")
+        write_json(claude_dir / ".claude-plugin" / "plugin.json",
+                   claude_manifest(name, spec["display_name"], description, version, claude_icon))
+        if claude_icon:
+            source = next(f for f in brand_files if f.name == Path(claude_icon).name)
+            target = claude_dir / claude_icon
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
 
         openai_dir = plugins_root / "openai" / name
         write_json(openai_dir / "plugin.json",
@@ -269,6 +283,7 @@ def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | Non
         "plugins": [
             {
                 "name": spec["name"],
+                "displayName": spec["display_name"],
                 "source": f"./plugins/claude/{spec['name']}",
                 "description": spec["description"],
                 "version": version,
@@ -323,6 +338,25 @@ def build_plugin_zips(out: Path) -> list[Path]:
                 rel = path.relative_to(plugin_dir)
                 if path.is_dir() or rel == Path("plugin.json") or any(
                         part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
+                    continue
+                zf.write(path, rel)
+        archives.append(archive)
+    return archives
+
+
+def build_claude_plugin_zips(out: Path) -> list[Path]:
+    """Zip each generated Claude plugin (root = `.claude-plugin/`, `skills/`, `assets/`)
+    for upload in Claude Desktop / claude.ai. Run after build()."""
+    dist = out / "dist" / "claude-plugins"
+    shutil.rmtree(dist, ignore_errors=True)
+    dist.mkdir(parents=True)
+    archives = []
+    for plugin_dir in sorted(p for p in (out / "plugins" / "claude").iterdir() if p.is_dir()):
+        archive = dist / f"{plugin_dir.name}.zip"
+        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
+            for path in sorted(plugin_dir.rglob("*")):
+                rel = path.relative_to(plugin_dir)
+                if path.is_dir() or any(part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
                     continue
                 zf.write(path, rel)
         archives.append(archive)
@@ -384,7 +418,7 @@ def check(root: Path = REPO_ROOT) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build plugins and marketplaces from skills/.")
     parser.add_argument("--check", action="store_true", help="fail if generated files are out of date")
-    parser.add_argument("--zip", action="store_true", help="also build dist/skills/<skill>.zip and dist/plugins/<plugin>.zip")
+    parser.add_argument("--zip", action="store_true", help="also build skill zips and plugin zips under dist/")
     args = parser.parse_args(argv)
 
     if args.check:
@@ -403,7 +437,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"built {spec['name']}  [{skills}]")
     print("wrote .claude-plugin/marketplace.json and .agents/plugins/marketplace.json")
     if args.zip:
-        for archive in build_zips(REPO_ROOT) + build_plugin_zips(REPO_ROOT):
+        for archive in build_zips(REPO_ROOT) + build_plugin_zips(REPO_ROOT) + build_claude_plugin_zips(REPO_ROOT):
             print(f"zipped {archive.relative_to(REPO_ROOT)}")
     return 0
 
