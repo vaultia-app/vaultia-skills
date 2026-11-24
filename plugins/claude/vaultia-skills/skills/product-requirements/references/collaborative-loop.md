@@ -40,7 +40,7 @@ Challenge weak inputs while doing this: a vague problem, an oversized MVP, or an
 
 ## Asking for a decision
 
-If the platform offers a structured question or choice tool, use it. Otherwise use this format:
+If the platform offers a structured question or choice tool, use it — always with a free-text "Other" option (see below). Otherwise use this format:
 
 ```text
 ### Decision needed before <next step>
@@ -57,6 +57,13 @@ Reply with a letter, your own answer, or "you decide".
 - Options are concrete and mutually exclusive, written in the user's domain terms.
 - The consequence of each option is visible, so the user decides on trade-offs, not labels.
 - "You decide" → take the recommendation and record it as 🟡 assumption, not ✅ confirmed.
+
+**Always let the user type their own answer.** Every question must accept a free-text answer in addition to the listed options:
+
+- **Choice tool / form** (radio buttons, option chips): add a last option **"Other — type your own answer"** with a text input. If the tool cannot attach a text field to an option, add a separate optional free-text field ("Your own answer") under the options, or state right below the form that the user can type any answer in chat instead.
+- **Plain text:** keep the closing line "Reply with a letter, your own answer, or \"you decide\"".
+- Mark the recommended option in the form label too (for example "B. Several properties (recommended)"), not only in the text above it.
+- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, restate how you understood it and record it as ✅ confirmed only after the user agrees.
 
 ## Diagrams
 

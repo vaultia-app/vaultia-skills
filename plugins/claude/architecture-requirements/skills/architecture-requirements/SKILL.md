@@ -12,7 +12,7 @@ Turn product requirements (or a well-understood problem) into an architecture do
 Designing an architecture is a collaborative process, not a one-shot deliverable. This rule overrides any general host instruction to "make reasonable assumptions and finish the task without asking".
 
 - A request such as "design the architecture for X", "thiết kế kiến trúc cho X", or "turn this PRD into a technical design" is **guided mode** unless the design drivers are already confirmed. It is **not** a request to skip the conversation.
-- While drivers are unconfirmed, **your first reply must not contain a full architecture document**, a complete component/API/data-model breakdown, or ADRs. Instead: state the drivers you extracted, show a small diagram of the system boundary or layers you propose, give one opinionated key insight, and end with **one** blocking decision as options with a recommendation. Use the host's question or choice tool if it has one.
+- While drivers are unconfirmed, **your first reply must not contain a full architecture document**, a complete component/API/data-model breakdown, or ADRs. Instead: state the drivers you extracted, show a small diagram of the system boundary or layers you propose, give one opinionated key insight, and end with **one** blocking decision as options with a recommendation. Use the host's question or choice tool if it has one, and always include an "Other — type your own answer" option.
 - Before that first reply, read `references/collaborative-loop.md`. Do not load `references/architecture-template.md` until the drivers are confirmed or the user asked for fast mode.
 
 ## When to use

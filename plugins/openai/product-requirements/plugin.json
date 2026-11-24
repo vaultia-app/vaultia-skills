@@ -16,9 +16,20 @@
     "com.openai": {
       "interface": {
         "displayName": "Product Requirements",
-        "shortDescription": "Create, refine, and review product requirements documents (PRDs) for software products and features.",
+        "shortDescription": "Write and review PRDs",
+        "longDescription": "Turn a product idea, notes, or a feature request into a clear, testable product requirements document: goals, target users, user journeys, functional requirements, acceptance criteria, success metrics, scope, and rollout. Works step by step with you: proposes options, shows a diagram, and asks one decision at a time before drafting.",
         "developerName": "Vaultia",
         "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Write a PRD for a personal expense tracking app",
+          "Turn these meeting notes into requirements with acceptance criteria",
+          "Review this PRD and list what is missing"
+        ],
+        "screenshots": [],
         "logo": "./assets/brand/logo-512.png",
         "composerIcon": "./assets/brand/composer-light-192.png",
         "composerIconDark": "./assets/brand/composer-dark-192.png",

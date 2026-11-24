@@ -10,14 +10,14 @@ Generated output (never edit by hand):
   plugins/openai/<plugin>/assets/brand/...             icons from the brand kit
   .claude-plugin/marketplace.json                      Claude Code marketplace
   .agents/plugins/marketplace.json                     Codex / ChatGPT marketplace
-  dist/skills/<skill>.zip                              (--zip) for manual upload
-                                                       to claude.ai / ChatGPT
+  dist/skills/<skill>.zip                              (--zip) skill upload (claude.ai)
+  dist/plugins/<plugin>.zip                            (--zip) plugin upload (ChatGPT / Codex)
 
 One plugin is built per skill, plus a bundle plugin containing every skill.
 
 Usage:
   python3 scripts/build_plugins.py           # regenerate plugins and marketplaces
-  python3 scripts/build_plugins.py --zip     # also build dist/skills/*.zip
+  python3 scripts/build_plugins.py --zip     # also build dist/skills/*.zip and dist/plugins/*.zip
   python3 scripts/build_plugins.py --check   # fail if generated files are stale
 
 Standard library only.
@@ -42,11 +42,59 @@ import validate  # noqa: E402
 
 MARKETPLACE_NAME = "vaultia-skills"
 BUNDLE_NAME = "vaultia-skills"
-BUNDLE_DISPLAY_NAME = "Vaultia Requirement"
+BUNDLE_DISPLAY_NAME = "Vaultia"
 BUNDLE_DESCRIPTION = "All Vaultia skills: product requirements and architecture requirements for software teams."
 AUTHOR = {"name": "Vaultia"}
 OPENAI_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 OPENAI_CATEGORY = "Productivity"
+OPENAI_CAPABILITIES = ["Interactive", "Write"]
+
+# Store listing text for OpenAI plugins (ChatGPT requires longDescription).
+# shortDescription stays short (~30 characters), like official plugins.
+OPENAI_LISTING = {
+    "product-requirements": {
+        "shortDescription": "Write and review PRDs",
+        "longDescription": (
+            "Turn a product idea, notes, or a feature request into a clear, testable product "
+            "requirements document: goals, target users, user journeys, functional requirements, "
+            "acceptance criteria, success metrics, scope, and rollout. Works step by step with you: "
+            "proposes options, shows a diagram, and asks one decision at a time before drafting."
+        ),
+        "defaultPrompt": [
+            "Write a PRD for a personal expense tracking app",
+            "Turn these meeting notes into requirements with acceptance criteria",
+            "Review this PRD and list what is missing",
+        ],
+    },
+    "architecture-requirements": {
+        "shortDescription": "Design system architecture",
+        "longDescription": (
+            "Turn product requirements into an architecture document: drivers, components, APIs, "
+            "data models, integrations, security, performance, scalability, reliability, and "
+            "architecture decision records (ADRs). Works step by step with you: proposes a design, "
+            "shows a diagram, and asks one blocking decision at a time."
+        ),
+        "defaultPrompt": [
+            "Turn this PRD into a technical design",
+            "Propose an architecture for a personal expense tracking app",
+            "Review this architecture for gaps and risks",
+        ],
+    },
+}
+OPENAI_LISTING[BUNDLE_NAME] = {
+    "shortDescription": "Product and architecture specs",
+    "longDescription": (
+        "Requirements skills for software teams. product-requirements turns an idea into a testable "
+        "PRD (WHAT and WHY); architecture-requirements turns the PRD into a system design with APIs, "
+        "data models, non-functional requirements, and ADRs (HOW and CONSTRAINTS). Both work step by "
+        "step with you: they propose options, show diagrams, and ask one decision at a time."
+    ),
+    "defaultPrompt": [
+        "Write a PRD for a personal expense tracking app",
+        "Turn this PRD into a technical design",
+        "Review this requirements document for gaps",
+    ],
+}
 KEYWORDS = ["requirements", "product-management", "architecture", "software-design"]
 
 # OpenAI plugin branding: `interface-snippet.json` lists the interface fields
@@ -130,6 +178,7 @@ def openai_branding(root: Path = REPO_ROOT) -> tuple[dict, list[Path]]:
 
 def openai_manifest(name: str, display_name: str, description: str, version: str,
                     branding: dict | None = None) -> dict:
+    listing = OPENAI_LISTING.get(name, {})
     return {
         "$schema": OPENAI_PLUGIN_SCHEMA,
         "name": name,
@@ -141,9 +190,13 @@ def openai_manifest(name: str, display_name: str, description: str, version: str
             "com.openai": {
                 "interface": {
                     "displayName": display_name,
-                    "shortDescription": description,
+                    "shortDescription": listing.get("shortDescription", description),
+                    "longDescription": listing.get("longDescription", description),
                     "developerName": AUTHOR["name"],
                     "category": OPENAI_CATEGORY,
+                    "capabilities": OPENAI_CAPABILITIES,
+                    "defaultPrompt": listing.get("defaultPrompt", []),
+                    "screenshots": [],
                     **(branding or {}),
                 }
             }
@@ -242,6 +295,40 @@ def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | Non
     return plugins
 
 
+def codex_manifest(portable: dict) -> dict:
+    """Convert a portable OpenAI manifest to the native `.codex-plugin/plugin.json` shape."""
+    manifest = {k: v for k, v in portable.items() if k not in ("$schema", "extensions")}
+    manifest["skills"] = "./skills/"
+    manifest["interface"] = portable["extensions"]["com.openai"]["interface"]
+    return manifest
+
+
+def build_plugin_zips(out: Path) -> list[Path]:
+    """Zip each generated OpenAI plugin for upload in ChatGPT / Codex.
+
+    Archive root = plugin root: `.codex-plugin/plugin.json`, `skills/`, `assets/`.
+    Run after build(); reads plugins/openai/ from `out`.
+    """
+    dist = out / "dist" / "plugins"
+    shutil.rmtree(dist, ignore_errors=True)
+    dist.mkdir(parents=True)
+    archives = []
+    for plugin_dir in sorted(p for p in (out / "plugins" / "openai").iterdir() if p.is_dir()):
+        portable = json.loads((plugin_dir / "plugin.json").read_text(encoding="utf-8"))
+        archive = dist / f"{plugin_dir.name}.zip"
+        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr(".codex-plugin/plugin.json",
+                        json.dumps(codex_manifest(portable), indent=2, ensure_ascii=False) + "\n")
+            for path in sorted(plugin_dir.rglob("*")):
+                rel = path.relative_to(plugin_dir)
+                if path.is_dir() or rel == Path("plugin.json") or any(
+                        part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
+                    continue
+                zf.write(path, rel)
+        archives.append(archive)
+    return archives
+
+
 def build_zips(out: Path, skills_root: Path = validate.SKILLS_DIR) -> list[Path]:
     """Zip each skill as <skill>/SKILL.md ... for upload to claude.ai or ChatGPT."""
     dist = out / "dist" / "skills"
@@ -297,7 +384,7 @@ def check(root: Path = REPO_ROOT) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build plugins and marketplaces from skills/.")
     parser.add_argument("--check", action="store_true", help="fail if generated files are out of date")
-    parser.add_argument("--zip", action="store_true", help="also build dist/skills/<skill>.zip")
+    parser.add_argument("--zip", action="store_true", help="also build dist/skills/<skill>.zip and dist/plugins/<plugin>.zip")
     args = parser.parse_args(argv)
 
     if args.check:
@@ -316,7 +403,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"built {spec['name']}  [{skills}]")
     print("wrote .claude-plugin/marketplace.json and .agents/plugins/marketplace.json")
     if args.zip:
-        for archive in build_zips(REPO_ROOT):
+        for archive in build_zips(REPO_ROOT) + build_plugin_zips(REPO_ROOT):
             print(f"zipped {archive.relative_to(REPO_ROOT)}")
     return 0
 

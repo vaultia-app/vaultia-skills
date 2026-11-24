@@ -120,6 +120,29 @@ class ZipTest(unittest.TestCase):
                 self.assertFalse(any("/tests/" in n for n in names))
 
 
+class PluginZipTest(unittest.TestCase):
+    def test_plugin_zip_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            build_plugins.build(out, version="9.9.9")
+            archives = build_plugins.build_plugin_zips(out)
+            self.assertEqual(sorted(a.stem for a in archives), sorted(PLUGINS))
+            for archive in archives:
+                with zipfile.ZipFile(archive) as zf:
+                    names = zf.namelist()
+                    manifest = json.loads(zf.read(".codex-plugin/plugin.json"))
+                self.assertEqual(manifest["name"], archive.stem)
+                self.assertEqual(manifest["skills"], "./skills/")
+                interface = manifest["interface"]
+                for key in ("displayName", "shortDescription", "longDescription", "developerName", "category"):
+                    self.assertTrue(interface[key].strip(), key)
+                self.assertTrue(interface["defaultPrompt"])
+                self.assertNotIn("plugin.json", names)
+                self.assertTrue(any(n.startswith("skills/") and n.endswith("/SKILL.md") for n in names))
+                logo = manifest["interface"]["logo"].removeprefix("./")
+                self.assertIn(logo, names)
+
+
 class HelpersTest(unittest.TestCase):
     def test_short_description(self) -> None:
         self.assertEqual(build_plugins.short_description("Do X — and more. Use when Y."), "Do X.")

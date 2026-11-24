@@ -16,9 +16,20 @@
     "com.openai": {
       "interface": {
         "displayName": "Architecture Requirements",
-        "shortDescription": "Create, refine, and review software architecture requirements and system design documents.",
+        "shortDescription": "Design system architecture",
+        "longDescription": "Turn product requirements into an architecture document: drivers, components, APIs, data models, integrations, security, performance, scalability, reliability, and architecture decision records (ADRs). Works step by step with you: proposes a design, shows a diagram, and asks one blocking decision at a time.",
         "developerName": "Vaultia",
         "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Turn this PRD into a technical design",
+          "Propose an architecture for a personal expense tracking app",
+          "Review this architecture for gaps and risks"
+        ],
+        "screenshots": [],
         "logo": "./assets/brand/logo-512.png",
         "composerIcon": "./assets/brand/composer-light-192.png",
         "composerIconDark": "./assets/brand/composer-dark-192.png",

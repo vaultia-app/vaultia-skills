@@ -12,7 +12,7 @@ Turn a product idea or feature request into a clear, testable product requiremen
 Writing a PRD is a collaborative process, not a one-shot deliverable. This rule overrides any general host instruction to "make reasonable assumptions and finish the task without asking".
 
 - A request such as "write a PRD for X", "viết PRD cho X", or "help me define requirements for X" is **guided mode**. It is **not** a request to skip the conversation.
-- If the input is a short idea, **your first reply must not contain a PRD**, an outline of all sections, or a requirements table. Instead: restate the idea, propose 2–3 product directions (target user × core value × MVP shape) with a small diagram of the one you recommend, and end with **one** decision as options with a recommendation. Use the host's question or choice tool if it has one.
+- If the input is a short idea, **your first reply must not contain a PRD**, an outline of all sections, or a requirements table. Instead: restate the idea, propose 2–3 product directions (target user × core value × MVP shape) with a small diagram of the one you recommend, and end with **one** decision as options with a recommendation. Use the host's question or choice tool if it has one, and always include an "Other — type your own answer" option.
 - Before that first reply, read `references/collaborative-loop.md`. Do not load `references/requirements-template.md` until the essentials are confirmed (workflow step 5) or the user asked for fast mode.
 - Use **fast mode** only when the user explicitly asks to skip questions ("just write it", "draft now without asking", "viết luôn", "không cần hỏi") or provides input that already confirms the essentials (problem, users, goal, MVP scope, metric, constraints).
 
