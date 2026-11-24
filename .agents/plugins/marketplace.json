@@ -1,7 +1,7 @@
 {
   "name": "vaultia-skills",
   "interface": {
-    "displayName": "Vaultia Requirement"
+    "displayName": "Vaultia"
   },
   "plugins": [
     {
