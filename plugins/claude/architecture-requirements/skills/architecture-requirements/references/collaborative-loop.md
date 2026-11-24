@@ -68,6 +68,7 @@ Reply with a letter, your own answer, or "you decide".
 
 - **Choice tool / form** (radio buttons, option chips): add a last option **"Other — type your own answer"** with a text input. If the tool cannot attach a text field to an option, add a separate optional free-text field ("Your own answer") under the options, or state right below the form that the user can type any answer in chat instead.
 - **Plain text:** keep the closing line "Reply with a letter, your own answer, or \"you decide\"".
+- **Submitted text = the answer only.** When the choice tool lets you set the message sent on submit, make it a short answer in the user's language, in the form `<topic>: <chosen option>` (for example "Primary customer: Software agencies and freelancers"). Never add instructions such as "update the PRD and ask the next question" — the loop already does that, and the extra text clutters the user's chat.
 - Mark the recommended option in the form label too (for example "B. Several properties (recommended)"), not only in the text above it.
 - A typed answer takes priority over a selected option. If it is unclear or contradicts the options, record your interpretation as 🟡 and confirm it through the choice form on the next turn (see *Keep the loop moving until v1.0*); mark it ✅ only after the user agrees.
 

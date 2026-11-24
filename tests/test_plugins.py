@@ -128,12 +128,14 @@ class PluginZipTest(unittest.TestCase):
             out = Path(tmp)
             build_plugins.build(out, version="9.9.9")
             archives = build_plugins.build_plugin_zips(out)
-            self.assertEqual(sorted(a.stem for a in archives), sorted(PLUGINS))
+            expected = {"vaultia" if n == build_plugins.BUNDLE_NAME else n for n in PLUGINS}
+            self.assertEqual({a.stem for a in archives}, expected)
             for archive in archives:
                 with zipfile.ZipFile(archive) as zf:
                     names = zf.namelist()
                     manifest = json.loads(zf.read(".codex-plugin/plugin.json"))
-                self.assertEqual(manifest["name"], archive.stem)
+                    claude = json.loads(zf.read(".claude-plugin/plugin.json"))
+                self.assertIn(manifest["name"], PLUGINS)
                 self.assertEqual(manifest["skills"], "./skills/")
                 interface = manifest["interface"]
                 for key in ("displayName", "shortDescription", "longDescription", "developerName", "category"):
@@ -143,22 +145,9 @@ class PluginZipTest(unittest.TestCase):
                 self.assertTrue(any(n.startswith("skills/") and n.endswith("/SKILL.md") for n in names))
                 logo = manifest["interface"]["logo"].removeprefix("./")
                 self.assertIn(logo, names)
-
-
-class ClaudePluginZipTest(unittest.TestCase):
-    def test_claude_plugin_zip_layout(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            out = Path(tmp)
-            build_plugins.build(out, version="9.9.9")
-            archives = build_plugins.build_claude_plugin_zips(out)
-            self.assertEqual(sorted(a.stem for a in archives), sorted(PLUGINS))
-            for archive in archives:
-                with zipfile.ZipFile(archive) as zf:
-                    names = zf.namelist()
-                    manifest = json.loads(zf.read(".claude-plugin/plugin.json"))
-                self.assertEqual(manifest["name"], archive.stem)
-                self.assertIn(manifest["icon"].removeprefix("./"), names)
-                self.assertTrue(any(n.startswith("skills/") and n.endswith("/SKILL.md") for n in names))
+                self.assertEqual(claude["name"], manifest["name"])
+                self.assertEqual(claude["displayName"], interface["displayName"])
+                self.assertIn(claude["icon"].removeprefix("./"), names)
 
 
 class HelpersTest(unittest.TestCase):

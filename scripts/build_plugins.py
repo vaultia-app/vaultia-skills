@@ -11,8 +11,8 @@ Generated output (never edit by hand):
   .claude-plugin/marketplace.json                      Claude Code marketplace
   .agents/plugins/marketplace.json                     Codex / ChatGPT marketplace
   dist/skills/<skill>.zip                              (--zip) skill upload (claude.ai)
-  dist/plugins/<plugin>.zip                            (--zip) plugin upload (ChatGPT / Codex)
-  dist/claude-plugins/<plugin>.zip                     (--zip) plugin upload (Claude Desktop / claude.ai)
+  dist/plugins/<display-name>.zip                      (--zip) plugin upload for both ChatGPT / Codex
+                                                       and Claude Desktop / claude.ai
 
 One plugin is built per skill, plus a bundle plugin containing every skill.
 
@@ -318,11 +318,18 @@ def codex_manifest(portable: dict) -> dict:
     return manifest
 
 
-def build_plugin_zips(out: Path) -> list[Path]:
-    """Zip each generated OpenAI plugin for upload in ChatGPT / Codex.
+def plugin_zip_name(portable: dict) -> str:
+    """Upload file name from the display name: "Vaultia" -> vaultia, "Product Requirements" -> product-requirements."""
+    display = portable["extensions"]["com.openai"]["interface"]["displayName"]
+    return re.sub(r"[^a-z0-9]+", "-", display.lower()).strip("-")
 
-    Archive root = plugin root: `.codex-plugin/plugin.json`, `skills/`, `assets/`.
-    Run after build(); reads plugins/openai/ from `out`.
+
+def build_plugin_zips(out: Path) -> list[Path]:
+    """Zip each plugin once for upload in ChatGPT / Codex and Claude.
+
+    Archive root = plugin root: `.codex-plugin/plugin.json` (ChatGPT / Codex),
+    `.claude-plugin/plugin.json` (Claude), and the shared `skills/` and `assets/`.
+    Each platform reads only its own manifest folder. Run after build().
     """
     dist = out / "dist" / "plugins"
     shutil.rmtree(dist, ignore_errors=True)
@@ -330,33 +337,16 @@ def build_plugin_zips(out: Path) -> list[Path]:
     archives = []
     for plugin_dir in sorted(p for p in (out / "plugins" / "openai").iterdir() if p.is_dir()):
         portable = json.loads((plugin_dir / "plugin.json").read_text(encoding="utf-8"))
-        archive = dist / f"{plugin_dir.name}.zip"
+        archive = dist / f"{plugin_zip_name(portable)}.zip"
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.writestr(".codex-plugin/plugin.json",
                         json.dumps(codex_manifest(portable), indent=2, ensure_ascii=False) + "\n")
+            zf.write(out / "plugins" / "claude" / plugin_dir.name / ".claude-plugin" / "plugin.json",
+                     ".claude-plugin/plugin.json")
             for path in sorted(plugin_dir.rglob("*")):
                 rel = path.relative_to(plugin_dir)
                 if path.is_dir() or rel == Path("plugin.json") or any(
                         part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
-                    continue
-                zf.write(path, rel)
-        archives.append(archive)
-    return archives
-
-
-def build_claude_plugin_zips(out: Path) -> list[Path]:
-    """Zip each generated Claude plugin (root = `.claude-plugin/`, `skills/`, `assets/`)
-    for upload in Claude Desktop / claude.ai. Run after build()."""
-    dist = out / "dist" / "claude-plugins"
-    shutil.rmtree(dist, ignore_errors=True)
-    dist.mkdir(parents=True)
-    archives = []
-    for plugin_dir in sorted(p for p in (out / "plugins" / "claude").iterdir() if p.is_dir()):
-        archive = dist / f"{plugin_dir.name}.zip"
-        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:
-            for path in sorted(plugin_dir.rglob("*")):
-                rel = path.relative_to(plugin_dir)
-                if path.is_dir() or any(part in EXCLUDED_FROM_DISTRIBUTION for part in rel.parts):
                     continue
                 zf.write(path, rel)
         archives.append(archive)
@@ -437,7 +427,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"built {spec['name']}  [{skills}]")
     print("wrote .claude-plugin/marketplace.json and .agents/plugins/marketplace.json")
     if args.zip:
-        for archive in build_zips(REPO_ROOT) + build_plugin_zips(REPO_ROOT) + build_claude_plugin_zips(REPO_ROOT):
+        for archive in build_zips(REPO_ROOT) + build_plugin_zips(REPO_ROOT):
             print(f"zipped {archive.relative_to(REPO_ROOT)}")
     return 0
 

@@ -14,10 +14,11 @@ All notable changes to this project are documented here. The format follows [Kee
 - GitHub Actions workflow running validation and tests.
 - README, agent instructions, contributing and skill-authoring guides.
 - OpenAI plugin branding (logo, composer icons, brand colors) and store listing fields; the bundle is listed as "Vaultia".
-- `build_plugins.py --zip` also builds `dist/plugins/<plugin>.zip` with `.codex-plugin/plugin.json` for upload in ChatGPT.
+- `build_plugins.py --zip` also builds `dist/plugins/<plugin>.zip`, one upload for both ChatGPT (`.codex-plugin/plugin.json`) and Claude (`.claude-plugin/plugin.json`).
 
 ### Changed
 - Both skills start in guided mode for short requests and ask one decision at a time before drafting; every choice question offers a free-text "Other" answer.
 - Guided mode uses the host's choice form for every decision turn, not only the first.
 - Guided mode keeps asking until v1.0: progress line, typed answers confirmed through the choice form, open questions asked in order, and a final "Finalize v1.0" choice.
 - Claude Code plugins and marketplace entries carry `displayName` ("Vaultia" for the bundle) and an `icon` for Anthropic's plugin directory.
+- Choice forms submit only the answer (`<topic>: <option>`), without extra instructions.
