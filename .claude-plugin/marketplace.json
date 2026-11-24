@@ -5,14 +5,14 @@
     "name": "Vaultia"
   },
   "metadata": {
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "plugins": [
     {
       "name": "architecture-requirements",
       "source": "./plugins/claude/architecture-requirements",
       "description": "Create, refine, and review software architecture requirements and system design documents.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "category": "productivity",
       "keywords": [
         "requirements",
@@ -25,7 +25,7 @@
       "name": "product-requirements",
       "source": "./plugins/claude/product-requirements",
       "description": "Create, refine, and review product requirements documents (PRDs) for software products and features.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "category": "productivity",
       "keywords": [
         "requirements",
@@ -38,7 +38,7 @@
       "name": "vaultia-skills",
       "source": "./plugins/claude/vaultia-skills",
       "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "category": "productivity",
       "keywords": [
         "requirements",

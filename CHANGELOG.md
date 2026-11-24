@@ -19,3 +19,4 @@ All notable changes to this project are documented here. The format follows [Kee
 ### Changed
 - Both skills start in guided mode for short requests and ask one decision at a time before drafting; every choice question offers a free-text "Other" answer.
 - Guided mode uses the host's choice form for every decision turn, not only the first.
+- Guided mode keeps asking until v1.0: progress line, typed answers confirmed through the choice form, open questions asked in order, and a final "Finalize v1.0" choice.

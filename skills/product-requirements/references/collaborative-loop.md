@@ -19,6 +19,13 @@ Every guided turn uses this shape (skip a part only when it adds nothing):
 
 When the user answers — even loosely, mixing several topics — start the next turn with "Updated based on your decisions:", fold **every** stated decision into the diagram and draft, then raise the next most important issue.
 
+**Keep the loop moving until v1.0.** Every turn ends with a decision for the user to answer — never with only a list of remaining questions, a "reply 'yes' if correct" sentence, or a summary.
+
+- **Progress line.** After the draft update, show one line such as `Progress: 4/7 decided · next: <topic> · then: <topic>, <topic>` so the user sees how far v1.0 is.
+- **Confirming a typed answer.** When you had to interpret a typed answer, do not ask for confirmation in prose. Put the confirmation in the same choice form as the next decision: one question "I understood <X> — correct?" with options *Correct (recommended)* / *<the most likely alternative>* / *Other — type your own answer*, plus the next blocking decision as a second question.
+- **Open questions are the queue.** Each `Q-n` in the draft's open-questions list is asked in a later turn, highest impact first, until every question that changes scope, requirements, or metrics is ✅ or explicitly deferred by the user. Questions that change nothing are moved to *Open questions (non-blocking)* instead of being asked.
+- **Closing.** When the blocking queue is empty, ask a final choice: *Finalize v1.0 (recommended)* / *Review section by section first* / *Other — type your own answer*. Do not stop at a v0.x draft without offering this.
+
 ## Starting point
 
 - **Rich input** (notes, existing docs, tickets, a codebase): propose directly and create Draft v0.1 in the first turn, marking every proposal that is not backed by the input as 🟡 proposed.
@@ -63,7 +70,7 @@ Reply with a letter, your own answer, or "you decide".
 - **Choice tool / form** (radio buttons, option chips): add a last option **"Other — type your own answer"** with a text input. If the tool cannot attach a text field to an option, add a separate optional free-text field ("Your own answer") under the options, or state right below the form that the user can type any answer in chat instead.
 - **Plain text:** keep the closing line "Reply with a letter, your own answer, or \"you decide\"".
 - Mark the recommended option in the form label too (for example "B. Several properties (recommended)"), not only in the text above it.
-- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, restate how you understood it and record it as ✅ confirmed only after the user agrees.
+- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, record your interpretation as 🟡 and confirm it through the choice form on the next turn (see *Keep the loop moving until v1.0*); mark it ✅ only after the user agrees.
 
 ## Diagrams
 
