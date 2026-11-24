@@ -68,6 +68,8 @@ erDiagram
   CONTRACT ||--o{ INVOICE : bills
 ```
 
+If the place you show this does not render Mermaid (for example ChatGPT), add the same relationships as a table — `Object | Relationship | Object | Cardinality` — so readers see them.
+
 **Relationship notes:** <cardinality the diagram cannot show, e.g. "a room has at most one active contract at a time">
 
 **Business rules**

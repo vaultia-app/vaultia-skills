@@ -1,7 +1,7 @@
 {
   "name": "vaultia-skills",
   "displayName": "Vaultia",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
   "author": {
     "name": "Vaultia"

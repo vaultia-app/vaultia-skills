@@ -176,7 +176,16 @@ The user may bring up something outside the pending question — a feature they 
 
 ## Diagrams
 
-Use Mermaid in fenced code blocks; it renders in most agent UIs, IDEs, and on GitHub. If rendering is unavailable, an indented text diagram is acceptable. Keep each diagram to roughly 12 nodes or fewer — one idea per diagram.
+Write diagrams as Mermaid in fenced code blocks tagged `mermaid` — that is the portable source kept in the document file (GitHub, IDEs, Claude, most Markdown viewers render it). Keep each diagram to roughly 12 nodes or fewer — split rather than cram.
+
+**Make sure the user actually sees a diagram, not code.** Some surfaces show Mermaid as plain text — notably ChatGPT's chat, canvas, and document views. There:
+
+1. Keep the ```` ```mermaid ```` block in the saved document, unchanged.
+2. In the chat, **also render the diagram visually** with the host's own tool (inline visualization, image, or diagram tool) so the user sees boxes and lines.
+3. If no visual tool is available, show a readable fallback instead of raw Mermaid: for an ER diagram, a relationship table (`Entity | Relationship | Entity | Cardinality`, for example `Branch | manages | Vehicle | 1 : N`); for flows, a short numbered list or an indented text tree.
+4. Never leave unrendered Mermaid as the only view in chat. If the user says a diagram "is broken" or shows as code, switch to steps 2–3 for the rest of the conversation.
+
+Write Mermaid that renders: one relationship per line, entity names in `UPPER_SNAKE` or `PascalCase` without spaces, labels with spaces in quotes (`ROOM ||--o{ CONTRACT : "rented under"`), and no attributes or types in conceptual ER diagrams.
 
 Pick by purpose:
 
