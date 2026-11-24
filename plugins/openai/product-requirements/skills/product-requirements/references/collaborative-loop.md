@@ -112,13 +112,16 @@ Every decision is asked through the host's **choice tool** when one is available
 | ChatGPT, Codex | `request_user_input_async` | `questions: [{"title": "<full question with the context needed>", "options": ["<recommended> (recommended)", "<option>", "<option>"]}]` — options are plain strings |
 | Codex Plan mode | `request_user_input` | 1–3 questions, each `{"id": "snake_case", "header": "≤12 chars", "options": [{"label": "1–5 words (Recommended)", "description": "one-sentence trade-off"}, …]}` with 2–3 options |
 | Claude (Claude Code, Desktop, claude.ai) | `AskUserQuestion` or the host's equivalent | 1–4 questions, each with a short `header`, 2–4 options with `label` + `description`, and `multiSelect` (true when several answers are allowed); add "(Recommended)" to the first option's label |
-| Any other host with a choice form | that tool | same rules below |
+| Self-built forms (inline widgets, visualizations, HTML cards) | the form you render | same rules below, **plus** an "Other — type your own answer" option with a text input |
 
 Rules for every choice tool:
 
 - **Give every decision a stable ID** (`D-1`, `D-2`, …) and put it at the start of the question title (for example "D-3 · Primary user: …"). Use the same ID in the draft's decision log, so any answer can be traced to its question.
 - **Recommended option first**, with "(recommended)" in its label in the user's language. Several hosts preselect the first option.
-- **Do not add an "Other" option or a free-text placeholder.** These tools add free-text input automatically.
+- **"Other" depends on what renders the form:**
+  - **Native question tools** listed above (`request_user_input_async`, `request_user_input`, `AskUserQuestion`): do **not** add an "Other" option — they add free-text input automatically.
+  - **Any form you build yourself** — an inline widget, visualization, HTML/React card, or custom form with radio buttons and a submit button: you **must** add a last option **"Other — type your own answer"** with a text input that is submitted as the answer. These forms have no built-in free text; without it the user can only pick your options.
+  - If unsure which one you are using, add the "Other" option with a text input.
 - **Short labels, consequences in descriptions** (or after a dash when options are plain strings). 2–4 mutually exclusive options in the user's domain terms.
 - **The title is self-contained**: the user may see only the form, so include the context needed to answer.
 - **Up to 3 questions in one call** when they are independent (for example, confirming an interpreted answer plus the next decision). Otherwise one.
