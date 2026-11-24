@@ -55,7 +55,7 @@ Every decision is asked through the host's **choice tool** when one is available
 |---|---|---|
 | ChatGPT, Codex | `request_user_input_async` | `questions: [{"title": "<full question with the context needed>", "options": ["<recommended> (recommended)", "<option>", "<option>"]}]` — options are plain strings |
 | Codex Plan mode | `request_user_input` | 1–3 questions, each `{"id": "snake_case", "header": "≤12 chars", "options": [{"label": "1–5 words (Recommended)", "description": "one-sentence trade-off"}, …]}` with 2–3 options |
-| Claude (Claude Code, Desktop, claude.ai) | `AskUserQuestion` or the host's equivalent | 1–4 questions, each with a short `header`, 2–4 options with `label` + `description`; add "(Recommended)" to the first option's label |
+| Claude (Claude Code, Desktop, claude.ai) | `AskUserQuestion` or the host's equivalent | 1–4 questions, each with a short `header`, 2–4 options with `label` + `description`, and `multiSelect` (true when several answers are allowed); add "(Recommended)" to the first option's label |
 | Any other host with a choice form | that tool | same rules below |
 
 Rules for every choice tool:
@@ -65,6 +65,12 @@ Rules for every choice tool:
 - **Short labels, consequences in descriptions** (or after a dash when options are plain strings). 2–4 mutually exclusive options in the user's domain terms.
 - **The title is self-contained**: the user may see only the form, so include the context needed to answer.
 - **Up to 3 questions in one call** when they are independent (for example, confirming an interpreted answer plus the next decision). Otherwise one.
+- **Multiple-choice questions** (the user may pick several, for example which features go into the MVP, which platforms, which user roles):
+  - Claude `AskUserQuestion`: set `multiSelect: true`.
+  - Any other tool with a multi-select flag: use it.
+  - ChatGPT / Codex (single-select plus free text): say in the title that several can be chosen and how to type them (for example "Choose one set, or type your own combination such as \"A, C, D\""). Offer ready-made sets as options, recommended set first — for example "Core set (recommended): A + B + D", "All of them", "Only A". Do not split one multi-select question into many yes/no questions.
+  - Plain-text fallback: label the items A, B, C… and end with "Reply with one or more letters (for example \"A, C\"), your own answer, or \"you decide\"".
+  - Record every selected item as its own decision in the draft (for example each chosen feature as Must), and the unselected ones as Later / out of scope.
 - **Never put instructions in options or titles** such as "update the PRD and ask the next question". The selection the user submits should read as their answer only.
 
 ### Fallback: plain text

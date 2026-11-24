@@ -23,3 +23,4 @@ All notable changes to this project are documented here. The format follows [Kee
 - Claude Code plugins and marketplace entries carry `displayName` ("Vaultia" for the bundle) and an `icon` for Anthropic's plugin directory.
 - Choice forms submit only the answer (`<topic>: <option>`), without extra instructions.
 - Decisions follow each host's choice tool contract (`request_user_input_async` / `request_user_input` in ChatGPT and Codex, `AskUserQuestion` in Claude): recommended option first, no manual "Other" option, then wait for the answer.
+- Multiple-choice decisions: `multiSelect` in Claude, ready-made sets plus typed combinations in ChatGPT / Codex, letters in plain text.
