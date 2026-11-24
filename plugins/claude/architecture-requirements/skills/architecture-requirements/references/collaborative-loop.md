@@ -22,9 +22,9 @@ When the user answers — even loosely, mixing stack choices, scope, and new req
 **Keep the loop moving until v1.0.** Every turn ends with a decision for the user to answer — never with only a list of remaining questions, a "reply 'yes' if correct" sentence, or a summary.
 
 - **Progress line.** After the draft update, show one line such as `Progress: 4/7 decided · next: <topic> · then: <topic>, <topic>` so the user sees how far v1.0 is.
-- **Confirming a typed answer.** When you had to interpret a typed answer, do not ask for confirmation in prose. Put the confirmation in the same choice form as the next decision: one question "I understood <X> — correct?" with options *Correct (recommended)* / *<the most likely alternative>* / *Other — type your own answer*, plus the next blocking decision as a second question.
+- **Confirming a typed answer.** When you had to interpret a typed answer, do not ask for confirmation in prose. Put the confirmation in the same choice form as the next decision: one question "I understood <X> — correct?" with options *Correct (recommended)* / *<the most likely alternative>*, plus the next blocking decision as a second question.
 - **Open questions are the queue.** Each `Q-n` in the draft's open-questions list is asked in a later turn, highest impact first, until every question that changes scope, requirements, or metrics is ✅ or explicitly deferred by the user. Questions that change nothing are moved to *Open questions (non-blocking)* instead of being asked.
-- **Closing.** When the blocking queue is empty, ask a final choice: *Finalize v1.0 (recommended)* / *Review section by section first* / *Other — type your own answer*. Do not stop at a v0.x draft without offering this.
+- **Closing.** When the blocking queue is empty, ask a final choice: *Finalize v1.0 (recommended)* / *Review section by section first*. Do not stop at a v0.x draft without offering this.
 
 ## Starting point
 
@@ -47,30 +47,47 @@ Challenge risky choices while doing this: an unnecessary new data store, a missi
 
 ## Asking for a decision
 
-If the platform offers a structured question or choice tool (a selectable form), use it for **every** decision, on **every** turn of the loop — not only the first one. Never fall back to plain-text A/B/C options while the tool is available, even after the user has answered previous questions in chat or by typing. Always include a free-text "Other" option (see below). If the platform has no such tool, use this format:
+Every decision is asked through the host's **choice tool** when one is available — on **every** turn of the loop, not only the first. Plain-text A/B/C lists are only the fallback for hosts without such a tool. After calling the tool, **end your turn and wait**: do not continue drafting content that depends on the answer.
+
+### Host choice tools
+
+| Host | Tool | How to fill it |
+|---|---|---|
+| ChatGPT, Codex | `request_user_input_async` | `questions: [{"title": "<full question with the context needed>", "options": ["<recommended> (recommended)", "<option>", "<option>"]}]` — options are plain strings |
+| Codex Plan mode | `request_user_input` | 1–3 questions, each `{"id": "snake_case", "header": "≤12 chars", "options": [{"label": "1–5 words (Recommended)", "description": "one-sentence trade-off"}, …]}` with 2–3 options |
+| Claude (Claude Code, Desktop, claude.ai) | `AskUserQuestion` or the host's equivalent | 1–4 questions, each with a short `header`, 2–4 options with `label` + `description`; add "(Recommended)" to the first option's label |
+| Any other host with a choice form | that tool | same rules below |
+
+Rules for every choice tool:
+
+- **Recommended option first**, with "(recommended)" in its label in the user's language. Several hosts preselect the first option.
+- **Do not add an "Other" option or a free-text placeholder.** These tools add free-text input automatically.
+- **Short labels, consequences in descriptions** (or after a dash when options are plain strings). 2–4 mutually exclusive options in the user's domain terms.
+- **The title is self-contained**: the user may see only the form, so include the context needed to answer.
+- **Up to 3 questions in one call** when they are independent (for example, confirming an interpreted answer plus the next decision). Otherwise one.
+- **Never put instructions in options or titles** such as "update the PRD and ask the next question". The selection the user submits should read as their answer only.
+
+### Fallback: plain text
+
+Only when the host has no choice tool:
 
 ```text
 ### Decision needed before <next step>
 
 <Question?>
 
-A) <Option> — <what it implies for the design>
+A) <Option> — <what it implies for the design> ← recommended: <one-line reason>
 B) <Option> — <what it implies for the design>
-C) <Option> — <what it implies for the design> ← recommended: <one-line reason>
+C) <Option> — <what it implies for the design>
 
 Reply with a letter, your own answer, or "you decide".
 ```
 
-- Options are concrete and mutually exclusive; each shows its design consequence.
+### Handling answers
+
+- Options are concrete and mutually exclusive; the consequence of each is visible so the user decides on trade-offs, not labels.
 - "You decide" → take the recommendation and record it as 🟡 assumption, and as a proposed ADR if significant.
-
-**Always let the user type their own answer.** Every question must accept a free-text answer in addition to the listed options:
-
-- **Choice tool / form** (radio buttons, option chips): add a last option **"Other — type your own answer"** with a text input. If the tool cannot attach a text field to an option, add a separate optional free-text field ("Your own answer") under the options, or state right below the form that the user can type any answer in chat instead.
-- **Plain text:** keep the closing line "Reply with a letter, your own answer, or \"you decide\"".
-- **Submitted text = the answer only.** When the choice tool lets you set the message sent on submit, make it a short answer in the user's language, in the form `<topic>: <chosen option>` (for example "Primary customer: Software agencies and freelancers"). Never add instructions such as "update the PRD and ask the next question" — the loop already does that, and the extra text clutters the user's chat.
-- Mark the recommended option in the form label too (for example "B. Several properties (recommended)"), not only in the text above it.
-- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, record your interpretation as 🟡 and confirm it through the choice form on the next turn (see *Keep the loop moving until v1.0*); mark it ✅ only after the user agrees.
+- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, record your interpretation as 🟡 and confirm it through the choice tool on the next turn (see *Keep the loop moving until v1.0*); mark it ✅ only after the user agrees.
 
 ## Diagrams
 
