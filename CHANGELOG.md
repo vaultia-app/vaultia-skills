@@ -13,3 +13,8 @@ All notable changes to this project are documented here. The format follows [Kee
 - `docs/plugin-distribution.md` with install instructions per platform.
 - GitHub Actions workflow running validation and tests.
 - README, agent instructions, contributing and skill-authoring guides.
+- OpenAI plugin branding (logo, composer icons, brand colors) and store listing fields; the bundle is listed as "Vaultia".
+- `build_plugins.py --zip` also builds `dist/plugins/<plugin>.zip` with `.codex-plugin/plugin.json` for upload in ChatGPT.
+
+### Changed
+- Both skills start in guided mode for short requests and ask one decision at a time before drafting; every choice question offers a free-text "Other" answer.
