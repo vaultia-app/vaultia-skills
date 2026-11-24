@@ -40,7 +40,7 @@ Challenge risky choices while doing this: an unnecessary new data store, a missi
 
 ## Asking for a decision
 
-If the platform offers a structured question or choice tool, use it — always with a free-text "Other" option (see below). Otherwise use this format:
+If the platform offers a structured question or choice tool (a selectable form), use it for **every** decision, on **every** turn of the loop — not only the first one. Never fall back to plain-text A/B/C options while the tool is available, even after the user has answered previous questions in chat or by typing. Always include a free-text "Other" option (see below). If the platform has no such tool, use this format:
 
 ```text
 ### Decision needed before <next step>
