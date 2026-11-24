@@ -23,7 +23,7 @@ Writing a PRD is a collaborative process, not a one-shot deliverable. This rule 
 - Reviewing a PRD for gaps, ambiguity, or untestable requirements.
 - Producing user stories and acceptance criteria for a defined scope.
 
-Hand off to `architecture-requirements` once the WHAT/WHY is stable and the user wants system design, APIs, data models, or technical constraints.
+The PRD includes a **conceptual** domain model (business objects, relationships, lifecycles, business rules with worked examples, and a simple ER diagram without types). Hand off to `architecture-requirements` once the WHAT/WHY is stable and the user wants system design, APIs, the logical/physical data model (tables, columns, keys, storage), or technical constraints. If the user asks for an ERD during a PRD session, give the conceptual ERD here; for a database-level ERD, say it belongs to the architecture phase and switch to `architecture-requirements` with the PRD's domain model as input.
 
 ## Inputs
 
@@ -38,7 +38,7 @@ Use whatever is available; none are strictly required up front.
 
 ## Workflow
 
-1. **Gather context.** Read every document, file, or note the user provided or pointed to. If editing an existing PRD, read it fully before changing anything.
+1. **Gather context.** If the input already contains decisions (handoff, BRD/SRS, ADRs, ERD, codebase), read `references/existing-context.md` and build the context ledger first: decided items are constraints, reuse existing names and IDs, take the agenda from the source's open items, and produce deltas instead of a new document. Read every document, file, or note the user provided or pointed to. If editing an existing PRD, read it fully before changing anything.
 2. **Classify the request.** New document, update, or review? For a review, skip to step 8 and report findings before editing.
 3. **Choose the mode.** For a new document, tell the user which mode you are using (they can switch at any time):
    - **Guided (default)** — the input is an idea, a short request (including "write a PRD for X"), or leaves essentials (problem, users, goal, scope, metrics, constraints) unconfirmed. Go to step 4.
@@ -81,3 +81,4 @@ Use whatever is available; none are strictly required up front.
 | `references/discovery-questions.md` | Identifying missing information or preparing questions |
 | `references/acceptance-criteria.md` | Writing or reviewing acceptance criteria |
 | `references/quality-checklist.md` | Final check before delivery, or when reviewing a PRD |
+| `references/existing-context.md` | The input is a handoff, BRD/SRS, earlier PRD, ADRs, ERD, or a codebase with decisions already made |

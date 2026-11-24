@@ -34,7 +34,7 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 ## Workflow
 
-1. **Gather context.** Read the PRD and any provided documents. If working inside a codebase, inspect it — languages, frameworks, existing services, data stores, deployment config — so the design fits what exists instead of assuming a greenfield.
+1. **Gather context.** If the input already contains decisions (handoff, BRD/SRS, ADRs, ERD, codebase), read `references/existing-context.md` and build the context ledger first: decided items are constraints, reuse existing names and IDs, take the agenda from the source's open items, and produce deltas instead of a new document. Read the PRD and any provided documents. If working inside a codebase, inspect it — languages, frameworks, existing services, data stores, deployment config — so the design fits what exists instead of assuming a greenfield.
 2. **Classify the request.** New design, update, or review? For a review, go to step 8 and report findings before editing.
 3. **Extract drivers.** List the architecturally significant requirements: key functional flows, quality attributes (performance, availability, security, scalability), and constraints. Trace each back to its PRD ID when available (`FR-3`, `NFR-1`).
 4. **Choose the mode and run the loop.** Tell the user which mode you are using:
@@ -80,3 +80,4 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 | `references/api-design.md` | Specifying service interfaces or public APIs |
 | `references/data-model.md` | Defining entities, storage, consistency, and migrations |
 | `references/security-checklist.md` | Every design — threats, controls, and compliance |
+| `references/existing-context.md` | The input is a handoff, BRD/SRS, earlier PRD, ADRs, ERD, or a codebase with decisions already made |

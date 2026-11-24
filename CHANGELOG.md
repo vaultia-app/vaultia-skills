@@ -27,3 +27,7 @@ All notable changes to this project are documented here. The format follows [Kee
 - Decisions carry stable IDs (`D-n`); an answer to an already-decided question is treated as a proposed change (impact shown, keep or change asked, old value kept in the change log) instead of overwriting the draft.
 - New ideas raised in free chat are summarized and offered for capture into the draft (Must / Later / open question / discard) through the choice tool, together with any pending question.
 - Guided mode publishes a decision agenda up front (PRD 6–10, architecture 8–12 one-way-door decisions), records implementation details as reviewable 🟡 defaults instead of asking, and offers to finalize when the agenda or budget is reached.
+- Both skills: `references/existing-context.md` for handoffs, specs, ADRs and codebases — context ledger, decided items as constraints, reuse of existing names and IDs, agenda from the source's open items, deltas instead of new documents.
+- Guided mode builds the document in stages with approval gates, and shows a document map before producing a whole documentation set.
+- `product-requirements`: new *Domain model and business rules* section (conceptual ER diagram, lifecycles, `BR-n` rules with worked examples); ERD requests are split into conceptual (PRD) and logical/physical (`architecture-requirements`).
+- `architecture-requirements`: the data model starts from the PRD domain model and extends existing tables instead of creating parallel ones.

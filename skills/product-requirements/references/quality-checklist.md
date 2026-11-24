@@ -10,6 +10,8 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 - [ ] Non-goals are listed.
 - [ ] Every main user journey has functional requirements.
 - [ ] Every functional requirement has acceptance criteria.
+- [ ] Core business objects, their relationships, and lifecycles are named in the domain model (conceptual only — no column types or storage).
+- [ ] Every calculation or money rule (`BR-n`) has a worked example, rounding, and boundary behavior.
 - [ ] Success metrics have a baseline (or "unknown"), a target, a timeframe, and a measurement method.
 - [ ] Scope, rollout, and dependencies are stated.
 - [ ] Risks have mitigations.
@@ -32,7 +34,7 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 
 ## Traceability
 
-- [ ] Stable IDs are used: `G-`, `J-`, `FR-`, `AC-`, `NFR-`, `M-`, `D-`, `A-`, `Q-`.
+- [ ] Stable IDs are used: `G-`, `J-`, `BR-`, `FR-`, `AC-`, `NFR-`, `M-`, `D-`, `A-`, `Q-`.
 - [ ] Each functional requirement links to a journey or goal.
 - [ ] No orphan requirements (requirements that serve no goal).
 - [ ] No goal without at least one requirement or metric.

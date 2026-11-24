@@ -4,7 +4,7 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 
 ---
 
-```markdown
+````markdown
 # <Product or Feature Name> — Product Requirements
 
 | Field | Value |
@@ -53,7 +53,32 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 **Edge cases**
 - E-1: <unusual or failure situation, e.g. missing data, conflicting input, permission denied> → covered by AC-<n.n>
 
-## 6. Functional requirements
+## 6. Domain model and business rules
+
+Conceptual level only: business objects in the user's language, how they relate, and the rules that govern them. No column types, keys, indexes, or storage — those belong to the architecture document.
+
+| Object | Meaning | Key business facts | Lifecycle |
+|---|---|---|---|
+| <Room> | <a rentable unit inside a property> | <code, rent, capacity> | <vacant → reserved → occupied → maintenance> |
+
+```mermaid
+erDiagram
+  PROPERTY ||--o{ ROOM : contains
+  ROOM ||--o{ CONTRACT : "rented under"
+  CONTRACT ||--o{ INVOICE : bills
+```
+
+**Relationship notes:** <cardinality the diagram cannot show, e.g. "a room has at most one active contract at a time">
+
+**Business rules**
+
+| ID | Rule | Worked example |
+|---|---|---|
+| BR-1 | <calculation, constraint, or policy stated precisely> | <numbers in → result out, e.g. "rent 3,000,000/month, move-in on day 16 of a 30-day month → 1,500,000"> |
+
+Give every calculation or money rule a worked example, and state rounding, boundaries (start/end day included?), and what happens on change mid-period.
+
+## 7. Functional requirements
 
 | ID | Requirement | Priority | Journey |
 |---|---|---|---|
@@ -61,13 +86,13 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 
 Priority uses MoSCoW: **Must** (release blocker), **Should** (important, not blocking), **Could** (nice to have), **Won't** (explicitly deferred).
 
-## 7. Acceptance criteria
+## 8. Acceptance criteria
 
 ### FR-1: <short name>
 - AC-1.1: Given <context>, when <action>, then <observable result>.
 - AC-1.2: ...
 
-## 8. Non-functional requirements (product-level)
+## 9. Non-functional requirements (product-level)
 
 Only the expectations the business cares about; the architecture phase refines them.
 
@@ -75,7 +100,7 @@ Only the expectations the business cares about; the architecture phase refines t
 |---|---|---|
 | NFR-1 | Performance / Availability / Accessibility / Privacy / Localization / Compliance | <measurable expectation> |
 
-## 9. Success metrics
+## 10. Success metrics
 
 | ID | Metric | Baseline | Target | Measurement |
 |---|---|---|---|---|
@@ -88,7 +113,7 @@ Include at least one leading indicator (adoption, activation) and one lagging in
 - **Funnel:** <step → step → step>
 - **Alerts:** <threshold that signals a problem, or "TBD — owner">
 
-## 10. Scope and release plan
+## 11. Scope and release plan
 
 - **In scope (v1):** <list>
 - **Later / out of scope:** <list>
@@ -97,13 +122,13 @@ Include at least one leading indicator (adoption, activation) and one lagging in
 - **Kill switch / rollback:** <how the feature can be disabled or reverted if it misbehaves>
 - **Dependencies:** <teams, systems, vendors, legal>
 
-## 11. Risks
+## 12. Risks
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | <risk> | Low / Med / High | Low / Med / High | <mitigation> |
 
-## 12. Decisions, assumptions, and open questions
+## 13. Decisions, assumptions, and open questions
 
 ### Confirmed decisions
 - D-1: <decision> — <who / when>
@@ -114,7 +139,7 @@ Include at least one leading indicator (adoption, activation) and one lagging in
 ### Open questions
 - Q-1: <question> — <owner, needed by>
 
-## 13. Appendix
+## 14. Appendix
 
 <Glossary, research notes, mockup links.>
 
@@ -123,4 +148,4 @@ Include at least one leading indicator (adoption, activation) and one lagging in
 | Version | Decisions applied | Sections changed |
 |---|---|---|
 | v0.1 | <initial proposal> | All |
-```
+````

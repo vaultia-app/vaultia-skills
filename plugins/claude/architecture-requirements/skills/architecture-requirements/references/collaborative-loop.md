@@ -49,6 +49,10 @@ Challenge risky choices while doing this: an unnecessary new data store, a missi
 
 The loop must have a visible end. Plan it, keep it short, and close it.
 
+**0. Stages with approval gates.** Build the document in stages — Drivers & context → Architecture style & components → Data model (logical → physical) → Interfaces, security & NFRs → Deployment, migration & milestones — and show them as a checklist with status (✅ approved · 🔄 in progress · ⏳ not started). A stage closes only when the user approves it; ask for that approval through the choice tool (*Approve <stage> (recommended)* / *Needs changes*), bundled with the first decision of the next stage. Approved stages are not reopened unless the user asks or a later answer changes them (then use *Answers to an already-decided question*).
+
+**Documentation sets.** If the user asks for a whole set of documents ("build the docs for my app"), first show a short document map — each document, what it covers, which skill produces it, and the order (product requirements first, then architecture) — and confirm it before starting the first one. Do not draft documents another skill owns.
+
 **1. Publish the agenda first.** On the first guided turn, list the decisions that must be made before v1.0 — usually **8–12** — as a numbered checklist (`D-1 … D-n`, one line each, recommended answer in brackets when you already have one). This is the scope of the conversation. Show it again, with ✅ / 🟡 / ⏳ marks, whenever it changes.
 
 **2. Ask only one-way-door decisions.** A question earns a place on the agenda only if the answer is hard to reverse later or changes the structure of the document, for example: system boundary and tenancy, architecture style (monolith / services / serverless), core domain model and sources of truth, primary data store, hosting and runtime platform, authentication and authorization model, sync vs. async processing for core flows, integration contracts with external systems.
