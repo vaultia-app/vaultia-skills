@@ -28,9 +28,41 @@ When the user answers — even loosely, mixing several topics — start the next
 
 ## Starting point
 
-- **Rich input** (notes, existing docs, tickets, a codebase): propose directly and create Draft v0.1 in the first turn, marking every proposal that is not backed by the input as 🟡 proposed.
-- **Thin input** (one-line idea): do not write a PRD yet. Turn 1 proposes 2–3 product directions (target user × core value × MVP shape) with a diagram for the recommended one, and asks which direction to pursue. Draft v0.1 starts once a direction is chosen.
-- **Fast mode requested** ("just write it"): skip the loop, draft the full document, and list every unconfirmed item as an assumption.
+Classify the input first:
+
+- **Vague input** — essentials are missing (for example "build an app for my business", or one line without users or purpose). Start with the **intake** below.
+- **Partial input** — some essentials are answered. Run the intake only for the missing items.
+- **Rich input** (notes, existing docs, tickets, a codebase, a handoff): skip the intake, follow `existing-context.md` when decisions already exist, and create Draft v0.1 in the first turn, marking every proposal not backed by the input as 🟡.
+- **Fast mode requested** ("just write it", "viết luôn"): skip the loop, draft the full document, and list every unconfirmed item as an assumption.
+
+### Intake (vague or partial input)
+
+Turn 1 is a short intake form — not a draft, not directions yet. One sentence restating what you understood, then the missing items from this list (at most 7) through the choice tool:
+
+| Item | Ask |
+|---|---|
+| Project name | Free text (or "suggest one") |
+| Purpose / problem | What pain or goal this solves — 3–4 domain-typical problems as options |
+| Primary users | Who uses it first — typical roles in this domain |
+| Platform | Web, mobile, both, internal tool |
+| Must-have capabilities | Multi-select from the domain's core capabilities |
+| Business model / context | Personal use, internal company tool, commercial product (SaaS, marketplace) |
+| Constraints | Deadline, budget, compliance, existing systems — multi-select plus "none yet" |
+
+Rules:
+- **Every item has suggested answers** drawn from your knowledge of the domain, recommended one first, so the user can click instead of writing. Only the name is free text. Mark multi-select items as such.
+- **Every item can be skipped**: say in the intro that the user can leave anything for you to decide; skipped items become 🟡 assumptions.
+- **Do not ask what the input already answers.** Show those as "Understood: …" in the intro.
+- **Fit the host's limits**: ChatGPT / Codex `request_user_input_async` takes all items in one call (omit `options` for free text); Claude `AskUserQuestion` takes 4 questions per call — ask the 4 most important, then the rest in the next turn; plain text — a numbered list the user can answer in one message.
+
+### After the intake: enrich with domain knowledge
+
+When the answers arrive, before drafting:
+
+1. **Restate** the project in 3–5 lines from the answers.
+2. **Domain notes** — what an expert in this domain would add: standard workflows, regulations and compliance rules, calculations and edge cases that usually bite, features users expect, common pitfalls and anti-patterns, and typical success metrics. Mark each as 🟡 proposal. Facts that change over time (laws, tax and price rules, platform policies) need a source and date, or the label "verify" when you cannot check them.
+3. If the answers still allow very different products, propose 2–3 directions (target user × core value × MVP shape) with a diagram for the recommended one and ask which to pursue; otherwise go straight to Draft v0.1.
+4. Publish the stages and the decision agenda (see *Decision agenda and when to stop*), then ask the first decision.
 
 ## Which decision to ask next
 
