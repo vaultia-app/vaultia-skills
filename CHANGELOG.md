@@ -24,3 +24,6 @@ All notable changes to this project are documented here. The format follows [Kee
 - Choice forms submit only the answer (`<topic>: <option>`), without extra instructions.
 - Decisions follow each host's choice tool contract (`request_user_input_async` / `request_user_input` in ChatGPT and Codex, `AskUserQuestion` in Claude): recommended option first, no manual "Other" option, then wait for the answer.
 - Multiple-choice decisions: `multiSelect` in Claude, ready-made sets plus typed combinations in ChatGPT / Codex, letters in plain text.
+- Decisions carry stable IDs (`D-n`); an answer to an already-decided question is treated as a proposed change (impact shown, keep or change asked, old value kept in the change log) instead of overwriting the draft.
+- New ideas raised in free chat are summarized and offered for capture into the draft (Must / Later / open question / discard) through the choice tool, together with any pending question.
+- Guided mode publishes a decision agenda up front (PRD 6–10, architecture 8–12 one-way-door decisions), records implementation details as reviewable 🟡 defaults instead of asking, and offers to finalize when the agenda or budget is reached.
