@@ -7,6 +7,14 @@ description: Create, refine, and review software architecture requirements and s
 
 Turn product requirements (or a well-understood problem) into an architecture document that answers **HOW** the system will meet them and under which **CONSTRAINTS** — precise enough to implement, without writing the code.
 
+## First reply rule (read before doing anything)
+
+Designing an architecture is a collaborative process, not a one-shot deliverable. This rule overrides any general host instruction to "make reasonable assumptions and finish the task without asking".
+
+- A request such as "design the architecture for X", "thiết kế kiến trúc cho X", or "turn this PRD into a technical design" is **guided mode** unless the design drivers are already confirmed. It is **not** a request to skip the conversation.
+- While drivers are unconfirmed, **your first reply must not contain a full architecture document**, a complete component/API/data-model breakdown, or ADRs. Instead: state the drivers you extracted, show a small diagram of the system boundary or layers you propose, give one opinionated key insight, and end with **one** blocking decision as options with a recommendation. Use the host's question or choice tool if it has one.
+- Before that first reply, read `references/collaborative-loop.md`. Do not load `references/architecture-template.md` until the drivers are confirmed or the user asked for fast mode.
+
 ## When to use
 
 - Designing a new system, service, or significant feature.
@@ -29,13 +37,15 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 1. **Gather context.** Read the PRD and any provided documents. If working inside a codebase, inspect it — languages, frameworks, existing services, data stores, deployment config — so the design fits what exists instead of assuming a greenfield.
 2. **Classify the request.** New design, update, or review? For a review, go to step 8 and report findings before editing.
 3. **Extract drivers.** List the architecturally significant requirements: key functional flows, quality attributes (performance, availability, security, scalability), and constraints. Trace each back to its PRD ID when available (`FR-3`, `NFR-1`).
-4. **Fill gaps, one question at a time.** If a driver that changes the design is unknown (scale, latency target, data sensitivity, multi-tenancy, deployment target), ask a single focused question with a recommended default. Use `references/non-functional-requirements.md` to spot missing quality attributes. Record everything else as assumptions.
+4. **Choose the mode and run the loop.** Tell the user which mode you are using:
+   - **Guided (default)** — drivers that shape the design (users served, system boundary, core domain model, sources of truth, scale, data sensitivity, stack) are not yet confirmed. Read and follow `references/collaborative-loop.md` (required): each turn states your understanding and one opinionated key insight, shows a Mermaid diagram (layers, context, ER, sequence) marked ✅ confirmed / 🟡 proposed / TBD, creates or updates the versioned draft (v0.1, v0.2, …), and ends with the **one** decision that blocks going deeper, as options with a recommended answer. Fold every answer into the diagram and draft, then raise the next decision. Use `references/non-functional-requirements.md` to spot missing quality attributes.
+   - **Fast** — only when the user explicitly asks to skip questions ("just write it", "viết luôn"), or the drivers are already confirmed in the input (for example, an approved PRD plus stated scale, data, and stack constraints). Record unknown drivers as assumptions and continue.
 5. **Choose the approach.** Consult `references/architecture-patterns.md`. Prefer the simplest design that satisfies the drivers. For each significant choice, consider at least one alternative and record the decision as an ADR (context → options → decision → consequences).
 6. **Draft from the template.** Read `references/architecture-template.md` and fill it in. Use `references/api-design.md` for interfaces and `references/data-model.md` for entities and storage. Include diagrams as Mermaid or text when they clarify structure or flows.
 7. **Address security.** Walk through `references/security-checklist.md` and document the threats and controls that apply.
 8. **Validate.** Check that every architecturally significant requirement is addressed, every NFR has a measurable target and a design response, and risks have mitigations. Note what remains unverified.
 9. **Label certainty.** Separate **Confirmed decisions**, **Assumptions**, and **Open questions**.
-10. **Deliver.** Save where the user asked (default: `docs/architecture/<system-or-feature>.md`, or inline if there is no project). Summarize the chosen approach, key trade-offs, top risks, and blocking questions.
+10. **Deliver.** Save where the user asked (default: `docs/architecture/<system-or-feature>.md`, or inline if there is no project) and ask the user to approve it as v1.0. Summarize the chosen approach, key trade-offs, top risks, and blocking questions.
 
 ## Outputs
 
@@ -48,6 +58,8 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 ## Guardrails
 
+- **Propose, don't interrogate — and don't run ahead.** In guided mode, never produce a full design from unconfirmed drivers, and never reply with only questions: always show a concrete proposal and diagram, and ask one blocking decision at a time. Unknown technologies, numbers, and vendors stay `TBD` until decided.
+- **The document belongs to the user.** Never insert advertising, self-promotion, signatures, contact details, or links the user did not provide or ask for.
 - **Do not invent confirmed decisions or constraints.** Load numbers, SLAs, budgets, and mandated technologies are assumptions unless the user or a document states them.
 - **Do not silently overwrite existing work.** Preserve existing decisions and ADRs; propose superseding an ADR rather than rewriting history.
 - **Fit the existing system.** When a codebase exists, align with its stack and conventions unless there is a stated reason to change; call out any departure explicitly.
@@ -61,6 +73,7 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 | File | Read when |
 |---|---|
+| `references/collaborative-loop.md` | Guided mode: turn structure, decision prompts, diagrams, versioned drafts |
 | `references/architecture-template.md` | Drafting or restructuring an architecture document |
 | `references/architecture-patterns.md` | Choosing an architectural style or integration approach |
 | `references/non-functional-requirements.md` | Defining or reviewing quality attributes and targets |

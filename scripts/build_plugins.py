@@ -7,6 +7,7 @@ Generated output (never edit by hand):
   plugins/claude/<plugin>/skills/<skill>/...
   plugins/openai/<plugin>/plugin.json                  Codex / ChatGPT plugin
   plugins/openai/<plugin>/skills/<skill>/...
+  plugins/openai/<plugin>/assets/brand/...             icons from the brand kit
   .claude-plugin/marketplace.json                      Claude Code marketplace
   .agents/plugins/marketplace.json                     Codex / ChatGPT marketplace
   dist/skills/<skill>.zip                              (--zip) for manual upload
@@ -41,12 +42,19 @@ import validate  # noqa: E402
 
 MARKETPLACE_NAME = "vaultia-skills"
 BUNDLE_NAME = "vaultia-skills"
-BUNDLE_DISPLAY_NAME = "Vaultia Skills"
+BUNDLE_DISPLAY_NAME = "Vaultia Requirement"
 BUNDLE_DESCRIPTION = "All Vaultia skills: product requirements and architecture requirements for software teams."
 AUTHOR = {"name": "Vaultia"}
 OPENAI_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 OPENAI_CATEGORY = "Productivity"
 KEYWORDS = ["requirements", "product-management", "architecture", "software-design"]
+
+# OpenAI plugin branding: `interface-snippet.json` lists the interface fields
+# (logo, composer icons, brand colors); each "./assets/brand/<file>" it names is
+# copied from this folder into every OpenAI plugin.
+OPENAI_BRAND_DIR = Path("assets") / "vaultia-brand-kit" / "openai"
+OPENAI_BRAND_SNIPPET = "interface-snippet.json"
+PLUGIN_BRAND_PREFIX = "./assets/brand/"
 
 # Skill content that is not shipped inside plugins or zips.
 EXCLUDED_FROM_DISTRIBUTION = ("tests", "__pycache__", ".DS_Store")
@@ -103,7 +111,25 @@ def claude_manifest(name: str, description: str, version: str) -> dict:
     }
 
 
-def openai_manifest(name: str, display_name: str, description: str, version: str) -> dict:
+def openai_branding(root: Path = REPO_ROOT) -> tuple[dict, list[Path]]:
+    """Return the interface fields and source image files for OpenAI plugins."""
+    brand_dir = root / OPENAI_BRAND_DIR
+    snippet = brand_dir / OPENAI_BRAND_SNIPPET
+    if not snippet.is_file():
+        return {}, []
+    interface = json.loads(snippet.read_text(encoding="utf-8"))["interface"]
+    files = []
+    for key, value in interface.items():
+        if isinstance(value, str) and value.startswith(PLUGIN_BRAND_PREFIX):
+            source = brand_dir / value[len(PLUGIN_BRAND_PREFIX):]
+            if not source.is_file():
+                raise SystemExit(f"brand file for interface.{key} not found: {source}")
+            files.append(source)
+    return interface, files
+
+
+def openai_manifest(name: str, display_name: str, description: str, version: str,
+                    branding: dict | None = None) -> dict:
     return {
         "$schema": OPENAI_PLUGIN_SCHEMA,
         "name": name,
@@ -118,6 +144,7 @@ def openai_manifest(name: str, display_name: str, description: str, version: str
                     "shortDescription": description,
                     "developerName": AUTHOR["name"],
                     "category": OPENAI_CATEGORY,
+                    **(branding or {}),
                 }
             }
         },
@@ -144,9 +171,11 @@ def plan_plugins(skill_dirs: list[Path]) -> list[dict]:
     return plugins
 
 
-def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | None = None) -> list[dict]:
+def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | None = None,
+          brand_root: Path = REPO_ROOT) -> list[dict]:
     """Generate plugins and marketplaces into `out`. Returns the plugin specs."""
     version = version or project_version()
+    branding, brand_files = openai_branding(brand_root)
     skill_dirs = validate.discover_skills(skills_root)
     if not skill_dirs:
         raise SystemExit("no skills found")
@@ -168,7 +197,12 @@ def build(out: Path, skills_root: Path = validate.SKILLS_DIR, version: str | Non
         write_json(claude_dir / ".claude-plugin" / "plugin.json", claude_manifest(name, description, version))
 
         openai_dir = plugins_root / "openai" / name
-        write_json(openai_dir / "plugin.json", openai_manifest(name, spec["display_name"], description, version))
+        write_json(openai_dir / "plugin.json",
+                   openai_manifest(name, spec["display_name"], description, version, branding))
+        for source in brand_files:
+            target = openai_dir / "assets" / "brand" / source.name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
 
         for skill_dir in spec["skills"]:
             copy_skill(skill_dir, claude_dir / "skills" / skill_dir.name)
@@ -249,7 +283,7 @@ def diff_trees(expected: Path, actual: Path) -> list[str]:
 def check(root: Path = REPO_ROOT) -> list[str]:
     with tempfile.TemporaryDirectory() as tmp:
         expected = Path(tmp)
-        build(expected, root / "skills", project_version(root))
+        build(expected, root / "skills", project_version(root), brand_root=root)
         problems: list[str] = []
         for rel in GENERATED_PATHS:
             for platform_dir in ([rel / "claude", rel / "openai"] if rel == Path("plugins") else [rel]):

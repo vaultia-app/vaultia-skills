@@ -54,6 +54,16 @@ class BuildPluginsTest(unittest.TestCase):
                 self.assertIn("com.openai", manifest["extensions"])
                 self.assertFalse((root / ".codex-plugin").exists())
 
+    def test_openai_plugins_are_branded(self) -> None:
+        for name in PLUGINS:
+            with self.subTest(plugin=name):
+                root = self.out / "plugins" / "openai" / name
+                interface = load(root / "plugin.json")["extensions"]["com.openai"]["interface"]
+                for key in ("logo", "composerIcon", "composerIconDark"):
+                    self.assertTrue(interface[key].startswith("./assets/brand/"))
+                    self.assertTrue((root / interface[key]).is_file(), interface[key])
+                self.assertRegex(interface["brandColor"], r"^#[0-9A-Fa-f]{6}$")
+
     def test_skill_copies_match_canonical_and_exclude_tests(self) -> None:
         for platform in ("claude", "openai"):
             for skill in SKILLS:

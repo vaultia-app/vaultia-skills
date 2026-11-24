@@ -10,6 +10,7 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 | Field | Value |
 |---|---|
 | Status | Draft / In review / Approved |
+| Version | <v0.1 while iterating; v1.0 when approved> |
 | Owner | <name or role> |
 | Last updated | <YYYY-MM-DD> |
 | Product requirements | <link to PRD> |
@@ -153,4 +154,10 @@ Cover where relevant: performance, scalability, availability, resilience, observ
 | PRD ID | Addressed by (component / flow / ADR) | Status |
 |---|---|---|
 | FR-1 | <component, flow 1> | Covered / Partial / Not covered |
+
+## Change log
+
+| Version | Decisions applied | Sections changed |
+|---|---|---|
+| v0.1 | <initial proposal> | All |
 ```

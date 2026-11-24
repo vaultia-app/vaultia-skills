@@ -1,6 +1,6 @@
 # Discovery Questions
 
-Use this list to find gaps, not as a questionnaire. Ask **one** question at a time, only for essentials you cannot infer, and offer a recommended answer when possible. Everything else becomes an assumption or open question in the document.
+Use this list to find gaps and pick probing questions, not as a questionnaire. In guided mode, turn them into one blocking decision per turn with options and a recommendation, as described in `collaborative-loop.md`. In fast mode, do not ask — record gaps as assumptions or open questions.
 
 ## Essentials (ask if missing)
 
@@ -54,6 +54,7 @@ Use this list to find gaps, not as a questionnaire. Ask **one** question at a ti
 
 ## Asking well
 
-- Prefer: "Who is the primary user — I'd suggest small-business admins based on the notes. Correct?"
-- Avoid: dumping ten questions at once.
-- Stop asking when you can write a useful draft. Drafts with explicit assumptions are better than delayed perfection.
+- Prefer: "Who is the primary user? A) small-business admins ← recommended, the notes mention billing setup; B) individual freelancers; C) enterprise IT."
+- Avoid: dumping ten questions at once, or asking without first showing a proposal and a recommendation.
+- Avoid: drafting a full PRD from a one-line idea without confirming problem, users, and scope first.
+- Stop asking when remaining unknowns would not change scope or requirements; list them as open questions.

@@ -10,6 +10,7 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 | Field | Value |
 |---|---|
 | Status | Draft / In review / Approved |
+| Version | <v0.1 while iterating; v1.0 when approved> |
 | Owner | <name or role> |
 | Last updated | <YYYY-MM-DD> |
 | Related | <links to research, designs, tickets, architecture doc> |
@@ -23,6 +24,7 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 - **Problem statement:** <The user or business problem, in the user's terms.>
 - **Evidence:** <Data, research, support tickets, or quotes that show the problem is real. Mark as assumption if none.>
 - **Impact of not solving:** <Cost of inaction.>
+- **Why now:** <What changed — market, technology, regulation, customer demand — that makes this the right time.>
 
 ## 3. Goals and non-goals
 
@@ -38,12 +40,18 @@ Copy this structure. Omit sections that do not apply; do not reorder. Replace ev
 |---|---|---|
 | <name> | <who they are> | <what they need from this> |
 
+- **Job to be done:** "When <situation>, I want to <motivation>, so I can <expected outcome>."
+- **Not serving in this release:** <segments deliberately excluded, and why>
+
 ## 5. User journeys
 
 ### J-1: <Journey name>
 1. <Trigger / starting point>
 2. <Step>
 3. <Outcome the user achieves>
+
+**Edge cases**
+- E-1: <unusual or failure situation, e.g. missing data, conflicting input, permission denied> → covered by AC-<n.n>
 
 ## 6. Functional requirements
 
@@ -73,13 +81,20 @@ Only the expectations the business cares about; the architecture phase refines t
 |---|---|---|---|---|
 | M-1 | <metric> | <current value or "unknown"> | <target and timeframe> | <data source / method> |
 
-Include at least one leading indicator (adoption, activation) and one lagging indicator (retention, revenue, cost).
+Include at least one leading indicator (adoption, activation) and one lagging indicator (retention, revenue, cost), plus guardrail metrics that must not get worse.
+
+**Instrumentation**
+- **Events:** `<object_action>` (e.g. `project_created`, `report_exported`) — the events needed to compute each metric
+- **Funnel:** <step → step → step>
+- **Alerts:** <threshold that signals a problem, or "TBD — owner">
 
 ## 10. Scope and release plan
 
 - **In scope (v1):** <list>
 - **Later / out of scope:** <list>
 - **Rollout:** <phases, feature flags, beta cohort, regions>
+- **Experiment:** <the hypothesis the release tests and how it will be judged, if any>
+- **Kill switch / rollback:** <how the feature can be disabled or reverted if it misbehaves>
 - **Dependencies:** <teams, systems, vendors, legal>
 
 ## 11. Risks
@@ -101,5 +116,11 @@ Include at least one leading indicator (adoption, activation) and one lagging in
 
 ## 13. Appendix
 
-<Glossary, research notes, mockup links, change log.>
+<Glossary, research notes, mockup links.>
+
+## Change log
+
+| Version | Decisions applied | Sections changed |
+|---|---|---|
+| v0.1 | <initial proposal> | All |
 ```

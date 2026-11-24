@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/vaultia-brand-kit/logos/vaultia-horizontal-dark.svg">
+    <img src="assets/vaultia-brand-kit/logos/vaultia-horizontal-light.svg" alt="Vaultia" width="260">
+  </picture>
+</p>
+
 # Vaultia Skills
 
 Reusable AI Agent Skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io/specification) format.
@@ -99,6 +106,7 @@ scripts/validate.py     # Skill validator
 scripts/build_plugins.py# Plugin, marketplace and zip builder
 tests/                  # Repository tests
 docs/                   # Authoring and architecture docs
+assets/vaultia-brand-kit/ # README logo and OpenAI plugin icons (only assets in use)
 ```
 
 ## Development

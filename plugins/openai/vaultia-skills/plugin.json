@@ -15,10 +15,15 @@
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Vaultia Skills",
+        "displayName": "Vaultia Requirement",
         "shortDescription": "All Vaultia skills: product requirements and architecture requirements for software teams.",
         "developerName": "Vaultia",
-        "category": "Productivity"
+        "category": "Productivity",
+        "logo": "./assets/brand/logo-512.png",
+        "composerIcon": "./assets/brand/composer-light-192.png",
+        "composerIconDark": "./assets/brand/composer-dark-192.png",
+        "brandColor": "#141414",
+        "brandColorDark": "#FFC533"
       }
     }
   }

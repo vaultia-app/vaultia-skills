@@ -6,7 +6,9 @@
     "What are the non-functional requirements and architecture constraints for this payments feature?",
     "Review this architecture document and point out risks and gaps.",
     "Turn this feature spec into components, APIs, and a data model before we start coding.",
-    "Write an ADR comparing a modular monolith and microservices for our new platform."
+    "Write an ADR comparing a modular monolith and microservices for our new platform.",
+    "I want to build a game management site — redesign the database for me and suggest how to extend it.",
+    "Here's our handoff doc for the CMS. Propose a new data model and walk me through the decisions."
   ],
   "should_not_trigger": [
     "Write a PRD for a habit-tracking app.",
