@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- `product-requirements` covers non-functional requirements and service commitments: it proposes product-wide NFRs as 🟡 defaults (performance, availability, security and privacy, accessibility, localization, compliance, data recovery), asks whether a product sold to customers promises an SLA, never drops the NFR section, and checks both before v1.0. The `docs/` starter kit's NFR file gains these categories and an SLA table (uptime, support response, maintenance window, data recovery).
+- `architecture-requirements` maps each SLA commitment from the PRD to an SLO, SLI, design response, and verification (*From SLA to design*).
+
 ## [0.4.0] - 2026-11-27
 
 ### Added

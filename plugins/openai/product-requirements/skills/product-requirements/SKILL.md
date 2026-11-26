@@ -43,7 +43,7 @@ The PRD includes a **conceptual** domain model: business objects, relationships,
 
 ## Outputs
 
-- One PRD file, `docs/PRD.md` (returned in the chat at v1.0), with acceptance criteria for each functional requirement and a scope checklist of what ships in this release
+- One PRD file, `docs/PRD.md` (returned in the chat at v1.0), with acceptance criteria for each functional requirement, product-wide non-functional requirements and the SLA decision, and a scope checklist of what ships in this release
 - On request only: the export to the `docs/` template, as a zip in chat hosts
 - In a project that already has the `docs/` structure: the feature spec `docs/03-functional-specs/F<nn>-<slug>.md` and the shared files it changed
 - Confirmed decisions separated from assumptions and open questions

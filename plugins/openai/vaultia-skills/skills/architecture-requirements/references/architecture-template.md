@@ -101,6 +101,8 @@ sequenceDiagram
 
 ## 10. Non-functional design
 
+SLA commitments from the PRD map to SLOs here (see `non-functional-requirements.md`, *From SLA to design*).
+
 | NFR | Target | Design response | Verification |
 |---|---|---|---|
 | NFR-1 | <p95 < 300 ms> | <caching, indexing, async processing> | <load test, monitoring> |

@@ -167,6 +167,19 @@
       "must_not": [
         "Moves or renames existing documents without approval"
       ]
+    },
+    {
+      "id": "nfr-and-sla-for-commercial-product",
+      "prompt": "(Guided mode, B2B SaaS sold to small businesses, reaching the Metrics, scope & release stage)",
+      "expect": [
+        "Proposes product-wide NFRs as 🟡 defaults in the NFR section, written as users notice them",
+        "Asks whether the product promises an SLA through the choice tool",
+        "Keeps technical targets such as p95 latency and RPO/RTO for architecture-requirements"
+      ],
+      "must_not": [
+        "Omits the NFR section because nothing was decided",
+        "Presents an uptime or support target as confirmed without the user's decision"
+      ]
     }
   ]
 }
