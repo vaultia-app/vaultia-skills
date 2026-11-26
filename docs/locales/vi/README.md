@@ -27,16 +27,19 @@
   Bộ Agent Skill biến ý tưởng sản phẩm thành tài liệu sẵn sàng để làm: PRD trước, rồi thiết kế hệ thống.<br>Skill làm việc <strong>cùng</strong> bạn: đề xuất phương án và hỏi từng quyết định một thay vì đoán.
 </p>
 
-<p align="center">
-  <img src="../../../assets/vaultia-brand-kit/readme/hero.svg" alt="Vaultia Skills: ý tưởng, rồi PRD (cái gì, tại sao), rồi kiến trúc (như thế nào, ràng buộc), rồi triển khai" width="100%">
-</p>
-
 ## Danh sách skill
 
 | Skill | Làm gì | Trả lời câu hỏi |
 |---|---|---|
 | [`product-requirements`](../../../skills/product-requirements/SKILL.md) | Tài liệu yêu cầu sản phẩm (PRD): mục tiêu, người dùng, hành trình, yêu cầu chức năng, tiêu chí chấp nhận, chỉ số thành công, phạm vi, kế hoạch phát hành | **CÁI GÌ / TẠI SAO** |
 | [`architecture-requirements`](../../../skills/architecture-requirements/SKILL.md) | Kiến trúc và thiết kế hệ thống: yếu tố dẫn dắt, thành phần, API, mô hình dữ liệu, NFR, bảo mật, triển khai, ADR | **NHƯ THẾ NÀO / RÀNG BUỘC** |
+
+```text
+Ý tưởng sản phẩm
+  → product-requirements       (CÁI GÌ / TẠI SAO)
+  → architecture-requirements  (NHƯ THẾ NÀO / RÀNG BUỘC)
+  → triển khai
+```
 
 Mỗi skill cũng dùng riêng được khi đầu vào đã đủ thông tin.
 
