@@ -1,8 +1,8 @@
 {
   "name": "ui-ux-design",
-  "displayName": "Ui Ux Design",
+  "displayName": "UI UX Design",
   "version": "0.3.2",
-  "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
+  "description": "Design and build user interface screens.",
   "author": {
     "name": "Vaultia"
   },

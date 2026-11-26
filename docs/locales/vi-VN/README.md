@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  Bộ Agent Skill biến ý tưởng sản phẩm thành tài liệu sẵn sàng để làm: PRD trước, rồi thiết kế hệ thống.<br>Skill làm việc <strong>cùng</strong> bạn: đề xuất phương án và hỏi từng quyết định một thay vì đoán.
+  Bộ Agent Skill biến ý tưởng sản phẩm thành tài liệu sẵn sàng để làm: PRD trước, rồi đến màn hình và thiết kế hệ thống.<br>Skill làm việc <strong>cùng</strong> bạn: đề xuất phương án và hỏi từng quyết định một thay vì đoán.
 </p>
 
 ## Danh sách skill
@@ -85,7 +85,7 @@ Copy hoặc tạo symlink thư mục skill vào thư mục skill của agent:
 ```bash
 # Claude Code, dùng được ở mọi project
 mkdir -p ~/.claude/skills
-cp -R skills/product-requirements skills/architecture-requirements ~/.claude/skills/
+cp -R skills/product-requirements skills/ui-ux-design skills/architecture-requirements ~/.claude/skills/
 
 # Phát triển local: symlink để sửa là thấy ngay
 ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
@@ -99,6 +99,7 @@ Cứ hỏi agent bằng ngôn ngữ tự nhiên, tiếng Việt cũng được:
 
 - *"Viết PRD cho app quản lý chi tiêu cá nhân."*
 - *"Chuyển biên bản họp này thành yêu cầu kèm tiêu chí chấp nhận."*
+- *"Thiết kế màn hình trang quản trị từ PRD này."*
 - *"Từ PRD này làm thiết kế kỹ thuật."*
 - *"Review kiến trúc này xem còn thiếu gì và có rủi ro gì."*
 

@@ -16,7 +16,7 @@ This is the only place host-specific tool names appear. Elsewhere, say "the choi
 
 ## Rules for every question
 
-- **Stable ID first.** Start the title with the decision ID (`D-003 · Primary user: …`): the next free number in `docs/09-working/decisions-log.md`. Use the same ID when you log the answer.
+- **Stable ID first.** Start the title with the decision ID (`D-003 · Primary user: …`): the next free number in the PRD's *Decisions* section (`docs/09-working/decisions-log.md` in a `docs/` project). Use the same ID when you log the answer.
 - **Recommended option first**, labeled "(recommended)" in the user's language. Several hosts preselect the first option.
 - **Self-contained title.** The user may see only the form, so include the context needed to answer.
 - **2–4 mutually exclusive options** in the user's domain terms: short labels, consequences in the description (or after a dash when options are plain strings), so the user decides on trade-offs, not labels.
@@ -54,12 +54,12 @@ Reply with a letter, your own answer, or "you decide".
 
 ### An answer to an already-decided question
 
-Hosts keep old forms clickable, so the user may pick a different option for an earlier `D-n`. Never overwrite silently:
+Hosts keep old forms clickable, so the user may pick a different option for an earlier `D-xxx`. Never overwrite silently:
 
-1. Name the change: "This changes D-2 · Primary user from *Individual gamers* to *Collectors*."
+1. Name the change: "This changes D-002 · Primary user from *Individual gamers* to *Collectors*."
 2. List what depends on it: later decisions, requirements, metrics, and diagram nodes that would change.
 3. Ask: *Keep <current value>* / *Change to <new value> and update the affected parts*. Recommend *Keep* unless the user clearly meant to change it.
-4. On *Change*: bump the version, update every affected part, mark dependent decisions 🟡 for re-confirmation, record old and new values in the spec's change log, and add a new decision to the decisions log that supersedes the old one (the old entry stays, marked superseded). On *Keep*: change nothing.
+4. On *Change*: bump the version, update every affected part, mark dependent decisions 🟡 for re-confirmation, record old and new values in the document's change log, and add a new decision to the decisions section that supersedes the old one (the old entry stays, marked superseded). On *Keep*: change nothing.
 
 If another question is still pending, handle its answer first, then raise the change.
 
@@ -68,7 +68,7 @@ If another question is still pending, handle its answer first, then raise the ch
 The user may raise something outside the pending question: a feature they just remembered, a constraint, a change of mind. Never let it stay only in the chat:
 
 1. Discuss it as long as the user wants; give your opinion and the trade-offs.
-2. When the discussion concludes or the user moves on, summarize what was agreed (what, for whom, why) and ask how to capture it, with a new ID (`D-n`, or `FR-n` for a requirement):
+2. When the discussion concludes or the user moves on, summarize what was agreed (what, for whom, why) and ask how to capture it, with a new ID (`D-xxx`, or `FR-n` for a requirement):
    - *Add to the draft as Must (recommended when it serves the primary journey)*
    - *Add as Should / later phase*
    - *Record as an open question*

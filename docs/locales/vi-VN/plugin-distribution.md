@@ -18,6 +18,7 @@ Skill gốc trong `skills/` được `scripts/build_plugins.py` đóng gói cho 
 | Plugin | Gồm |
 |---|---|
 | `product-requirements` | `product-requirements` |
+| `ui-ux-design` | `ui-ux-design` |
 | `architecture-requirements` | `architecture-requirements` |
 | `vaultia-skills` (tên hiển thị "Vaultia", file zip `vaultia.zip`) | mọi skill |
 

@@ -51,7 +51,7 @@
     },
     {
       "id": "you-decide-is-an-assumption",
-      "prompt": "(During guided mode, answering D-3 · MVP scope) You decide.",
+      "prompt": "(During guided mode, answering D-003 · MVP scope) You decide.",
       "expect": [
         "Takes the recommended option",
         "Records it as 🟡 assumption in the draft"
@@ -82,18 +82,65 @@
       ]
     },
     {
-      "id": "first-feature-scaffolds-docs",
-      "prompt": "(In a project with no docs/ folder, after the intake is answered) Let's draft the login feature.",
+      "id": "first-draft-is-single-file",
+      "prompt": "(In a project with no docs/ folder, after the intake is answered) Let's draft the requirements.",
       "expect": [
-        "Copies the starter kit from assets/docs-starter/ into docs/",
-        "Creates the draft as docs/03-functional-specs/F01-<slug>.md at v0.1",
-        "Adds an F01 row with a link to the spec in docs/02-requirements/01-feature-list.md",
-        "Says in one line that the structure was created and where the feature file is"
+        "Creates the draft as docs/PRD.md at v0.1, using the starter kit's sections and conventions",
+        "Puts each feature in an F<nn> subsection with a row in the Features and MVP scope section"
       ],
       "must_not": [
-        "Writes the PRD to docs/requirements/ or another ad-hoc location",
+        "Writes the full docs/ starter-kit structure",
+        "Creates docs/03-functional-specs/ files",
+        "Leaves template placeholders such as <Product name> in the file"
+      ]
+    },
+    {
+      "id": "scope-checklist-before-v1",
+      "prompt": "(Guided mode, every agenda item is decided and the remaining sections are complete)",
+      "expect": [
+        "Writes a checklist of functional requirements grouped by feature, with the recommended set ticked",
+        "Asks through the choice tool: accept the recommended set, choose per feature, or edit the checklist in the file"
+      ],
+      "must_not": [
+        "Asks to finalize v1.0 before the scope checklist",
+        "Deletes unticked requirements or reuses their IDs"
+      ]
+    },
+    {
+      "id": "scope-dependency-conflict-is-raised",
+      "prompt": "(At the scope checklist) Untick F01/FR-3 customer billing details; keep F03/FR-2 bulk invoices.",
+      "expect": [
+        "Says F03/FR-2 needs F01/FR-3",
+        "Proposes a fix and asks it through the choice tool before finalizing",
+        "Moves items the user drops to a later release with their reason and records the change as a decision"
+      ],
+      "must_not": [
+        "Finalizes v1.0 while a ticked item depends on an unticked one"
+      ]
+    },
+    {
+      "id": "v1-returns-single-file-and-offers-export",
+      "prompt": "(At the scope checklist) Accept the recommended set and finalize v1.0.",
+      "expect": [
+        "Sets the PRD to v1.0 and returns the single file in the chat (attached, inline, or linked when saved in the project)",
+        "Offers through the choice tool: keep the single file, export to the docs/ template (zip), hand off to architecture-requirements, or add the next feature"
+      ],
+      "must_not": [
+        "Exports to the docs/ template or creates a zip without being asked",
+        "Reprints the whole file in the chat when it is already saved in the project"
+      ]
+    },
+    {
+      "id": "export-splits-into-docs-template",
+      "prompt": "(After v1.0, in a chat host) Export to the docs/ template (zip).",
+      "expect": [
+        "Splits each section into its starter-kit file and each feature into 03-functional-specs/F<nn>-<slug>.md",
+        "Delivers the folder as <product-slug>-docs.zip and says which kit source was used",
+        "Keeps every ID unchanged"
+      ],
+      "must_not": [
         "Creates 04-ui/, 05-architecture/, 06-testing/, or 07-roadmap/ without content",
-        "Leaves template placeholders such as <Product name> in the delivered files"
+        "Invents content to fill kit files"
       ]
     },
     {

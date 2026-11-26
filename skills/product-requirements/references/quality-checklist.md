@@ -1,6 +1,6 @@
 # Product Requirements Quality Checklist
 
-Run before delivering a feature spec, and use as the rubric when reviewing one. Report review findings as **Blocking**, **Important**, or **Minor**.
+Run before delivering a PRD or feature spec, and use as the rubric when reviewing one. Report review findings as **Blocking**, **Important**, or **Minor**.
 
 ## Completeness
 
@@ -10,7 +10,7 @@ Run before delivering a feature spec, and use as the rubric when reviewing one. 
 - [ ] Non-goals are listed.
 - [ ] Every main user journey has functional requirements.
 - [ ] Every functional requirement has acceptance criteria.
-- [ ] Business objects this feature uses are in `01-business/02-domain-model.md` with relationships and lifecycles (conceptual only: no column types or storage).
+- [ ] Business objects this feature uses are in the domain model (`01-business/02-domain-model.md` in a `docs/` project) with relationships and lifecycles (conceptual only: no column types or storage).
 - [ ] Every calculation or money rule (`BR-xxx`) has a worked example, rounding, and boundary behavior.
 - [ ] Success metrics have a baseline (or "unknown"), a target, a timeframe, and a measurement method.
 - [ ] Scope, rollout, and dependencies are stated.
@@ -22,7 +22,7 @@ Run before delivering a feature spec, and use as the rubric when reviewing one. 
 
 - [ ] Each requirement states a single behavior.
 - [ ] No ambiguous terms left unqualified: *fast, easy, simple, intuitive, secure, scalable, flexible, robust, user-friendly, etc., as needed, appropriate*.
-- [ ] Terms are used consistently; terms that could be misread are in `00-overview/02-glossary.md`.
+- [ ] Terms are used consistently; terms that could be misread are in the glossary.
 - [ ] Requirements use "shall" (mandatory) consistently; optional behavior uses priority, not wording.
 
 ## Testability
@@ -41,16 +41,19 @@ Run before delivering a feature spec, and use as the rubric when reviewing one. 
 
 ## Placement (documentation structure)
 
-- [ ] The spec is `03-functional-specs/F<nn>-<slug>.md` and has a row in `02-requirements/01-feature-list.md` that links to it.
-- [ ] Rules, objects, actors, and terms that other features could use live in the shared files; the spec references them by ID instead of repeating them.
-- [ ] Every `BR-xxx`, `D-xxx`, and `Q-xxx` the spec mentions exists in its shared file, and its *Used by* / *Affects* / *Raised in* column names this feature.
-- [ ] Relative links between files resolve.
+- [ ] Single file: sections follow the order in `docs-structure.md`; each feature is an `F<nn>` subsection with a row in *Features and MVP scope*; local IDs are qualified (`F02/FR-1`) outside their own subsection.
+- [ ] `docs/` project: the spec is `03-functional-specs/F<nn>-<slug>.md` and has a row in `02-requirements/01-feature-list.md` that links to it.
+- [ ] Rules, objects, actors, and terms that other features could use live in the shared sections or files; features reference them by ID instead of repeating them.
+- [ ] Every `BR-xxx`, `D-xxx`, and `Q-xxx` a feature mentions exists where it lives, and its *Used by* / *Affects* / *Raised in* column names this feature.
+- [ ] Links and anchors resolve.
 
 ## Scope discipline
 
 - [ ] Requirements describe WHAT and WHY, not HOW (no unnecessary technology or design choices).
 - [ ] Priorities are assigned; not everything is "Must".
 - [ ] The v1 scope is the smallest version that achieves the goal.
+- [ ] The scope checklist lists every functional requirement once, ticked or not; each unticked line says why and where it goes.
+- [ ] No ticked item depends on an unticked one; the primary journey can be completed with the ticked items; every actor in the release has a ticked capability.
 
 ## Honesty
 

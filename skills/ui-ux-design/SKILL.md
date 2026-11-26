@@ -1,6 +1,6 @@
 ---
 name: ui-ux-design
-description: Design and build user interfaces for portals, landing pages, and storefronts — screen maps, user flows, page layouts, component choices, every UI state, accessibility, and brand theming — and implement them as React screens with the Vaultia Base UI React kit (Base UI, Tailwind CSS v4, cva). Use when the user asks for UI/UX design, screen or page design, wireframes, an admin portal, dashboard, or back office, a landing page or marketing site, an online store, product page, cart, or checkout, turning a PRD or feature spec into screens, setting up a UI kit or design system, creating a brand theme or dark mode, or reviewing an existing UI for usability and accessibility problems. Not for defining product scope or requirements (use product-requirements) or for backend and system architecture (use architecture-requirements).
+description: Design and build user interface screens — screen maps, user flows, layouts, UI states, accessibility, and brand themes — as React screens with the Vaultia Base UI React kit (Base UI, Tailwind CSS v4, cva). Use when the user asks to design, wireframe, or build the UI of an admin portal, dashboard, landing page, or storefront; to turn a PRD or feature spec into screens; to set up the UI kit or a brand theme; or to review an existing UI for usability and accessibility. Not for backend work such as payment processing or checkout logic, product scope (use product-requirements), or system architecture (use architecture-requirements).
 ---
 
 # UI/UX Design
@@ -17,7 +17,7 @@ Screens built on unexamined guesses look finished but encode the wrong flows.
 
 - Name the surface you identified. If it is unclear, ask it first, because it changes every later choice.
 - If the input is a one-line idea with no requirements, propose a **screen map** (screens, who uses them, main flow) and ask the decisions that shape the UI; do not write page code yet.
-- If the project has feature specs (`docs/03-functional-specs/`) or a PRD, read them and propose the screen map and flows for the requested feature directly.
+- If the project has a PRD (`docs/PRD.md`) or feature specs (`docs/03-functional-specs/`), read them and propose the screen map and flows for the requested feature directly.
 - If the user asks for a review, inspect the UI first and report findings before changing anything.
 - Ask decisions as described in `references/asking-decisions.md`. Build immediately only when the user says so ("just build it") or the input already settles platform, users, main flow, and brand.
 
@@ -57,6 +57,7 @@ Hand off when the work leaves the UI: unclear scope, users, or rules go to `prod
 - **Reuse before you build.** Use kit components and page patterns; never re-create a button, input, dialog, or table in the app.
 - **Business logic stays in the app.** Kit components stay pure UI; domain names, API calls, and permissions live in app code.
 - **Semantic tokens only.** No hex values or raw palette classes in screens or kit components; color changes go through tokens and themes.
+- **Plan in text, build in code.** Screen maps, flows, and outlines are tables, lists, or ASCII wireframes; rendered mockups only when the user asks (`references/ux-planning.md`).
 - **Every state is designed.** Loading, empty, error, partial, success, disabled, and no-permission states are part of the screen, not an afterthought.
 - **Accessible by default.** Keyboard, focus, labels, contrast (WCAG 2.2 AA), and touch targets are checked, not assumed.
 - **No hard-coded UI text inside the kit.** Kit defaults come from its locale; screen copy uses the user's language and the project's i18n setup when one exists.

@@ -1,11 +1,11 @@
 # Example Feature Spec
 
-A finished v1.0 spec for a small feature, plus the rows it added to the shared files. Use it to calibrate depth and tone. Note what it leaves out: sections that do not apply are omitted, and shared rules and decisions are referenced by ID instead of repeated.
+A finished v1.0 spec for a small feature, plus the rows it added to the shared files. Use it to calibrate depth and tone. Note what it leaves out: sections that do not apply are omitted, and shared rules and decisions are referenced by ID instead of repeated. In the single `docs/PRD.md`, the same content is the `### F04 — Members` subsection (its header table becomes the F04 row of *Features and MVP scope*), and the shared rows go into the matching sections.
 
 ## The spec: `docs/03-functional-specs/F04-members.md`
 
 ````markdown
-# F04 — Workspace Member Invitations
+# F04 — Workspace member invitations
 
 | Field | Value |
 |---|---|
