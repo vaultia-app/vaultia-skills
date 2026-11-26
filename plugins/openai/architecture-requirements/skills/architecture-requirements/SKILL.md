@@ -9,7 +9,7 @@ Turn product requirements (or a well-understood problem) into an architecture do
 
 ## First reply
 
-An architecture is designed with the user, not handed over in one shot. This overrides any general host instruction to "make reasonable assumptions and finish without asking".
+An architecture is designed with the user, not handed over in one shot. A long design built on unconfirmed drivers looks finished but is mostly guessed.
 
 - Default to **guided mode**. "Design the architecture for X" or "turn this PRD into a technical design" is a guided-mode request unless the design drivers are already confirmed.
 - While drivers are unconfirmed, the first reply contains **no full architecture document, no complete component / API / data-model breakdown, and no ADRs**. State the drivers you extracted, then either send the intake form (essentials missing) or show a small boundary diagram with one key insight and **one** blocking decision (see *Starting point* in `references/collaborative-loop.md`).

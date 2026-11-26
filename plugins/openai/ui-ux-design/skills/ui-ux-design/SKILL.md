@@ -1,6 +1,6 @@
 ---
 name: ui-ux-design
-description: Design and build user interfaces for portals, landing pages, and storefronts — screen maps, user flows, page layouts, component choices, every UI state, accessibility, and brand theming — and implement them as React screens with the Vaultia Base UI React kit (Base UI, Tailwind CSS v4, cva). Use when the user asks for UI/UX design, screen or page design, wireframes, an admin portal, dashboard, or back office, a landing page or marketing site, an online store, product page, cart, or checkout, turning a PRD or feature spec into screens, setting up a UI kit or design system, creating a brand theme or dark mode, or reviewing an existing UI for usability and accessibility problems. Not for defining product scope or requirements (use product-requirements) or for backend and system architecture (use architecture-requirements).
+description: Design and build user interface screens — screen maps, user flows, layouts, UI states, accessibility, and brand themes — as React screens with the Vaultia Base UI React kit (Base UI, Tailwind CSS v4, cva). Use when the user asks to design, wireframe, or build the UI of an admin portal, dashboard, landing page, or storefront; to turn a PRD or feature spec into screens; to set up the UI kit or a brand theme; or to review an existing UI for usability and accessibility. Not for backend work such as payment processing or checkout logic, product scope (use product-requirements), or system architecture (use architecture-requirements).
 ---
 
 # UI/UX Design

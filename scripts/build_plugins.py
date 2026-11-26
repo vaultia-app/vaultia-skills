@@ -153,8 +153,11 @@ def short_description(description: str) -> str:
     return text + "."
 
 
+ACRONYMS = {"ui": "UI", "ux": "UX", "api": "API"}
+
+
 def title_case(name: str) -> str:
-    return " ".join(word.capitalize() for word in name.split("-"))
+    return " ".join(ACRONYMS.get(word, word.capitalize()) for word in name.split("-"))
 
 
 # ---------------------------------------------------------------- writers

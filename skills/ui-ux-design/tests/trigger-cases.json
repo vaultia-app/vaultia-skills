@@ -27,6 +27,8 @@
     "Viết PRD cho app quản lý phòng trọ.",
     "Review this pull request for security issues.",
     "Write SEO blog posts for our store.",
-    "Integrate the Stripe payment API on the backend."
+    "Integrate the Stripe payment API on the backend.",
+    "Fix the checkout total calculation when a discount code is applied.",
+    "Add an endpoint that returns the products in a category."
   ]
 }

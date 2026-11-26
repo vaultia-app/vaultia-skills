@@ -42,9 +42,9 @@
     },
     {
       "name": "ui-ux-design",
-      "displayName": "Ui Ux Design",
+      "displayName": "UI UX Design",
       "source": "./plugins/claude/ui-ux-design",
-      "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
+      "description": "Design and build user interface screens.",
       "version": "0.3.2",
       "category": "productivity",
       "keywords": [
