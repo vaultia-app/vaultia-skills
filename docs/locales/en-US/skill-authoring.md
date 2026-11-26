@@ -76,6 +76,14 @@ A rule written in two places will eventually say two different things.
 - Define each mode, threshold, or limit once (for example "ask one decision; batch up to 3 only when independent") and refer to it elsewhere.
 - Keep host-specific tool names (`AskUserQuestion`, `request_user_input_async`, …) in a single table. Everywhere else, describe the capability ("the host's choice tool"), so a tool rename means a one-line fix.
 
+## Shared templates
+
+Document templates that a skill writes into the user's project (for example the `docs/` starter kit) live in the public [vaultia-templates](https://github.com/vaultia-app/vaultia-templates) repository, not in this one. Change them there.
+
+- The skill reads the template live from `vaultia-templates@main`, so every installed version gets the latest one. It keeps a bundled copy in `assets/` and uses it only when the live copy cannot be fetched. The reference that tells the agent how to fetch it (for `product-requirements`: `references/docs-structure.md`) says when to fetch, which files must be present, and to never mix the two sources.
+- The bundled copy is generated: never edit it by hand. Refresh it with `python3 scripts/sync_templates.py`; a new template gets a line in `BUNDLES` in that script.
+- Because old skill versions read `main` too, template changes follow the compatibility rules in the vaultia-templates `README.md`.
+
 ## Split references by when they are needed
 
 Split reference files by the moment the agent needs them, not by topic, so each step loads only what it uses. For an interactive skill, for example:
@@ -150,6 +158,7 @@ Negative cases are most valuable when they are *near misses*: prompts that share
 
 - [ ] `python3 scripts/validate.py` passes.
 - [ ] `python3 scripts/build_plugins.py` has been run.
+- [ ] Bundled templates are in sync: `python3 scripts/sync_templates.py --check`.
 - [ ] `python3 -m unittest discover -s tests` passes.
 - [ ] Every file referenced from `SKILL.md` exists.
 - [ ] No rule is stated in two places; host tool names appear in one table only.

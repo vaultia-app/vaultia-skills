@@ -1,5 +1,7 @@
 """Checks for the product-requirements docs starter kit (assets/docs-starter/).
 
+The bundled kit is synced from vaultia-templates (scripts/sync_templates.py).
+
 The kit is copied as-is into a project's docs/ folder, so its files must exist,
 follow the naming conventions, and link to each other correctly.
 """
@@ -78,6 +80,10 @@ class StarterKitTest(unittest.TestCase):
         structure = (SKILL / "references" / "docs-structure.md").read_text(encoding="utf-8")
         self.assertIn("assets/docs-starter/", skill)
         self.assertIn("assets/docs-starter/03-functional-specs/_template.md", skill)
+        live = "https://raw.githubusercontent.com/vaultia-app/vaultia-templates/main/"
+        self.assertIn(live + "manifest.json", structure, "docs-structure.md should fetch the live kit")
+        self.assertIn(live + "src/requirements/docs-starter/", structure)
+        self.assertIn("`assets/docs-starter/`", structure, "docs-structure.md should name the bundled fallback")
         for rel in REQUIRED:
             if rel.startswith(("01-business/", "02-requirements/01", "09-working/")):
                 with self.subTest(file=rel):

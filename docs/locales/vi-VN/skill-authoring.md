@@ -76,6 +76,14 @@ Quy tắc viết ở hai nơi sớm muộn sẽ nói hai điều khác nhau.
 - Định nghĩa mỗi chế độ, ngưỡng hay giới hạn một lần (ví dụ "hỏi một quyết định; chỉ gộp tối đa 3 khi độc lập") rồi tham chiếu ở chỗ khác.
 - Gom tên tool riêng của từng host (`AskUserQuestion`, `request_user_input_async`, …) vào một bảng duy nhất. Ở mọi chỗ khác, mô tả theo khả năng ("choice tool của host"), để khi tool đổi tên chỉ cần sửa một dòng.
 
+## Template dùng chung
+
+Các template tài liệu mà skill ghi vào project của người dùng (ví dụ bộ khung `docs/`) nằm ở repo public [vaultia-templates](https://github.com/vaultia-app/vaultia-templates), không nằm trong repo này. Muốn sửa thì sửa ở đó.
+
+- Skill đọc template trực tiếp từ `vaultia-templates@main`, nên mọi phiên bản đã cài đều dùng bản mới nhất. Skill giữ một bản copy đi kèm trong `assets/` và chỉ dùng nó khi không lấy được bản trực tiếp. File reference hướng dẫn agent cách lấy template (với `product-requirements` là `references/docs-structure.md`) nói rõ khi nào cần lấy, file nào bắt buộc phải có, và không bao giờ trộn file từ hai nguồn.
+- Bản copy đi kèm là file sinh tự động, không sửa tay. Cập nhật bằng `python3 scripts/sync_templates.py`; template mới thì thêm một dòng vào `BUNDLES` trong script đó.
+- Vì skill bản cũ cũng đọc `main`, mọi thay đổi template phải theo quy tắc tương thích trong `README.md` của vaultia-templates.
+
 ## Tách reference theo thời điểm cần dùng
 
 Tách file reference theo lúc agent cần đến chúng, không theo chủ đề, để mỗi bước chỉ load những gì nó dùng. Ví dụ với một skill tương tác:
@@ -150,6 +158,7 @@ Ca phủ định có giá trị nhất khi là *ca sát ranh giới*: prompt dù
 
 - [ ] `python3 scripts/validate.py` chạy qua.
 - [ ] Đã chạy `python3 scripts/build_plugins.py`.
+- [ ] Template đi kèm đã đồng bộ: `python3 scripts/sync_templates.py --check`.
 - [ ] `python3 -m unittest discover -s tests` chạy qua.
 - [ ] Mọi file được tham chiếu từ `SKILL.md` đều tồn tại.
 - [ ] Không quy tắc nào được viết ở hai nơi; tên tool của host chỉ nằm trong một bảng.

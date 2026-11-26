@@ -22,7 +22,7 @@ Requires Python 3.10+, no third-party dependencies.
 
 ## Make the change
 
-1. Edit or add a skill under `skills/<skill-name>/`, following [the skill authoring guide](docs/locales/en-US/skill-authoring.md). Never edit `plugins/` by hand.
+1. Edit or add a skill under `skills/<skill-name>/`, following [the skill authoring guide](docs/locales/en-US/skill-authoring.md). Never edit `plugins/` by hand. Document templates such as the `docs/` starter kit are changed in [vaultia-templates](https://github.com/vaultia-app/vaultia-templates), not here.
 2. Run the checks:
    ```bash
    python3 scripts/validate.py

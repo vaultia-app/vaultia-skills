@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- `product-requirements` reads the `docs/` starter kit live from the public [vaultia-templates](https://github.com/vaultia-app/vaultia-templates) repository (`requirements/docs-starter`), so every installed version uses the latest templates. `assets/docs-starter/` stays as a bundled fallback, used only when the live copy cannot be fetched.
+
+### Added
+- `scripts/sync_templates.py` refreshes the bundled template copies from `vaultia-templates@main`; `--check` fails when they are out of date. The release workflow runs the check.
+
 ## [0.3.0] - 2026-11-26
 
 ### Added

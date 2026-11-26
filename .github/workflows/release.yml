@@ -34,6 +34,9 @@ jobs:
       - name: Validate skills
         run: python scripts/validate.py
 
+      - name: Check bundled templates match vaultia-templates@main
+        run: python scripts/sync_templates.py --check
+
       - name: Check generated plugins are up to date
         run: python scripts/build_plugins.py --check
 
