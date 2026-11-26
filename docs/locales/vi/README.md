@@ -27,16 +27,19 @@
   Bộ Agent Skill biến ý tưởng sản phẩm thành tài liệu sẵn sàng để làm: PRD trước, rồi thiết kế hệ thống.<br>Skill làm việc <strong>cùng</strong> bạn: đề xuất phương án và hỏi từng quyết định một thay vì đoán.
 </p>
 
-<p align="center">
-  <img src="../../../assets/vaultia-brand-kit/readme/hero.svg" alt="Vaultia Skills: ý tưởng, rồi PRD (cái gì, tại sao), rồi kiến trúc (như thế nào, ràng buộc), rồi triển khai" width="100%">
-</p>
-
 ## Danh sách skill
 
 | Skill | Làm gì | Trả lời câu hỏi |
 |---|---|---|
 | [`product-requirements`](../../../skills/product-requirements/SKILL.md) | Tài liệu yêu cầu sản phẩm (PRD): mục tiêu, người dùng, hành trình, yêu cầu chức năng, tiêu chí chấp nhận, chỉ số thành công, phạm vi, kế hoạch phát hành | **CÁI GÌ / TẠI SAO** |
 | [`architecture-requirements`](../../../skills/architecture-requirements/SKILL.md) | Kiến trúc và thiết kế hệ thống: yếu tố dẫn dắt, thành phần, API, mô hình dữ liệu, NFR, bảo mật, triển khai, ADR | **NHƯ THẾ NÀO / RÀNG BUỘC** |
+
+```text
+Ý tưởng sản phẩm
+  → product-requirements       (CÁI GÌ / TẠI SAO)
+  → architecture-requirements  (NHƯ THẾ NÀO / RÀNG BUỘC)
+  → triển khai
+```
 
 Mỗi skill cũng dùng riêng được khi đầu vào đã đủ thông tin.
 
@@ -100,25 +103,9 @@ Cứ hỏi agent bằng ngôn ngữ tự nhiên, tiếng Việt cũng được:
 
 Trong Claude Code bạn cũng có thể gọi trực tiếp, ví dụ `/product-requirements`. Muốn bỏ qua phần hỏi đáp để có bản nháp ngay thì nói *"viết luôn"*.
 
-## Phát triển
+## Đóng góp
 
-Cần Python 3.10+, không có thư viện ngoài.
-
-```bash
-python3 scripts/validate.py              # kiểm tra tất cả skill
-python3 scripts/build_plugins.py         # sinh lại plugin sau khi sửa skills/
-python3 -m unittest discover -s tests    # chạy test
-```
-
-Đọc [CONTRIBUTING.md](../../../CONTRIBUTING.md) và [skill-authoring.md](skill-authoring.md) trước khi thêm hoặc sửa skill.
-
-## Lộ trình
-
-- [x] `product-requirements` và `architecture-requirements`, validator, test, CI
-- [x] Plugin cho Claude Code và Codex / ChatGPT, marketplace, file zip để upload
-- [ ] Trình cài đặt cho kiểu copy thủ công (global / project, dry-run, gỡ cài đặt)
-- [ ] Plugin cho Cursor
-- [ ] Thêm skill: `product-discovery`, `user-experience-design`, `api-design`, `database-design`, `software-testing`, `software-deployment`
+Rất hoan nghênh issue và pull request. Xem [CONTRIBUTING.md](../../../CONTRIBUTING.md) và [hướng dẫn viết skill](skill-authoring.md).
 
 ## Giấy phép
 

@@ -100,9 +100,10 @@ Releases are published by the [Release workflow](../.github/workflows/release.ym
    python3 scripts/build_plugins.py
    python3 -m unittest discover -s tests
    ```
-4. Commit `skills/`, `plugins/`, both `marketplace.json` files, and the docs, then push `main`.
-5. Tag and push the tag:
+4. Commit `skills/`, `plugins/`, both `marketplace.json` files, and the docs on a branch, open a pull request, and merge it once CI passes. `main` is protected: direct pushes are blocked (see `.github/rulesets/`).
+5. Update your local `main`, then tag and push the tag (only repository admins can create `v*` tags):
    ```bash
+   git switch main && git pull
    git tag vX.Y.Z
    git push origin vX.Y.Z
    ```

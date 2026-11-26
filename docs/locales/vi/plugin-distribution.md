@@ -100,9 +100,10 @@ Bản phát hành được [workflow Release](../../../.github/workflows/release
    python3 scripts/build_plugins.py
    python3 -m unittest discover -s tests
    ```
-4. Commit `skills/`, `plugins/`, hai file `marketplace.json` và docs, rồi push `main`.
-5. Tạo tag và push tag:
+4. Commit `skills/`, `plugins/`, hai file `marketplace.json` và docs lên một nhánh, mở pull request, rồi merge khi CI qua. Nhánh `main` được bảo vệ nên không push thẳng được (xem `.github/rulesets/`).
+5. Cập nhật `main` ở máy, rồi tạo tag và push tag (chỉ admin của repo mới tạo được tag `v*`):
    ```bash
+   git switch main && git pull
    git tag vX.Y.Z
    git push origin vX.Y.Z
    ```

@@ -27,16 +27,19 @@
   AI Agent Skills that turn a product idea into build-ready specs: a PRD first, then the system design.<br>They work <strong>with</strong> you, proposing options and asking one decision at a time instead of guessing.
 </p>
 
-<p align="center">
-  <img src="assets/vaultia-brand-kit/readme/hero.svg" alt="Vaultia Skills: idea, then PRD (what and why), then architecture (how and constraints), then build" width="100%">
-</p>
-
 ## Skills
 
 | Skill | What it does | Answers |
 |---|---|---|
 | [`product-requirements`](skills/product-requirements/SKILL.md) | Product requirements documents (PRDs): goals, users, journeys, functional requirements, acceptance criteria, success metrics, scope, rollout | **WHAT / WHY** |
 | [`architecture-requirements`](skills/architecture-requirements/SKILL.md) | Architecture and system design: drivers, components, APIs, data models, NFRs, security, deployment, ADRs | **HOW / CONSTRAINTS** |
+
+```text
+Product idea
+  → product-requirements       (WHAT / WHY)
+  → architecture-requirements  (HOW / CONSTRAINTS)
+  → implementation
+```
 
 Each skill also works on its own when enough input is available.
 
@@ -100,25 +103,9 @@ Ask your agent naturally:
 
 In Claude Code you can also call a skill directly, for example `/product-requirements`. To skip the questions and get a draft right away, say *"just write it"*.
 
-## Development
+## Contributing
 
-Requires Python 3.10+, no third-party dependencies.
-
-```bash
-python3 scripts/validate.py              # validate all skills
-python3 scripts/build_plugins.py         # regenerate plugins after changing skills/
-python3 -m unittest discover -s tests    # run tests
-```
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/skill-authoring.md](docs/skill-authoring.md) before adding or changing a skill.
-
-## Roadmap
-
-- [x] `product-requirements` and `architecture-requirements`, validator, tests, CI
-- [x] Claude Code and Codex / ChatGPT plugins, marketplaces, upload zips
-- [ ] Installer for manual copies (global / project, dry-run, uninstall)
-- [ ] Cursor plugin
-- [ ] More skills: `product-discovery`, `user-experience-design`, `api-design`, `database-design`, `software-testing`, `software-deployment`
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/skill-authoring.md).
 
 ## License
 
