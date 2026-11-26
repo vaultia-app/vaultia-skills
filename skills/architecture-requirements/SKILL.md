@@ -45,7 +45,7 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 7. **Address security.** Walk through `references/security-checklist.md` and document the threats and controls that apply.
 8. **Validate.** Check that every architecturally significant requirement is addressed, every NFR has a measurable target and a design response, and risks have mitigations. Note what remains unverified.
 9. **Label certainty.** Separate **Confirmed decisions**, **Assumptions**, and **Open questions**.
-10. **Deliver.** Save where the user asked (default: `docs/architecture/<system-or-feature>.md`, or inline if there is no project) and ask the user to approve it as v1.0. Summarize the chosen approach, key trade-offs, top risks, and blocking questions.
+10. **Deliver.** Save where the user asked (default: `docs/05-architecture/<system-or-feature>.md` when the project uses the standard `docs/` structure from `product-requirements`, otherwise `docs/architecture/<system-or-feature>.md`; inline if there is no project) and ask the user to approve it as v1.0. Summarize the chosen approach, key trade-offs, top risks, and blocking questions.
 
 ## Outputs
 

@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- `product-requirements` writes into one standard `docs/` structure that can be used as-is. The first feature scaffolds it from the new starter kit (`assets/docs-starter/`: README, introduction, glossary, conventions, actors and permissions, domain model, business rules, workflows, feature list, non-functional requirements, feature spec template, open questions, decisions log).
+- Each feature is one file, `docs/03-functional-specs/F<nn>-<slug>.md`; shared actors, objects, rules, terms, decisions, and questions are written once in the shared files and referenced by ID.
+- `references/docs-structure.md`: when to scaffold, where each kind of content goes, which shared files to update, and how to number IDs.
+- `tests/test_docs_starter.py` and behavior cases for scaffolding, adding a second feature, and keeping an existing docs layout.
+
+### Changed
+- `references/requirements-template.md` is replaced by the feature spec template in the starter kit; `references/example-prd.md` is now `references/example-feature-spec.md` and shows the rows a feature adds to the shared files.
+- Decisions and open questions go to `09-working/decisions-log.md` (`D-001`) and `09-working/open-questions.md` (`Q-001`); feature specs list their IDs. IDs inside a spec (`FR-1`, `AC-1.1`) are local and referenced from outside as `F04/AC-1.1`.
+- `architecture-requirements` saves to `docs/05-architecture/` and reads the domain model and business rules from `docs/01-business/` when the project uses the standard structure.
+
 ## [0.2.6] - 2026-11-26
 
 ### Changed

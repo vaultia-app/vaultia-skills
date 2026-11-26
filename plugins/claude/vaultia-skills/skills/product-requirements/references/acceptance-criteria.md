@@ -25,7 +25,7 @@ AC-3.2: Password must not match any of the user's last 5 passwords.
 2. **Observable outcomes.** Describe what the user or system visibly does, not internal implementation.
 3. **Concrete values.** Use numbers, limits, and specific messages where they matter.
 4. **Cover the unhappy paths.** Include errors, empty states, permission denials, limits, and timeouts — not just the happy path.
-5. **Traceable.** Every criterion belongs to exactly one functional requirement (`AC-1.2` → `FR-1`).
+5. **Traceable.** Every criterion belongs to exactly one functional requirement (`AC-1.2` → `FR-1`). Both IDs are local to the feature spec; from other documents, write `F04/AC-1.2`.
 6. **Implementation-neutral.** No database tables, endpoints, or frameworks unless they are a business constraint.
 
 ## Coverage checklist per requirement

@@ -80,6 +80,46 @@
       "must_not": [
         "Produces tables with column types, keys, or indexes in the PRD"
       ]
+    },
+    {
+      "id": "first-feature-scaffolds-docs",
+      "prompt": "(In a project with no docs/ folder, after the intake is answered) Let's draft the login feature.",
+      "expect": [
+        "Copies the starter kit from assets/docs-starter/ into docs/",
+        "Creates the draft as docs/03-functional-specs/F01-<slug>.md at v0.1",
+        "Adds an F01 row with a link to the spec in docs/02-requirements/01-feature-list.md",
+        "Says in one line that the structure was created and where the feature file is"
+      ],
+      "must_not": [
+        "Writes the PRD to docs/requirements/ or another ad-hoc location",
+        "Creates 04-ui/, 05-architecture/, 06-testing/, or 07-roadmap/ without content",
+        "Leaves template placeholders such as <Product name> in the delivered files"
+      ]
+    },
+    {
+      "id": "next-feature-reuses-shared-files",
+      "prompt": "(In a project whose docs/ already has F01–F03, BR-001–BR-004, and D-001–D-006) Write the requirements for monthly invoices.",
+      "expect": [
+        "Reads docs/README.md, the conventions, and the feature list before proposing",
+        "Creates docs/03-functional-specs/F04-<slug>.md",
+        "Numbers new shared items from BR-005, D-007, and the next free Q",
+        "References existing rules and decisions by ID instead of restating them"
+      ],
+      "must_not": [
+        "Renumbers or reuses an existing ID",
+        "Scaffolds the starter kit again or overwrites shared files"
+      ]
+    },
+    {
+      "id": "different-docs-structure-is-kept",
+      "prompt": "(In a project whose docs/specs/ uses its own layout) Add a spec for the export feature.",
+      "expect": [
+        "Follows the existing layout and naming",
+        "Offers the standard structure at most once, as an option"
+      ],
+      "must_not": [
+        "Moves or renames existing documents without approval"
+      ]
     }
   ]
 }

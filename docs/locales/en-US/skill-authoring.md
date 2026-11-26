@@ -85,7 +85,7 @@ Split reference files by the moment the agent needs them, not by topic, so each 
 | `collaborative-loop.md` | Every guided turn: intake, turn shape, agenda, stop rules |
 | `asking-decisions.md` | Every turn that asks a question or receives an answer |
 | `diagrams.md` | Only when drawing |
-| `requirements-template.md` | Only once the essentials are confirmed |
+| `docs-structure.md` | Only when the first draft file is created |
 
 Keep each reference file under about 2,000 words. Larger files usually mix several moments and should be split.
 
@@ -93,7 +93,7 @@ Keep each reference file under about 2,000 words. Larger files usually mix sever
 
 - One good example and one bad example teach more than a paragraph of rules.
 - Comparison tables ("vague → testable", "defect → fix") work especially well.
-- For document-producing skills, include one short, complete example output (such as `references/example-prd.md`) so the agent can calibrate depth. Placeholders alone don't show the expected level of precision.
+- For document-producing skills, include one short, complete example output (such as `references/example-feature-spec.md`) so the agent can calibrate depth. Placeholders alone don't show the expected level of precision.
 
 ## Interactive skills
 

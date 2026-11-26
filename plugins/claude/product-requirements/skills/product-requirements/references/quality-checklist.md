@@ -1,6 +1,6 @@
 # Product Requirements Quality Checklist
 
-Run before delivering a PRD, and use as the rubric when reviewing one. Report review findings as **Blocking**, **Important**, or **Minor**.
+Run before delivering a feature spec, and use as the rubric when reviewing one. Report review findings as **Blocking**, **Important**, or **Minor**.
 
 ## Completeness
 
@@ -10,8 +10,8 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 - [ ] Non-goals are listed.
 - [ ] Every main user journey has functional requirements.
 - [ ] Every functional requirement has acceptance criteria.
-- [ ] Core business objects, their relationships, and lifecycles are named in the domain model (conceptual only — no column types or storage).
-- [ ] Every calculation or money rule (`BR-n`) has a worked example, rounding, and boundary behavior.
+- [ ] Business objects this feature uses are in `01-business/02-domain-model.md` with relationships and lifecycles (conceptual only: no column types or storage).
+- [ ] Every calculation or money rule (`BR-xxx`) has a worked example, rounding, and boundary behavior.
 - [ ] Success metrics have a baseline (or "unknown"), a target, a timeframe, and a measurement method.
 - [ ] Scope, rollout, and dependencies are stated.
 - [ ] Risks have mitigations.
@@ -22,7 +22,7 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 
 - [ ] Each requirement states a single behavior.
 - [ ] No ambiguous terms left unqualified: *fast, easy, simple, intuitive, secure, scalable, flexible, robust, user-friendly, etc., as needed, appropriate*.
-- [ ] Terms are used consistently; domain terms are defined in a glossary when needed.
+- [ ] Terms are used consistently; terms that could be misread are in `00-overview/02-glossary.md`.
 - [ ] Requirements use "shall" (mandatory) consistently; optional behavior uses priority, not wording.
 
 ## Testability
@@ -34,10 +34,17 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 
 ## Traceability
 
-- [ ] Stable IDs are used: `G-`, `J-`, `BR-`, `FR-`, `AC-`, `NFR-`, `M-`, `D-`, `A-`, `Q-`.
+- [ ] IDs follow `00-overview/03-conventions.md`: global `F`, `G`, `BR`, `NFR`, `W`, `D`, `Q`; local `J`, `E`, `FR`, `AC`, `NFR-L`, `M`, `A`. No ID was renumbered or reused.
 - [ ] Each functional requirement links to a journey or goal.
 - [ ] No orphan requirements (requirements that serve no goal).
 - [ ] No goal without at least one requirement or metric.
+
+## Placement (documentation structure)
+
+- [ ] The spec is `03-functional-specs/F<nn>-<slug>.md` and has a row in `02-requirements/01-feature-list.md` that links to it.
+- [ ] Rules, objects, actors, and terms that other features could use live in the shared files; the spec references them by ID instead of repeating them.
+- [ ] Every `BR-xxx`, `D-xxx`, and `Q-xxx` the spec mentions exists in its shared file, and its *Used by* / *Affects* / *Raised in* column names this feature.
+- [ ] Relative links between files resolve.
 
 ## Scope discipline
 
@@ -54,7 +61,8 @@ Run before delivering a PRD, and use as the rubric when reviewing one. Report re
 
 ## Hygiene
 
-- [ ] No empty placeholder sections (appendix items that only say "TBD") — omit them or turn them into open questions with an owner.
+- [ ] No empty placeholder sections (items that only say "TBD"): omit them or turn them into open questions with an owner.
+- [ ] No template placeholders (`<…>`) left in the delivered files.
 - [ ] No promotional content, signatures, contact links, or third-party URLs the user did not provide.
 
 ## Common defects

@@ -217,7 +217,7 @@ flowchart TD
 
 ## Versioned drafts
 
-- Save to the design file from the start (default `docs/architecture/<system-or-feature>.md`; inline if there is no project). Update the same file each turn.
+- Save to the design file from the start (default `docs/05-architecture/<system-or-feature>.md` in the standard `docs/` structure, otherwise `docs/architecture/<system-or-feature>.md`; inline if there is no project). Update the same file each turn.
 - Bump the version in the header on every substantive update: v0.1, v0.2, … Reserve v1.0 for the version the user approves.
 - Keep a **Change log** at the end: version → decisions applied → sections changed. Significant decisions also become ADRs.
 - In chat, show only what changed plus the updated diagram — not the whole document.

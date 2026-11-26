@@ -11,7 +11,7 @@
 | `W` | Business workflow | Global | [Workflows](../01-business/04-workflows.md) | `W-1` |
 | `D` | Decision | Global | [Decisions log](../09-working/decisions-log.md) | `D-001` |
 | `Q` | Open question | Global | [Open questions](../09-working/open-questions.md) | `Q-001` |
-| `J`, `E`, `FR`, `AC`, `M`, `A` | Journey, edge case, functional requirement, acceptance criterion, metric, assumption | Local to one feature spec | `03-functional-specs/Fxx-<slug>.md` | `FR-2`, `AC-2.1` |
+| `J`, `E`, `FR`, `AC`, `NFR-L`, `M`, `A` | Journey, edge case, functional requirement, acceptance criterion, feature-only NFR, metric, assumption | Local to one feature spec | `03-functional-specs/Fxx-<slug>.md` | `FR-2`, `AC-2.1`, `NFR-L1` |
 
 - **IDs are never renumbered or reused.** A removed item keeps its ID with status `Deprecated`. A duplicate gets a new ID, and the file notes "formerly Fxx".
 - **Local IDs** restart in each feature spec. Outside that spec, qualify them with the feature: `F04/AC-2.1`.
@@ -20,6 +20,7 @@
 ## File names
 
 - Folders and files: two-digit order prefix plus `kebab-case`, in English: `01-business/02-domain-model.md`.
+- Files in `09-working/` have no order prefix, because they are living logs rather than chapters: `open-questions.md`, `decisions-log.md`.
 - Feature specs: `03-functional-specs/F<nn>-<slug>.md`, for example `F04-members.md`.
 - Dated notes: `09-working/meetings/YYYY-MM-DD-<topic>.md`.
 

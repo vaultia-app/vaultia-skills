@@ -2,7 +2,7 @@
 
 Describe what data exists, who owns it, where it lives, how it changes, and how long it is kept. In an existing codebase, read the current schema and migrations first and extend them consistently.
 
-**Start from what is already decided.** If a PRD has a domain model (objects, relationships, `BR-n` rules), treat it as the conceptual model and do not re-ask it: refine it into a logical model (attributes, types, keys) and then a physical one (tables, constraints, indexes, store). If tables already exist, **extend them with new columns or relations instead of creating parallel tables**, and keep their names; propose any rename or split explicitly as a change (see `existing-context.md`).
+**Start from what is already decided.** If a PRD has a domain model (objects, relationships, `BR-n` rules; in the standard `docs/` structure: `docs/01-business/02-domain-model.md` and `03-business-rules.md`), treat it as the conceptual model and do not re-ask it: refine it into a logical model (attributes, types, keys) and then a physical one (tables, constraints, indexes, store). If tables already exist, **extend them with new columns or relations instead of creating parallel tables**, and keep their names; propose any rename or split explicitly as a change (see `existing-context.md`).
 
 ## Entity specification
 
