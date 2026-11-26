@@ -1,0 +1,156 @@
+{
+  "skill": "ui-ux-design",
+  "cases": [
+    {
+      "id": "identifies-surface-first",
+      "prompt": "Design the UI for our new product.",
+      "expect": [
+        "Asks whether it is a portal, a landing page, a storefront, or a mix before proposing screens"
+      ],
+      "must_not": [
+        "Assumes an admin dashboard layout without asking"
+      ]
+    },
+    {
+      "id": "vague-idea-starts-with-screen-map",
+      "prompt": "Design the UI for a gym membership app.",
+      "expect": [
+        "Proposes a screen map with screens, actors, and the main flow",
+        "Asks only the decisions that block the design (platform, navigation, brand) through the host's choice tool",
+        "Ends the turn after asking"
+      ],
+      "must_not": [
+        "Writes page or component code before the decisions are answered",
+        "Asks about things the kit already decides, such as the component library or icon set"
+      ]
+    },
+    {
+      "id": "feature-spec-drives-screens",
+      "prompt": "Build the screens for docs/03-functional-specs/F04-members.md.",
+      "expect": [
+        "Reads the feature spec, actors, domain model, and business rules first",
+        "Maps every screen to the journeys and requirements it covers",
+        "Designs loading, empty, error, and no-permission states for each screen"
+      ],
+      "must_not": [
+        "Adds screens or fields that no requirement asks for without marking them as proposals",
+        "Invents API endpoints"
+      ]
+    },
+    {
+      "id": "installs-kit-in-react-project-without-ui",
+      "prompt": "Set up the UI for our new Next.js monorepo and build a dashboard page.",
+      "expect": [
+        "Copies the Base UI React kit into packages/ui from vaultia-templates",
+        "Wires theme.css, data-theme, and the locale provider into the app",
+        "Builds the dashboard in the app by composing kit components",
+        "Runs typecheck and build"
+      ],
+      "must_not": [
+        "Re-creates buttons, inputs, dialogs, or tables inside the app",
+        "Rewrites the kit from memory when it cannot be downloaded"
+      ]
+    },
+    {
+      "id": "respects-existing-design-system",
+      "prompt": "Add a settings page to our app. We already use MUI.",
+      "expect": [
+        "Uses MUI components and the existing theme",
+        "Applies the UX planning and checklist"
+      ],
+      "must_not": [
+        "Installs the Base UI React kit or replaces MUI without the user asking"
+      ]
+    },
+    {
+      "id": "brand-theme-through-tokens",
+      "prompt": "Change the primary color to our brand green #16A34A and support dark mode.",
+      "expect": [
+        "Edits the brand scale in tokens.json and regenerates the theme CSS with the build script",
+        "Checks primary-foreground contrast in light and dark mode"
+      ],
+      "must_not": [
+        "Hard-codes hex colors or palette classes in components or screens",
+        "Edits the generated theme CSS by hand"
+      ]
+    },
+    {
+      "id": "review-reports-before-editing",
+      "prompt": "Review our orders page for UX problems.",
+      "expect": [
+        "Reports findings ranked Blocking, Important, Minor with screen, problem, and fix",
+        "Asks before making changes"
+      ],
+      "must_not": [
+        "Rewrites the page before reporting"
+      ]
+    },
+    {
+      "id": "vietnamese-request",
+      "prompt": "Thiết kế giao diện màn hình danh sách hợp đồng cho admin.",
+      "expect": [
+        "Replies in Vietnamese",
+        "Proposes the screen layout and states before building",
+        "Uses the Vietnamese UI locale or the project's i18n for screen text"
+      ],
+      "must_not": [
+        "Hard-codes Vietnamese text inside kit components"
+      ]
+    },
+    {
+      "id": "landing-page",
+      "prompt": "Build a landing page for our scheduling SaaS. Goal: book a demo.",
+      "expect": [
+        "Treats the page as design-led: distinctive layout, typography, and motion",
+        "Uses one primary call to action (book a demo) repeated down the page",
+        "Proposes sections such as hero, social proof, benefits, how it works, pricing or FAQ, final CTA",
+        "Plans static or server rendering, SEO metadata, and a mobile performance budget",
+        "Builds sections in the app from kit components and tokens",
+        "Keeps content readable without animation and respects reduced motion"
+      ],
+      "must_not": [
+        "Uses an app shell with a sidebar or dense tables",
+        "Invents customer logos, testimonials, or numbers presented as real",
+        "Ships lorem ipsum"
+      ]
+    },
+    {
+      "id": "storefront",
+      "prompt": "Design the product page and checkout for our online clothing store.",
+      "expect": [
+        "Keeps content clear and specific with motion limited to hover and feedback",
+        "Shows price, variants, stock, delivery, and returns on the product page",
+        "Offers guest checkout and shows the full cost before the final step",
+        "Keeps the cart and input when payment fails",
+        "Plans Product and Offer structured data and server rendering for product pages"
+      ],
+      "must_not": [
+        "Forces account creation before purchase",
+        "Adds commerce components such as the product card or cart to the kit package",
+        "Adds decorative animations that delay browsing or buying"
+      ]
+    },
+    {
+      "id": "mixed-surfaces",
+      "prompt": "We need a storefront plus a customer account area with order history.",
+      "expect": [
+        "applies the storefront rules to shopping pages and the portal rules to the account area"
+      ],
+      "must_not": [
+        "Uses one set of patterns for both"
+      ]
+    },
+    {
+      "id": "portal",
+      "prompt": "Build the contract management screens for our rental admin portal.",
+      "expect": [
+        "Focuses on business rules, statuses, permissions, and edge cases from the requirements",
+        "Uses kit defaults with just-enough visuals and functional motion only",
+        "Designs dense interactions: table, filters, row and bulk actions, forms"
+      ],
+      "must_not": [
+        "Adds decorative imagery, hero sections, or scroll animations"
+      ]
+    }
+  ]
+}

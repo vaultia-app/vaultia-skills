@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.3.1-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.3.1"></a>
-  <a href="skills"><img src="https://img.shields.io/badge/skills-2-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 2"></a>
+  <a href="skills"><img src="https://img.shields.io/badge/skills-3-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 3"></a>
   <a href="#installation"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-TBD-8A8A8A?style=for-the-badge&labelColor=3a3a3a" alt="License: TBD">
@@ -32,11 +32,13 @@
 | Skill | What it does | Answers |
 |---|---|---|
 | [`product-requirements`](skills/product-requirements/SKILL.md) | Product requirements documents (PRDs): goals, users, journeys, functional requirements, acceptance criteria, success metrics, scope, rollout | **WHAT / WHY** |
+| [`ui-ux-design`](skills/ui-ux-design/SKILL.md) | Screen maps, user flows, layouts, UI states, accessibility, and brand themes, built as React screens with the ready-made [Base UI React kit](https://github.com/vaultia-app/vaultia-templates/tree/main/src/frontend/base-ui-react-kit) | **LOOK / FEEL** |
 | [`architecture-requirements`](skills/architecture-requirements/SKILL.md) | Architecture and system design: drivers, components, APIs, data models, NFRs, security, deployment, ADRs | **HOW / CONSTRAINTS** |
 
 ```text
 Product idea
   → product-requirements       (WHAT / WHY)
+  → ui-ux-design               (LOOK / FEEL)
   → architecture-requirements  (HOW / CONSTRAINTS)
   → implementation
 ```
