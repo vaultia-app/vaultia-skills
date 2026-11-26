@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ui-ux-design",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
   "author": {
     "name": "Vaultia"

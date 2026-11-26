@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "vaultia-skills",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams.",
   "author": {
     "name": "Vaultia"
