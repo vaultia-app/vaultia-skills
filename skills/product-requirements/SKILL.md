@@ -7,7 +7,7 @@ description: Create, refine, and review product requirements documents (PRDs) fo
 
 Turn a product idea or feature request into a clear, testable PRD that answers **WHAT** is being built and **WHY**, without prescribing **HOW**.
 
-Output lands in one standard `docs/` structure that can be used as-is: shared files for actors, domain, rules, and decisions, plus **one file per feature** at `docs/03-functional-specs/F<nn>-<slug>.md`. The first feature scaffolds the structure from `assets/docs-starter/`.
+Output lands in one standard `docs/` structure that can be used as-is: shared files for actors, domain, rules, and decisions, plus **one file per feature** at `docs/03-functional-specs/F<nn>-<slug>.md`. The first feature scaffolds the structure from the starter kit, read live from the `vaultia-templates` repository with `assets/docs-starter/` as the bundled fallback (`references/docs-structure.md`).
 
 ## First reply
 
@@ -35,7 +35,7 @@ The PRD includes a **conceptual** domain model: business objects, relationships,
 3. **Choose the mode** and tell the user which one you use (they can switch at any time): guided (default) → step 4; fast → list gaps with `references/discovery-questions.md`, record them as assumptions and open questions, then go to step 6.
 4. **Run the collaborative loop** in `references/collaborative-loop.md`: propose → diagram → draft vN → ask one decision → update. The draft is the feature file, placed and linked as described in `references/docs-structure.md` (scaffold `docs/` first if the project has none). Ask decisions as described in `references/asking-decisions.md`, and draw diagrams as described in `references/diagrams.md`.
 5. **Close the loop** when problem, target user, MVP scope, primary journey, primary metric, and hard constraints are confirmed. Tell the user you are completing the remaining sections.
-6. **Complete the feature file** from `assets/docs-starter/03-functional-specs/_template.md`, and update the shared files it depends on (feature list, domain model, business rules, decisions, open questions) as listed in `references/docs-structure.md`. Extend the existing draft and keep its version history. Omit sections that do not apply; keep the order. `references/example-feature-spec.md` shows the expected depth.
+6. **Complete the feature file** from the starter kit's `03-functional-specs/_template.md` (the project's copy in `docs/` once scaffolded; the bundled one is `assets/docs-starter/03-functional-specs/_template.md`), and update the shared files it depends on (feature list, domain model, business rules, decisions, open questions) as listed in `references/docs-structure.md`. Extend the existing draft and keep its version history. Omit sections that do not apply; keep the order. `references/example-feature-spec.md` shows the expected depth.
 7. **Write acceptance criteria** for each functional requirement, following `references/acceptance-criteria.md`.
 8. **Quality check** with `references/quality-checklist.md`. Fix what you can; list the rest as open questions.
 9. **Deliver.** The feature file is at `docs/03-functional-specs/F<nn>-<slug>.md` (or where the user asked; inline when there is no project). List the shared files you changed. Summarize key decisions, top assumptions, and blocking open questions. Ask the user to approve v1.0, then offer the next feature or the handoff to `architecture-requirements`.
@@ -68,8 +68,8 @@ The PRD includes a **conceptual** domain model: business objects, relationships,
 | `references/asking-decisions.md` | Every turn that asks the user to decide, and every answer that comes back |
 | `references/diagrams.md` | Drawing or updating a diagram |
 | `references/discovery-questions.md` | Finding missing information or preparing questions |
-| `references/docs-structure.md` | Creating the first draft: where files go, scaffolding, which shared files to update |
-| `assets/docs-starter/` | The standard `docs/` structure, its conventions, and the feature spec template |
+| `references/docs-structure.md` | Creating the first draft: getting the starter kit, where files go, scaffolding, which shared files to update |
+| `assets/docs-starter/` | Bundled fallback copy of the starter kit; read the live one first, as in `references/docs-structure.md` |
 | `references/example-feature-spec.md` | Calibrating the depth and tone of a finished feature spec |
 | `references/acceptance-criteria.md` | Writing or reviewing acceptance criteria |
 | `references/quality-checklist.md` | Final check before delivery, or reviewing a PRD |
