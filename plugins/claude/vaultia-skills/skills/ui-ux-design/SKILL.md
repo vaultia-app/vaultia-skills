@@ -57,6 +57,7 @@ Hand off when the work leaves the UI: unclear scope, users, or rules go to `prod
 - **Reuse before you build.** Use kit components and page patterns; never re-create a button, input, dialog, or table in the app.
 - **Business logic stays in the app.** Kit components stay pure UI; domain names, API calls, and permissions live in app code.
 - **Semantic tokens only.** No hex values or raw palette classes in screens or kit components; color changes go through tokens and themes.
+- **Plan in text, build in code.** Screen maps, flows, and outlines are tables, lists, or ASCII wireframes; rendered mockups only when the user asks (`references/ux-planning.md`).
 - **Every state is designed.** Loading, empty, error, partial, success, disabled, and no-permission states are part of the screen, not an afterthought.
 - **Accessible by default.** Keyboard, focus, labels, contrast (WCAG 2.2 AA), and touch targets are checked, not assumed.
 - **No hard-coded UI text inside the kit.** Kit defaults come from its locale; screen copy uses the user's language and the project's i18n setup when one exists.

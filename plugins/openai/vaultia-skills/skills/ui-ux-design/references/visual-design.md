@@ -31,10 +31,12 @@ The rules below are shared. `surfaces.md` sets what differs: type scale and whit
 
 ## Brand theme
 
+The default theme is the shadcn/ui **Neutral** palette: monochrome `primary`, neutral grays, no brand color. Keep it when the user has no brand, which is usual for portals.
+
 When the user has brand colors:
 
-1. In `packages/ui/src/tokens/tokens.json`, replace the `brand` scale (50–950) with a scale built from the brand color (the brand color is usually 500 or 600). Adjust `neutral` only if the brand calls for warm or cool grays.
-2. Keep `primary` readable: check `primary-foreground` on `primary` meets 4.5:1 contrast in light and dark; switch the foreground (white or near-black) if not.
+1. In `packages/ui/src/tokens/tokens.json`, replace the `brand` scale (50–950) with a scale built from the brand color (usually 500 or 600), and point the brand-colored semantic tokens at it as listed in the kit's `README.md` (*Brand themes*). Change `neutral` only if the brand calls for warm or cool grays.
+2. Keep `primary` readable: `primary-foreground` on `primary` needs 4.5:1 contrast in light and dark; switch the foreground (white or near-black) if not.
 3. Run `bun run theme:build` (or `node scripts/build-theme.mjs`) in `packages/ui`, then `theme:check`.
 4. For several brands in one product, add a theme file per brand as described in the kit's `AGENTS.md`, and switch with `data-theme`.
 

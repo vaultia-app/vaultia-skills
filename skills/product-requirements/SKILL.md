@@ -56,6 +56,7 @@ The PRD includes a **conceptual** domain model: business objects, relationships,
 - **Challenge, then respect the decision.** Push back on weak problems, oversized scope, or unmeasurable goals with a sharper option; once the user decides, record it and move on.
 - **Preserve existing work.** Describe what changed. Ask before deleting or restructuring large sections.
 - **Stay at WHAT/WHY.** Name technology only when it is a genuine business constraint; note other technical points for the architecture phase.
+- **No UI mockups.** Describe screens, forms, and fields with tables (field, type, rule), not rendered previews: mockups are slow to generate and belong to `ui-ux-design`. Offer that handoff when the user wants to see screens.
 - **Keep requirements testable.** Replace vague words ("fast", "easy", "intuitive", "secure") with measurable statements, or flag them.
 - **Use stable IDs** as defined in the conventions file (`F01`, `BR-001`, `D-001`, `Q-001`, and local `FR-1`, `AC-1.1`). Never renumber or reuse an ID.
 - **Right-size.** A small feature gets a short spec. Shared knowledge is written once in the shared sections, not repeated in every feature.

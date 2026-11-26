@@ -34,11 +34,12 @@ flowchart TD
 - Labels with spaces in quotes: `CUSTOMER ||--o{ ORDER : "places"`.
 - Node text with emoji or punctuation in quotes: `A["Admin CMS ✅"]`.
 
-## Make sure the user sees a diagram, not code
+## Showing diagrams in chat
 
-Some surfaces show Mermaid as plain text, notably ChatGPT's chat, canvas, and document views. There:
+Mermaid is text and costs a few dozen lines. Rendering a diagram as an image or widget costs many times more and is slow, so keep it as text:
 
 1. Keep the `mermaid` block in the saved document unchanged.
-2. In the chat, also render the diagram visually with the host's own tool (inline visualization, image, or diagram tool).
-3. With no visual tool, show a readable fallback instead of raw Mermaid: for an ER diagram, a relationship table (`Object | Relationship | Object | Cardinality`, such as `Branch | manages | Vehicle | 1 : N`); for flows, a numbered list or an indented text tree.
-4. Never leave unrendered Mermaid as the only view in chat. If the user says a diagram "is broken" or shows as code, use steps 2–3 for the rest of the conversation.
+2. In chat, show the Mermaid block where the surface renders it. Where it shows as plain code (notably ChatGPT's chat, canvas, and document views), show a text version instead: for an ER diagram, a relationship table (`Object | Relationship | Object | Cardinality`, such as `Branch | manages | Vehicle | 1 : N`); for flows, a numbered list or an indented text tree.
+3. Render a diagram as an image or widget only when the user asks for it.
+4. Show a diagram only when it changed, at most one per turn, without icons or decoration.
+5. If the user says a diagram "is broken" or shows as code, use the text version for the rest of the conversation.

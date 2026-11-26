@@ -64,6 +64,8 @@ For each screen, decide what the user sees in each state:
 
 ## 5. Screen outline
 
+Plan in text: the screen map table, flows as lists, and an outline (or a small ASCII wireframe) per complex screen. A rendered mockup is slow to generate, so draw one only when the user asks, for one or two key screens. The real UI is built as code in the project, not as a widget in chat.
+
 Before coding a complex screen, write a short outline:
 
 ```text

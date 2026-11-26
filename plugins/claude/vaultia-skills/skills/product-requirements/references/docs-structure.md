@@ -28,7 +28,7 @@ Pick the first case that matches:
 | The project already has `docs/PRD.md` | Add to it: a new feature subsection, the next free IDs, the shared sections it touches. |
 | The project has docs in a different structure | Follow the existing structure (`existing-context.md`). Offer the standard structure once as an option; never restructure without approval. |
 | The project has no docs yet | Create the single file `docs/PRD.md` at v0.1 when you write the first draft. |
-| No project or file access (chat only) | The single file lives in the chat. Deliver it as described in *Delivering v1.0*. |
+| No project or file access (chat only) | The single file lives in the host's document surface (below), created at v0.1 and updated in place every turn when the surface allows it. |
 | The user asked for another location | Use it, with the same single-file layout. |
 
 ## The single file
@@ -59,9 +59,16 @@ Sections in this order. Each maps to one starter-kit file: take its tables and c
 After the scope checklist (`collaborative-loop.md`) and the user's approval:
 
 1. Set the version to v1.0 and the status to Approved, and add the change-log row.
-2. **Return the file in the chat.**
-   - Chat hosts: attach it as a downloadable `<product-slug>-prd.md` when the host can attach files; otherwise put the whole file in one fenced `markdown` block.
-   - A project with file access: the file is already saved. Link it and summarize; do not reprint the whole file, which doubles the output. Print it only if the user asks.
+2. **Return the file in the chat**, in the host's document surface, never as plain message text:
+
+   | Host | Document surface |
+   |---|---|
+   | ChatGPT | Canvas or a writing block (the document card with copy and expand); also attach `<product-slug>-prd.md` when the host can create files |
+   | claude.ai, Claude Desktop | An artifact (Markdown document) |
+   | A project with file access (Claude Code, Codex, IDEs) | The saved file: link it and summarize; do not reprint it, which doubles the output. Print it only if the user asks |
+   | None of these | The whole file in one fenced `markdown` block |
+
+   The document holds only document content. Your comments (what you did, what you left out, how it was made) go in the message around it, never inside it. The status uses the conventions' values (Draft, In review, Approved).
 3. Below it, summarize key decisions, top assumptions, and blocking open questions, then ask through the choice tool:
    - *Keep the single file (recommended)*
    - *Export to the `docs/` template (zip)*
