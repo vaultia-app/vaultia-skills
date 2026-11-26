@@ -1,7 +1,7 @@
 {
   "name": "architecture-requirements",
   "displayName": "Architecture Requirements",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Create, refine, and review software architecture requirements and system design documents.",
   "author": {
     "name": "Vaultia"
