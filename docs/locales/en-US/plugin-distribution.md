@@ -12,8 +12,8 @@ Canonical skills in `skills/` are packaged for each platform by `scripts/build_p
 | `plugins/claude/<plugin>/` | Yes | Claude Code | Installable plugin |
 | `.agents/plugins/marketplace.json` | Yes | Codex CLI, ChatGPT | Marketplace listing every plugin |
 | `plugins/openai/<plugin>/` | Yes | Codex CLI, ChatGPT | Installable plugin, with brand icons |
-| `dist/skills/<skill>.zip` | No (release asset `<skill>-skill.zip`) | claude.ai | Single skill upload |
-| `dist/plugins/<plugin>.zip` | No (release asset `<plugin>-plugin.zip`) | ChatGPT, Claude Desktop | Plugin upload |
+| `dist/skills/<skill>.zip` | No | claude.ai | Single skill upload, for local use |
+| `dist/plugins/<plugin>.zip` | No (`vaultia.zip` is the release asset `vaultia-plugin.zip`) | claude.ai, Claude Desktop, ChatGPT | Plugin upload |
 
 | Plugin | Contains |
 |---|---|
@@ -86,7 +86,9 @@ Skill availability differs by ChatGPT plan and surface; check OpenAI's current d
 
 ## claude.ai (web, desktop, mobile)
 
-Upload each `<skill>-skill.zip` from the release (or `dist/skills/<skill>.zip` when building yourself) under **Settings → Capabilities → Skills → Upload skill**. Each zip contains a single `<skill-name>/` folder with `SKILL.md` at its top. To update, remove the old skill and upload the new zip.
+Upload `vaultia-plugin.zip` from the release as a plugin; it contains both a Claude and a Codex / ChatGPT manifest, so the same file works everywhere. To update, remove the old plugin and upload the new zip.
+
+To upload a single skill instead, build it locally with `python3 scripts/build_plugins.py --zip` and upload `dist/skills/<skill>.zip` under **Settings → Capabilities → Skills → Upload skill**. Each skill zip contains a single `<skill-name>/` folder with `SKILL.md` at its top.
 
 ## Release checklist
 
@@ -108,6 +110,6 @@ Releases are published by the [Release workflow](../../../.github/workflows/rele
    git push origin vX.Y.Z
    ```
 
-The workflow then checks that the tag matches `pyproject.toml` and that `CHANGELOG.md` has a section for it, runs validation and tests, builds the zips, and creates the GitHub release with the zips attached as `<skill>-skill.zip` and `<plugin>-plugin.zip` (skill and plugin zips share names in `dist/`). Pushing the same tag again (after deleting it) updates the existing release.
+The workflow then checks that the tag matches `pyproject.toml` and that `CHANGELOG.md` has a section for it, runs validation and tests, builds the zips, and creates the GitHub release with one asset, `vaultia-plugin.zip` (the bundle plugin with every skill). Pushing the same tag again (after deleting it) updates the existing release.
 
 Preview the release notes locally with `python3 scripts/release_notes.py X.Y.Z`.

@@ -12,8 +12,8 @@ Skill gốc trong `skills/` được `scripts/build_plugins.py` đóng gói cho 
 | `plugins/claude/<plugin>/` | Có | Claude Code | Plugin để cài |
 | `.agents/plugins/marketplace.json` | Có | Codex CLI, ChatGPT | Marketplace liệt kê mọi plugin |
 | `plugins/openai/<plugin>/` | Có | Codex CLI, ChatGPT | Plugin để cài, kèm icon thương hiệu |
-| `dist/skills/<skill>.zip` | Không (đính kèm release là `<skill>-skill.zip`) | claude.ai | Upload từng skill |
-| `dist/plugins/<plugin>.zip` | Không (đính kèm release là `<plugin>-plugin.zip`) | ChatGPT, Claude Desktop | Upload plugin |
+| `dist/skills/<skill>.zip` | Không | claude.ai | Upload từng skill, dùng ở máy |
+| `dist/plugins/<plugin>.zip` | Không (`vaultia.zip` được đính kèm release với tên `vaultia-plugin.zip`) | claude.ai, Claude Desktop, ChatGPT | Upload plugin |
 
 | Plugin | Gồm |
 |---|---|
@@ -86,7 +86,9 @@ Khả năng dùng skill khác nhau theo gói ChatGPT và nền tảng; hãy xem 
 
 ## claude.ai (web, desktop, mobile)
 
-Upload từng file `<skill>-skill.zip` từ trang release (hoặc `dist/skills/<skill>.zip` khi tự build) ở **Settings → Capabilities → Skills → Upload skill**. Mỗi zip chứa một thư mục `<skill-name>/` với `SKILL.md` ở trên cùng. Muốn cập nhật thì xóa skill cũ rồi upload zip mới.
+Upload `vaultia-plugin.zip` từ trang release như một plugin. File này có cả manifest cho Claude lẫn Codex / ChatGPT nên dùng được ở mọi nơi. Muốn cập nhật thì xóa plugin cũ rồi upload zip mới.
+
+Muốn upload riêng từng skill thì tự build bằng `python3 scripts/build_plugins.py --zip` rồi upload `dist/skills/<skill>.zip` ở **Settings → Capabilities → Skills → Upload skill**. Mỗi zip skill chứa một thư mục `<skill-name>/` với `SKILL.md` ở trên cùng.
 
 ## Checklist phát hành
 
@@ -108,6 +110,6 @@ Bản phát hành được [workflow Release](../../../.github/workflows/release
    git push origin vX.Y.Z
    ```
 
-Sau đó workflow kiểm tra tag khớp với `pyproject.toml` và `CHANGELOG.md` có phần cho version đó, chạy validate và test, build file zip, rồi tạo GitHub Release kèm file zip với tên `<skill>-skill.zip` và `<plugin>-plugin.zip` (vì zip skill và zip plugin trùng tên trong `dist/`). Push lại cùng tag (sau khi xóa tag cũ) sẽ cập nhật release đã có.
+Sau đó workflow kiểm tra tag khớp với `pyproject.toml` và `CHANGELOG.md` có phần cho version đó, chạy validate và test, build file zip, rồi tạo GitHub Release với một file duy nhất là `vaultia-plugin.zip` (plugin gộp đủ mọi skill). Push lại cùng tag (sau khi xóa tag cũ) sẽ cập nhật release đã có.
 
 Xem trước release notes ở máy bằng `python3 scripts/release_notes.py X.Y.Z`.

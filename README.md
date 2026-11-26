@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.2.5-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.2.5"></a>
+  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.2.6-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.2.6"></a>
   <a href="skills"><img src="https://img.shields.io/badge/skills-2-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 2"></a>
   <a href="#installation"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
@@ -64,12 +64,11 @@ The ChatGPT desktop app shows marketplaces added this way in its **Plugins** dir
 
 ### claude.ai or ChatGPT (upload)
 
-Download the zip files from the [latest release](https://github.com/vaultia-app/vaultia-skills/releases/latest), or build them yourself with `python3 scripts/build_plugins.py --zip` (skills land in `dist/skills/`, plugins in `dist/plugins/`).
+Download `vaultia-plugin.zip` from the [latest release](https://github.com/vaultia-app/vaultia-skills/releases/latest) and upload it as a plugin. The same file works on every platform below. To build it yourself, run `python3 scripts/build_plugins.py --zip` (output: `dist/plugins/vaultia.zip`).
 
 | Platform | Upload | Where |
 |---|---|---|
-| claude.ai | `product-requirements-skill.zip`, `architecture-requirements-skill.zip` | **Settings → Capabilities → Skills** |
-| ChatGPT | `vaultia-plugin.zip` | **Plugins → Upload** |
+| claude.ai, Claude Desktop, ChatGPT | `vaultia-plugin.zip` | **Plugins → Upload** |
 
 ### Manual copy (any agent)
 
