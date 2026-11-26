@@ -98,13 +98,15 @@
       ]
     },
     {
-      "id": "landing-page-uses-landing-profile",
+      "id": "landing-page",
       "prompt": "Build a landing page for our scheduling SaaS. Goal: book a demo.",
       "expect": [
+        "Treats the page as design-led: distinctive layout, typography, and motion",
         "Uses one primary call to action (book a demo) repeated down the page",
         "Proposes sections such as hero, social proof, benefits, how it works, pricing or FAQ, final CTA",
         "Plans static or server rendering, SEO metadata, and a mobile performance budget",
-        "Builds sections in the app from kit components and tokens"
+        "Builds sections in the app from kit components and tokens",
+        "Keeps content readable without animation and respects reduced motion"
       ],
       "must_not": [
         "Uses an app shell with a sidebar or dense tables",
@@ -113,9 +115,10 @@
       ]
     },
     {
-      "id": "storefront-uses-storefront-profile",
+      "id": "storefront",
       "prompt": "Design the product page and checkout for our online clothing store.",
       "expect": [
+        "Keeps content clear and specific with motion limited to hover and feedback",
         "Shows price, variants, stock, delivery, and returns on the product page",
         "Offers guest checkout and shows the full cost before the final step",
         "Keeps the cart and input when payment fails",
@@ -123,17 +126,30 @@
       ],
       "must_not": [
         "Forces account creation before purchase",
-        "Adds commerce components such as the product card or cart to the kit package"
+        "Adds commerce components such as the product card or cart to the kit package",
+        "Adds decorative animations that delay browsing or buying"
       ]
     },
     {
-      "id": "mixed-surfaces-apply-each-profile",
+      "id": "mixed-surfaces",
       "prompt": "We need a storefront plus a customer account area with order history.",
       "expect": [
-        "Applies the storefront profile to shopping pages and the portal profile to the account area"
+        "applies the storefront rules to shopping pages and the portal rules to the account area"
       ],
       "must_not": [
         "Uses one set of patterns for both"
+      ]
+    },
+    {
+      "id": "portal",
+      "prompt": "Build the contract management screens for our rental admin portal.",
+      "expect": [
+        "Focuses on business rules, statuses, permissions, and edge cases from the requirements",
+        "Uses kit defaults with just-enough visuals and functional motion only",
+        "Designs dense interactions: table, filters, row and bulk actions, forms"
+      ],
+      "must_not": [
+        "Adds decorative imagery, hero sections, or scroll animations"
       ]
     }
   ]

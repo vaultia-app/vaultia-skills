@@ -19,7 +19,7 @@
       "interface": {
         "displayName": "Ui Ux Design",
         "shortDescription": "Design and build UI screens",
-        "longDescription": "Turn requirements into screens people can use, with a different playbook for portals, landing pages, and storefronts: screen maps, user flows, layouts, every UI state, accessibility, SEO and performance where they matter, and brand themes. Builds the screens in React with a ready-made Base UI and Tailwind CSS kit of about 60 components, so projects start from a complete design system instead of from scratch. Also reviews existing UIs for usability problems.",
+        "longDescription": "Turn requirements into screens people can use. Pages are grouped by design intent: polished, animated landing pages; clear, specific storefronts; and portals focused on business logic and interaction. Plans screen maps, user flows, every UI state, accessibility, and brand themes, then builds the screens in React with a ready-made Base UI and Tailwind CSS kit of about 60 components, so projects start from a complete design system instead of from scratch. Also reviews existing UIs for usability problems.",
         "developerName": "Vaultia",
         "category": "Productivity",
         "capabilities": [

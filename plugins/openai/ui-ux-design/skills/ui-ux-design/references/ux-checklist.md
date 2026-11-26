@@ -1,6 +1,6 @@
 # UX Checklist
 
-Run this on every screen before delivery, and use it to structure a review of an existing UI. Then run the checklist additions in the surface profile. Fix what you can; report the rest.
+Run this on every screen before delivery, and use it to structure a review of an existing UI. Then check the rules for the surface in `surfaces.md`. Fix what you can; report the rest.
 
 ## States
 

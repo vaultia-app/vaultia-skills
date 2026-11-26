@@ -7,15 +7,7 @@ description: Design and build user interfaces for portals, landing pages, and st
 
 Turn requirements into screens people can use: plan the experience first (screens, flows, states), then build it with a ready-made component kit instead of starting from scratch.
 
-Different surfaces have different goals, so the skill first identifies which one it is building:
-
-| Surface | For | Optimizes for | Profile |
-|---|---|---|---|
-| Portal | Admin portals, dashboards, back offices, SaaS apps, account areas | Efficiency and accuracy for repeat, signed-in users | `references/surface-portal.md` |
-| Landing page | Marketing sites, launches, campaigns | Conversion on one call to action, speed, SEO | `references/surface-landing-page.md` |
-| Storefront | Online shops and catalogs | Finding, deciding, and checking out; trust, SEO | `references/surface-storefront.md` |
-
-A product can mix surfaces (a storefront with an account area, a marketing site in front of an app): apply each profile to its own group of pages.
+Every page belongs to one of three surfaces, grouped by design intent: **landing page** (impress: polished, animated), **storefront** (sell: clear, specific, little motion), and **portal** (work: business logic and interaction, just-enough visuals). The surface sets the defaults for polish, motion, content, and interaction (`references/surfaces.md`).
 
 The default stack is the **Base UI React kit** from the public `vaultia-templates` repository: about 60 components (atoms, molecules, organisms) on Base UI, Tailwind CSS v4, and `cva`, with design tokens, generated themes, and English and Vietnamese locales. The kit's own `AGENTS.md` holds its coding rules.
 
@@ -41,14 +33,14 @@ Hand off when the work leaves the UI: unclear scope, users, or rules go to `prod
 ## Workflow
 
 1. **Gather context.** Read the request and any PRD, feature spec, actors, workflows, and glossary. In a codebase, detect the framework, package manager, monorepo layout, and whether a UI kit or design system already exists (`packages/ui`, `components/ui`, a `tailwind` config, an `AGENTS.md` for UI).
-2. **Identify the surface** (portal, landing page, storefront, or a mix) and read its profile. The profile sets the goal, screen set, page patterns, visual and technical priorities, and extra checks; it takes precedence over the general defaults in the other references.
+2. **Classify each page** as landing page, storefront, or portal with `references/surfaces.md`. Its rules take precedence over the general defaults in the other references.
 3. **Plan the UX** with `references/ux-planning.md`: screen map, the flow for each journey, and the states of each screen. Show it to the user with one diagram and ask only the decisions that block the design.
 4. **Set up the kit** if the project has none, following `references/ui-kit-setup.md`. If the project already has a design system, use it and skip this step.
 5. **Read the kit rules.** Read the project's `packages/ui/AGENTS.md` (or the kit's live copy, see `references/ui-kit-setup.md`) before writing UI code.
-6. **Choose components and layout** with `references/component-map.md` and the page patterns in the surface profile: map each part of each screen to an existing kit component. Add a kit component only when no composition works.
+6. **Choose components and layout** with `references/component-map.md` and the typical pages in `references/surfaces.md`: map each part of each screen to an existing kit component, at the polish and interaction level of its surface. Add a kit component only when no composition works.
 7. **Apply the visual design** with `references/visual-design.md`: hierarchy, spacing, color through semantic tokens, and a brand theme when the user has one.
 8. **Build the screens** in the app (not in the kit): pages, sections, and feature components that compose kit components and receive data through props or the app's data layer.
-9. **Check** every screen against `references/ux-checklist.md` and the surface profile's checklist additions: all states, forms, feedback, responsive layout, accessibility, and copy. Run the project's typecheck, lint, and build; fix what fails.
+9. **Check** every screen against `references/ux-checklist.md` and the surface rules: all states, forms, feedback, responsive layout, accessibility, and copy. Run the project's typecheck, lint, and build; fix what fails.
 10. **Deliver.** List the screens and files created or changed, the decisions made, assumptions, and open questions. Offer the next feature or a review pass.
 
 ## Outputs
@@ -77,9 +69,7 @@ Hand off when the work leaves the UI: unclear scope, users, or rules go to `prod
 | File | Read when |
 |---|---|
 | `references/asking-decisions.md` | Any turn that asks the user to decide |
-| `references/surface-portal.md` | Building a portal, dashboard, back office, SaaS app, or account area |
-| `references/surface-landing-page.md` | Building a landing page, marketing site, or campaign page |
-| `references/surface-storefront.md` | Building an online store: product list, product page, cart, checkout |
+| `references/surfaces.md` | Classifying pages as landing page, storefront, or portal, and the defaults each one sets |
 | `references/ux-planning.md` | Planning screens, flows, and states from requirements |
 | `references/ui-kit-setup.md` | The project has no UI kit, or you need the kit's rules |
 | `references/component-map.md` | Choosing kit components for each part of a screen |

@@ -34,7 +34,7 @@ Map each part of a screen to a kit component before writing code. Import from `@
 
 ## Page patterns
 
-Page patterns depend on the surface: app shell, list, detail, form, dashboard, and settings pages are in `surface-portal.md`; landing page sections in `surface-landing-page.md`; product list, product detail, cart, and checkout in `surface-storefront.md`.
+Typical pages for each surface are listed in `surfaces.md`. Build them from the components above.
 
 ## Composition rules
 

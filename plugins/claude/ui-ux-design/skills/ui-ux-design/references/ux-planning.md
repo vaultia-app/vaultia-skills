@@ -19,7 +19,7 @@ Missing information becomes an assumption you state, or a question if it blocks 
 
 ## 2. Screen map
 
-List every screen the feature needs. A screen is a page, dialog, sheet, or drawer with its own purpose. Start from the screen set in the surface profile, then keep only what the requirements need.
+List every screen the feature needs. A screen is a page, dialog, sheet, or drawer with its own purpose. Start from the typical pages of the surface in `surfaces.md`, then keep only what the requirements need.
 
 | ID | Screen | Type | Purpose | Actors | Covers |
 |---|---|---|---|---|---|

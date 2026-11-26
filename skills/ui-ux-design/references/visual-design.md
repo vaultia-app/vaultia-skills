@@ -2,7 +2,7 @@
 
 The kit already sets the look; good screens come from consistent use of it. Change the look through tokens and themes, never per screen.
 
-The rules below are shared. The surface profile sets the defaults that differ: type scale and whitespace (landing pages are larger and airier), density (portals can be compact), and how strongly the brand shows (landing page > storefront > portal).
+The rules below are shared. `surfaces.md` sets what differs: type scale and whitespace (landing pages are larger and airier), density (portals can be compact), and how strongly the brand shows (landing page > storefront > portal).
 
 ## Hierarchy
 
@@ -42,6 +42,15 @@ When the user has brand colors:
 
 - Comes from the theme's `.dark` values; screens need no `dark:` color classes when they use semantic tokens.
 - Check every new screen in both modes: contrast, borders that disappear, images or charts with hard-coded backgrounds.
+
+## Motion
+
+The amount of motion comes from the surface (`surfaces.md`): rich on landing pages, hover and feedback only on storefronts, functional only in portals. In every case:
+
+- Content is readable without the animation and never waits for it.
+- Respect `prefers-reduced-motion` (`motion-safe:` / `motion-reduce:` variants).
+- Animate `transform` and `opacity`, not layout properties, to avoid jank and layout shift.
+- Use the kit's `tw-animate-css` utilities for enter and exit; add an animation library only for landing pages that need it.
 
 ## Density
 
