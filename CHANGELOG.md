@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-11-26
+
+### Changed
+- Releases attach a single asset, `vaultia-plugin.zip`: the bundle plugin with every skill, which installs in claude.ai, Claude Desktop, and ChatGPT / Codex. Per-skill and per-plugin zips are still built locally with `build_plugins.py --zip`.
+
 ## [0.2.5] - 2026-11-26
 
 ### Added

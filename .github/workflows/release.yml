@@ -40,14 +40,13 @@ jobs:
       - name: Run tests
         run: python -m unittest discover -s tests -v
 
-      - name: Build zips
+      - name: Build the plugin zip
         run: |
           python scripts/build_plugins.py --zip
-          # Skill and plugin zips share file names (product-requirements.zip in
-          # both folders); give release assets distinct names.
+          # Only the bundle plugin is released: one zip with every skill that
+          # installs in Claude (claude.ai, Desktop) and ChatGPT / Codex alike.
           mkdir -p release-assets
-          for f in dist/skills/*.zip; do cp "$f" "release-assets/$(basename "$f" .zip)-skill.zip"; done
-          for f in dist/plugins/*.zip; do cp "$f" "release-assets/$(basename "$f" .zip)-plugin.zip"; done
+          cp dist/plugins/vaultia.zip release-assets/vaultia-plugin.zip
           ls -l release-assets
 
       - name: Write release notes
@@ -69,7 +68,7 @@ jobs:
           codex plugin add vaultia-skills@vaultia-skills
           ```
 
-          **Upload:** `product-requirements-skill.zip` and `architecture-requirements-skill.zip` for claude.ai, `vaultia-plugin.zip` for ChatGPT.
+          **Upload:** `vaultia-plugin.zip` works in claude.ai, Claude Desktop, and ChatGPT.
           EOF
 
           repo_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
@@ -89,7 +88,7 @@ jobs:
           shopt -s nullglob
           assets=(release-assets/*.zip)
           if [ ${#assets[@]} -eq 0 ]; then
-            echo "::error::no zip files were built"
+            echo "::error::vaultia-plugin.zip was not built"
             exit 1
           fi
           tag="$GITHUB_REF_NAME"
