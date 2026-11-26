@@ -1,6 +1,6 @@
 # Plugin Distribution
 
-**English** · [Tiếng Việt](../vi/plugin-distribution.md)
+**English** · [Tiếng Việt](../vi-VN/plugin-distribution.md)
 
 Canonical skills in `skills/` are packaged for each platform by `scripts/build_plugins.py`. Plugins and marketplaces are committed so platforms can install straight from GitHub. **Never edit generated files by hand**: change `skills/` and rebuild.
 

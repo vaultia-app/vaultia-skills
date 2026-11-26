@@ -1,7 +1,7 @@
 """Checks for repository docs: every locale is complete and local links resolve.
 
 Docs live in docs/locales/<lang>/, one folder per language with the same file
-names. English (docs/locales/en/) is the source of truth. The English README.md
+names. English (docs/locales/en-US/) is the source of truth. The English README.md
 stays at the repository root so GitHub shows it; every other locale also has
 its own docs/locales/<lang>/README.md.
 """
@@ -14,12 +14,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LOCALES = REPO_ROOT / "docs" / "locales"
-SOURCE = LOCALES / "en"
+SOURCE = LOCALES / "en-US"
 ROOT_README = REPO_ROOT / "README.md"
 
 # Markdown links [text](target) and HTML href/src/srcset attributes.
 LINK = re.compile(r"\]\(([^)\s]+)\)|(?:href|src|srcset)=\"([^\"]+)\"")
-LOCALE_NAME = re.compile(r"^[a-z]{2}(-[A-Z]{2})?$")
+LOCALE_NAME = re.compile(r"^[a-z]{2}-[A-Z]{2}$")
 
 
 def source_docs() -> list[Path]:
@@ -46,18 +46,18 @@ def all_docs() -> list[Path]:
 
 class LocalesTest(unittest.TestCase):
     def test_english_source_exists(self) -> None:
-        self.assertTrue(source_docs(), "expected docs/locales/en/*.md")
+        self.assertTrue(source_docs(), "expected docs/locales/en-US/*.md")
         self.assertFalse((SOURCE / "README.md").exists(), "the English README.md belongs at the repository root")
         stray = sorted(p.name for p in (REPO_ROOT / "docs").glob("*.md"))
         self.assertEqual(stray, [], "put docs in docs/locales/<lang>/, not directly in docs/")
 
     def test_at_least_one_translation(self) -> None:
-        self.assertTrue(translations(), "expected docs/locales/<lang>/ besides en")
+        self.assertTrue(translations(), "expected docs/locales/<lang>/ besides en-US")
 
     def test_locale_folder_names(self) -> None:
         for locale in [SOURCE, *translations()]:
             with self.subTest(locale=locale.name):
-                self.assertRegex(locale.name, LOCALE_NAME, "use a language code such as vi or pt-BR")
+                self.assertRegex(locale.name, LOCALE_NAME, "use a BCP 47 tag such as en-US or vi-VN")
 
     def test_every_translation_is_complete(self) -> None:
         for locale in translations():

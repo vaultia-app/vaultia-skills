@@ -13,7 +13,7 @@ All notable changes to this project are documented here. The format follows [Kee
 - README shows only what users need: the roadmap, hero image, and development section are removed; a short Contributing section links to `CONTRIBUTING.md`.
 - `CONTRIBUTING.md` describes the fork-based workflow for outside contributors and leaves versioning to maintainers.
 - CI uses `actions/checkout@v5` and `actions/setup-python@v6` (Node 24).
-- English docs moved to `docs/locales/en/`, so every language has its own folder (`docs/locales/en/`, `docs/locales/vi/`). The English `README.md` stays at the repository root.
+- Every language has its own docs folder named with a BCP 47 tag: English docs moved to `docs/locales/en-US/`, Vietnamese from `docs/locales/vi/` to `docs/locales/vi-VN/`. The English `README.md` stays at the repository root.
 
 ### Fixed
 - Release workflow: create the release as a draft, upload the zips with retries, then publish. Uploading right after creating a release could fail with HTTP 404 and leave a draft without assets.

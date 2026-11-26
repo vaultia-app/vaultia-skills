@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <strong>🇺🇸 English</strong> | <a href="docs/locales/vi/README.md">🇻🇳 Tiếng Việt</a>
+  <strong>🇺🇸 English</strong> | <a href="docs/locales/vi-VN/README.md">🇻🇳 Tiếng Việt</a>
 </p>
 
 <p align="center">
@@ -90,7 +90,7 @@ cp -R skills/product-requirements skills/architecture-requirements ~/.claude/ski
 ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
 ```
 
-More options, team setup, and updating: [plugin distribution guide](docs/locales/en/plugin-distribution.md).
+More options, team setup, and updating: [plugin distribution guide](docs/locales/en-US/plugin-distribution.md).
 
 ## Usage
 
@@ -105,7 +105,7 @@ In Claude Code you can also call a skill directly, for example `/product-require
 
 ## Contributing
 
-Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/locales/en/skill-authoring.md).
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/locales/en-US/skill-authoring.md).
 
 ## License
 

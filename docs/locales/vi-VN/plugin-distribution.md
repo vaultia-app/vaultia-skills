@@ -1,6 +1,6 @@
 # Phân phối plugin
 
-[English](../en/plugin-distribution.md) · **Tiếng Việt**
+[English](../en-US/plugin-distribution.md) · **Tiếng Việt**
 
 Skill gốc trong `skills/` được `scripts/build_plugins.py` đóng gói cho từng nền tảng. Plugin và marketplace có được commit để các nền tảng cài thẳng từ GitHub. **Không bao giờ sửa tay file được sinh ra**: sửa `skills/` rồi build lại.
 
