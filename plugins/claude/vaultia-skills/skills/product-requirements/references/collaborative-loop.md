@@ -17,7 +17,7 @@ Classify the input first:
 | **Vague**: essentials missing ("build an app for my business", one line with no users or purpose) | Intake form (below) |
 | **Partial**: some essentials answered | Intake form for the missing items only |
 | **Rich**: notes, docs, tickets, a codebase, a handoff | Skip intake. Follow `existing-context.md` when decisions already exist; otherwise create Draft v0.1 now, marking every proposal not backed by the input as 🟡 |
-| **Fast mode requested** | Skip the loop. Draft the full document and list every unconfirmed item as an assumption. Include the scope checklist with the recommended set ticked, without asking |
+| **Fast mode requested** (by the user only) | Skip the loop. Draft the full document and list every unconfirmed item as an assumption. Include the scope checklist with the recommended set ticked, without asking. Still end with *Delivering v1.0*: return the file and ask the delivery choice |
 
 ### Intake
 
@@ -94,7 +94,7 @@ The loop must have a visible end.
 - **Non-functional requirements and SLA.** In the *Metrics, scope & release* stage, propose the product-wide NFRs as 🟡 defaults in the NFR section (performance as users notice it, availability, security and privacy, accessibility, localization, compliance, data recovery) instead of asking each one. When the product is sold to customers, put one decision on the agenda: *Do we promise an SLA?* (uptime, support response, maintenance window, data recovery). Technical targets such as p95 latency or RPO/RTO belong to `architecture-requirements`.
 - **New agenda items need a reason.** Add one only when an answer creates a new one-way door: `Agenda: 6/9 decided · +1 added: <topic> because <reason>`.
 - **Open questions are the queue.** Each blocking `Q-xxx` in the draft is asked in a later turn, highest impact first. Questions that change nothing move to *Open questions (non-blocking)* without being asked.
-- **Stop** when every agenda item is ✅ or explicitly deferred and the essentials are confirmed: problem, target user, MVP scope, primary journey, primary metric, hard constraints. Then complete the document and run the *Scope checklist* (below). Never stop at a v0.x draft without reaching it.
+- **Stop** when every agenda item is ✅ or explicitly deferred and the essentials are confirmed: problem, target user, MVP scope, primary journey, primary metric, hard constraints. Stay in guided mode: complete the document, run the *Scope checklist* (below), ask for v1.0 approval, then deliver. Never stop at a v0.x draft without reaching it.
 - **Budget.** If about **10** decisions have been asked and items remain, offer: *Move to the scope checklist with the remaining items as 🟡 defaults (recommended)* / *Continue with the remaining <n> decisions* / *Review the defaults table first*.
 
 ## Versioned drafts

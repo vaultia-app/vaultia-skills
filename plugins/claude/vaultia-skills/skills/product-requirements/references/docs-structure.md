@@ -74,7 +74,7 @@ After the scope checklist (`collaborative-loop.md`) and the user's approval:
    - *Export to the `docs/` template (zip)*
    - *Hand off to architecture-requirements*
    - *Add the next feature*
-4. **Export only when the user chooses it.** Never run the export as part of finishing.
+4. **Export only when the user chooses it** in this question. Finishing, fast mode, and the question budget never trigger it, and "package it for review" is not a reason to zip on your own.
 
 ## Exporting to the `docs/` template
 

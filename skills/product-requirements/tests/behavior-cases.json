@@ -180,6 +180,29 @@
         "Omits the NFR section because nothing was decided",
         "Presents an uptime or support target as confirmed without the user's decision"
       ]
+    },
+    {
+      "id": "agenda-done-stays-guided",
+      "prompt": "(Guided mode, the user just answered the last agenda decision, D-014 · MVP scope)",
+      "expect": [
+        "Stays in guided mode and completes the remaining sections",
+        "Runs the scope checklist and asks for v1.0 approval through the choice tool"
+      ],
+      "must_not": [
+        "Switches to fast mode on its own",
+        "Exports to the docs/ template or creates a zip"
+      ]
+    },
+    {
+      "id": "fast-mode-still-asks-delivery",
+      "prompt": "Just write the full PRD for a booking app now, no questions.",
+      "expect": [
+        "Delivers v1.0 as one file in the host's document surface",
+        "Ends with the delivery choice: keep the single file, export (zip), hand off, or add the next feature"
+      ],
+      "must_not": [
+        "Creates a zip or the docs/ export before the user picks it"
+      ]
     }
   ]
 }
