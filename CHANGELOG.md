@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-11-26
+
+### Added (release)
+- Release workflow (`.github/workflows/release.yml`): pushing a `vX.Y.Z` tag checks the tag against `pyproject.toml` and `CHANGELOG.md`, runs validation and tests, builds the zips, and publishes a GitHub release with them attached.
+- `scripts/release_notes.py`: prints a version's CHANGELOG section as release notes, and checks a tag before release.
+
 ### Changed (product-requirements restructure)
 - `product-requirements` SKILL.md slimmed to a router: short First reply rules, one-line workflow steps that point to references, no duplicated loop content.
 - `collaborative-loop.md` split: choice tools, multi-select, fallback and answer handling move to `references/asking-decisions.md`; Mermaid rules move to `references/diagrams.md`. Host tool names now appear in one table only.

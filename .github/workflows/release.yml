@@ -1,0 +1,84 @@
+name: Release
+
+# Push a tag such as v0.2.4 to publish a GitHub release:
+#   git tag v0.2.4 && git push origin v0.2.4
+# The tag must match `version` in pyproject.toml, and CHANGELOG.md must have a
+# "## [0.2.4]" section; it becomes the release notes.
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Check tag, version, and changelog
+        run: python scripts/release_notes.py --check-tag "$GITHUB_REF_NAME"
+
+      - name: Validate skills
+        run: python scripts/validate.py
+
+      - name: Check generated plugins are up to date
+        run: python scripts/build_plugins.py --check
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Build zips
+        run: python scripts/build_plugins.py --zip
+
+      - name: Write release notes
+        run: |
+          python scripts/release_notes.py "$GITHUB_REF_NAME" > "$RUNNER_TEMP/notes.md"
+          cat >> "$RUNNER_TEMP/notes.md" <<'EOF'
+
+          ## Install
+
+          **Claude Code**
+          ```bash
+          claude plugin marketplace add vaultia-app/vaultia-skills
+          claude plugin install vaultia-skills@vaultia-skills
+          ```
+
+          **Codex CLI / ChatGPT**
+          ```bash
+          codex plugin marketplace add vaultia-app/vaultia-skills
+          codex plugin add vaultia-skills@vaultia-skills
+          ```
+
+          **Upload:** `product-requirements.zip` and `architecture-requirements.zip` (skills) for claude.ai, `vaultia.zip` (plugin) for ChatGPT.
+          EOF
+
+      - name: Create or update the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          assets=(dist/skills/*.zip dist/plugins/*.zip)
+          if [ ${#assets[@]} -eq 0 ]; then
+            echo "::error::no zip files were built"
+            exit 1
+          fi
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release edit "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md"
+            gh release upload "$GITHUB_REF_NAME" "${assets[@]}" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "${assets[@]}" \
+              --title "$GITHUB_REF_NAME" \
+              --notes-file "$RUNNER_TEMP/notes.md" \
+              --verify-tag
+          fi

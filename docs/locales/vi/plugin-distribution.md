@@ -90,15 +90,23 @@ Upload từng file `dist/skills/<skill>.zip` ở **Settings → Capabilities →
 
 ## Checklist phát hành
 
-1. Tăng `version` trong `pyproject.toml` và chuyển các mục *Unreleased* trong `CHANGELOG.md` sang version mới.
-2. `python3 scripts/validate.py && python3 scripts/build_plugins.py --zip`
-3. `python3 -m unittest discover -s tests`
-4. `claude plugin validate .`
-5. Commit `skills/`, `plugins/` và hai file `marketplace.json`, rồi tag và push:
+Bản phát hành được [workflow Release](../../../.github/workflows/release.yml) tạo tự động khi bạn push một tag version.
+
+1. Tăng `version` trong `pyproject.toml` và badge release trong mọi README (có test kiểm tra hai chỗ này khớp nhau).
+2. Trong `CHANGELOG.md`, chuyển các mục *Unreleased* xuống một tiêu đề mới `## [X.Y.Z] - YYYY-MM-DD`. Phần này sẽ thành release notes.
+3. Chạy kiểm tra ở máy:
    ```bash
-   git tag vX.Y.Z && git push origin main --tags
+   python3 scripts/validate.py
+   python3 scripts/build_plugins.py
+   python3 -m unittest discover -s tests
    ```
-6. Tạo GitHub release kèm file zip:
+4. Commit `skills/`, `plugins/`, hai file `marketplace.json` và docs, rồi push `main`.
+5. Tạo tag và push tag:
    ```bash
-   gh release create vX.Y.Z dist/skills/*.zip dist/plugins/*.zip --title "vX.Y.Z" --notes-file <release-notes.md>
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
    ```
+
+Sau đó workflow kiểm tra tag khớp với `pyproject.toml` và `CHANGELOG.md` có phần cho version đó, chạy validate và test, build file zip, rồi tạo GitHub Release kèm `dist/skills/*.zip` và `dist/plugins/*.zip`. Push lại cùng tag (sau khi xóa tag cũ) sẽ cập nhật release đã có.
+
+Xem trước release notes ở máy bằng `python3 scripts/release_notes.py X.Y.Z`.

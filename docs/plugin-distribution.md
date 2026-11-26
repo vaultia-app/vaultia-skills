@@ -90,15 +90,23 @@ Upload each `dist/skills/<skill>.zip` under **Settings → Capabilities → Skil
 
 ## Release checklist
 
-1. Bump `version` in `pyproject.toml` and move the `CHANGELOG.md` *Unreleased* entries under the new version.
-2. `python3 scripts/validate.py && python3 scripts/build_plugins.py --zip`
-3. `python3 -m unittest discover -s tests`
-4. `claude plugin validate .`
-5. Commit `skills/`, `plugins/`, and both `marketplace.json` files, then tag and push:
+Releases are published by the [Release workflow](../.github/workflows/release.yml) when you push a version tag.
+
+1. Bump `version` in `pyproject.toml` and the release badge in every README (a test checks they match).
+2. In `CHANGELOG.md`, move the *Unreleased* entries under a new `## [X.Y.Z] - YYYY-MM-DD` heading. That section becomes the release notes.
+3. Run the checks locally:
    ```bash
-   git tag vX.Y.Z && git push origin main --tags
+   python3 scripts/validate.py
+   python3 scripts/build_plugins.py
+   python3 -m unittest discover -s tests
    ```
-6. Create the GitHub release with the zips attached:
+4. Commit `skills/`, `plugins/`, both `marketplace.json` files, and the docs, then push `main`.
+5. Tag and push the tag:
    ```bash
-   gh release create vX.Y.Z dist/skills/*.zip dist/plugins/*.zip --title "vX.Y.Z" --notes-file <release-notes.md>
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
    ```
+
+The workflow then checks that the tag matches `pyproject.toml` and that `CHANGELOG.md` has a section for it, runs validation and tests, builds the zips, and creates the GitHub release with `dist/skills/*.zip` and `dist/plugins/*.zip` attached. Pushing the same tag again (after deleting it) updates the existing release.
+
+Preview the release notes locally with `python3 scripts/release_notes.py X.Y.Z`.
