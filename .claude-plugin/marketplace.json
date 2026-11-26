@@ -5,7 +5,7 @@
     "name": "Vaultia"
   },
   "metadata": {
-    "version": "0.4.0"
+    "version": "0.4.1"
   },
   "plugins": [
     {
@@ -13,7 +13,7 @@
       "displayName": "Architecture Requirements",
       "source": "./plugins/claude/architecture-requirements",
       "description": "Create, refine, and review software architecture requirements and system design documents.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "productivity",
       "keywords": [
         "requirements",
@@ -29,7 +29,7 @@
       "displayName": "Product Requirements",
       "source": "./plugins/claude/product-requirements",
       "description": "Create, refine, and review product requirements documents (PRDs) for software products and features.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "productivity",
       "keywords": [
         "requirements",
@@ -45,7 +45,7 @@
       "displayName": "UI UX Design",
       "source": "./plugins/claude/ui-ux-design",
       "description": "Design and build user interface screens.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "productivity",
       "keywords": [
         "requirements",
@@ -61,7 +61,7 @@
       "displayName": "Vaultia",
       "source": "./plugins/claude/vaultia-skills",
       "description": "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "productivity",
       "keywords": [
         "requirements",
