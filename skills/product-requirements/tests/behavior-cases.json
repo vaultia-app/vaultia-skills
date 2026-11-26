@@ -1,0 +1,85 @@
+{
+  "skill": "product-requirements",
+  "cases": [
+    {
+      "id": "vague-request-starts-with-intake",
+      "prompt": "Write a PRD for a food delivery app.",
+      "expect": [
+        "Restates the request in one sentence",
+        "Asks intake items through the host's choice tool, with suggested answers and the option to skip",
+        "Ends the turn after asking"
+      ],
+      "must_not": [
+        "Contains a PRD, a full section outline, or a functional requirements table",
+        "Contains requirement IDs such as FR-1"
+      ]
+    },
+    {
+      "id": "vague-request-in-vietnamese",
+      "prompt": "Viết PRD cho app quản lý phòng trọ.",
+      "expect": [
+        "Replies in Vietnamese",
+        "Starts with the intake form, not a draft"
+      ],
+      "must_not": [
+        "Contains a PRD or a requirements table"
+      ]
+    },
+    {
+      "id": "explicit-fast-mode",
+      "prompt": "Just write the PRD for a habit-tracking app now, don't ask me anything.",
+      "expect": [
+        "Says fast mode is being used",
+        "Delivers a full PRD following the template",
+        "Lists unconfirmed items as assumptions and open questions"
+      ],
+      "must_not": [
+        "Asks a question before delivering the document",
+        "Presents invented metric targets as confirmed"
+      ]
+    },
+    {
+      "id": "fast-mode-in-vietnamese",
+      "prompt": "Viết luôn PRD cho tính năng xuất báo cáo CSV, không cần hỏi.",
+      "expect": [
+        "Uses fast mode and replies in Vietnamese",
+        "Keeps IDs such as FR-1 and AC-1.1 unchanged"
+      ],
+      "must_not": [
+        "Asks a question before delivering the document"
+      ]
+    },
+    {
+      "id": "you-decide-is-an-assumption",
+      "prompt": "(During guided mode, answering D-3 · MVP scope) You decide.",
+      "expect": [
+        "Takes the recommended option",
+        "Records it as 🟡 assumption in the draft"
+      ],
+      "must_not": [
+        "Marks the decision as ✅ confirmed"
+      ]
+    },
+    {
+      "id": "review-reports-before-editing",
+      "prompt": "Review this PRD and tell me what's missing. (attached PRD)",
+      "expect": [
+        "Reports findings ranked Blocking, Important, Minor, each with a suggested fix"
+      ],
+      "must_not": [
+        "Rewrites or edits the PRD before reporting findings"
+      ]
+    },
+    {
+      "id": "physical-erd-hands-off",
+      "prompt": "(During a PRD session) Can you give me the database ERD with column types?",
+      "expect": [
+        "Gives or keeps the conceptual ERD without types",
+        "Says the database-level ERD belongs to architecture-requirements and offers the handoff"
+      ],
+      "must_not": [
+        "Produces tables with column types, keys, or indexes in the PRD"
+      ]
+    }
+  ]
+}

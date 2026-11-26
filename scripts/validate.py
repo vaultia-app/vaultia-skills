@@ -10,6 +10,7 @@ Checks, per skill directory:
   * Every referenced local file (`references/...`, `scripts/...`, `assets/...`
     in backticks, and relative Markdown links) exists.
   * Optional tests/trigger-cases.json is well formed.
+  * Optional tests/behavior-cases.json is well formed (id, prompt, expect / must_not).
 
 Usage:
   python3 scripts/validate.py              # validate every skill in skills/
@@ -129,6 +130,48 @@ def check_trigger_cases(skill_dir: Path, name: str, result: Result) -> None:
             result.errors.append(f"tests/trigger-cases.json '{key}' must contain non-empty strings")
 
 
+def check_behavior_cases(skill_dir: Path, name: str, result: Result) -> None:
+    path = skill_dir / "tests" / "behavior-cases.json"
+    if not path.exists():
+        return
+    prefix = "tests/behavior-cases.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        result.errors.append(f"{prefix} is not valid JSON: {exc}")
+        return
+    if not isinstance(data, dict):
+        result.errors.append(f"{prefix} must be a JSON object")
+        return
+    if data.get("skill") != name:
+        result.errors.append(f"{prefix} 'skill' must match the skill name")
+    cases = data.get("cases")
+    if not isinstance(cases, list) or not cases:
+        result.errors.append(f"{prefix} 'cases' must be a non-empty list")
+        return
+    seen: set[str] = set()
+    for index, case in enumerate(cases):
+        where = f"{prefix} case {index}"
+        if not isinstance(case, dict):
+            result.errors.append(f"{where} must be an object")
+            continue
+        case_id = case.get("id")
+        if not isinstance(case_id, str) or not case_id.strip():
+            result.errors.append(f"{where} needs a non-empty 'id'")
+        elif case_id in seen:
+            result.errors.append(f"{where} duplicates id {case_id!r}")
+        else:
+            seen.add(case_id)
+        if not isinstance(case.get("prompt"), str) or not case["prompt"].strip():
+            result.errors.append(f"{where} needs a non-empty 'prompt'")
+        for key in ("expect", "must_not"):
+            value = case.get(key, [])
+            if not isinstance(value, list) or not all(isinstance(v, str) and v.strip() for v in value):
+                result.errors.append(f"{where} '{key}' must be a list of non-empty strings")
+        if not case.get("expect") and not case.get("must_not"):
+            result.errors.append(f"{where} needs at least one 'expect' or 'must_not' entry")
+
+
 def validate_skill(skill_dir: Path) -> Result:
     skill_dir = skill_dir.resolve()
     result = Result(skill=skill_dir.name)
@@ -187,6 +230,7 @@ def validate_skill(skill_dir: Path) -> Result:
 
     check_links(skill_dir, body, result)
     check_trigger_cases(skill_dir, name or skill_dir.name, result)
+    check_behavior_cases(skill_dir, name or skill_dir.name, result)
     return result
 
 

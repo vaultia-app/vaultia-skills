@@ -125,6 +125,31 @@ class ValidateSkillTest(unittest.TestCase):
         )
         self.assertTrue(any("should_trigger" in e for e in errors))
 
+    def test_valid_behavior_cases(self) -> None:
+        cases = json.dumps({
+            "skill": "sample-skill",
+            "cases": [{"id": "a", "prompt": "Do it.", "expect": ["Does it"], "must_not": []}],
+        })
+        errors = self.errors(
+            "sample-skill", VALID, {"references/guide.md": "x", "tests/behavior-cases.json": cases}
+        )
+        self.assertEqual(errors, [])
+
+    def test_invalid_behavior_cases(self) -> None:
+        cases = json.dumps({
+            "skill": "sample-skill",
+            "cases": [
+                {"id": "a", "prompt": "Do it.", "expect": ["Does it"]},
+                {"id": "a", "prompt": "", "expect": [], "must_not": []},
+            ],
+        })
+        errors = self.errors(
+            "sample-skill", VALID, {"references/guide.md": "x", "tests/behavior-cases.json": cases}
+        )
+        self.assertTrue(any("duplicates id" in e for e in errors))
+        self.assertTrue(any("'prompt'" in e for e in errors))
+        self.assertTrue(any("at least one" in e for e in errors))
+
     def test_main_exit_codes(self) -> None:
         good = make_skill(self.root, "sample-skill", VALID, {"references/guide.md": "x"})
         bad = make_skill(self.root, "broken", "# nothing\n")

@@ -1,227 +1,110 @@
 # Collaborative Loop (Guided Mode)
 
-Work like a senior product manager pairing with the user: **propose, visualize, draft, ask for one decision, update** — and repeat until the requirements are agreed. The user should always see a concrete, versioned proposal they can react to, never a wall of questions and never a "final" document built on guesses.
-
-## The loop
+Work like a senior product manager pairing with the user. The user should always see a concrete, versioned proposal they can react to: never a wall of questions, and never a "final" document built on guesses.
 
 ```text
-Propose → Visualize → Draft vN → Decide one thing → Update to vN+1 → …
+Propose → Visualize → Draft vN → Decide → Update to vN+1 → … → v1.0
 ```
 
-Every guided turn uses this shape (skip a part only when it adds nothing):
-
-1. **Understanding + key insight.** Two to four sentences restating what you understood, then one **bold, opinionated insight** — the most important thing you would do differently or watch out for. Lead with a point of view, not a question.
-2. **Diagram.** One small diagram that shows the current shape of the idea (see *Diagrams*). On later turns, update the same diagram and mark what is now decided.
-3. **Structure table (when useful).** Capabilities, user types, or scope grouped in a table with a one-line role for each row. Call out one subtle distinction the user is likely to miss.
-4. **Draft vN.** Create or update the PRD file and say what changed (see *Versioned drafts*).
-5. **Next steps (optional).** A short phased roadmap when the idea is larger than one release — each phase with a one-line reason for its position.
-6. **One blocking decision.** End with the single decision that most blocks progress (see *Asking for a decision*). If two are truly independent and both blocking, ask at most three.
-
-When the user answers — even loosely, mixing several topics — start the next turn with "Updated based on your decisions:", fold **every** stated decision into the diagram and draft, then raise the next most important issue.
-
-**Keep the loop moving until v1.0.** Every turn ends with a decision for the user to answer — never with only a list of remaining questions, a "reply 'yes' if correct" sentence, or a summary.
-
-- **Progress line.** After the draft update, show one line against the agenda (see *Decision agenda and when to stop*), such as `Agenda: 4/9 decided · next: <topic> · then: <topic>, <topic>`, so the user sees how far v1.0 is.
-- **Confirming a typed answer.** When you had to interpret a typed answer, do not ask for confirmation in prose. Put the confirmation in the same choice form as the next decision: one question "I understood <X> — correct?" with options *Correct (recommended)* / *<the most likely alternative>*, plus the next blocking decision as a second question.
-- **Open questions are the queue.** Each `Q-n` in the draft's open-questions list is asked in a later turn, highest impact first, until every question that changes scope, requirements, or metrics is ✅ or explicitly deferred by the user. Questions that change nothing are moved to *Open questions (non-blocking)* instead of being asked.
-- **Closing.** When the blocking queue is empty, ask a final choice: *Finalize v1.0 (recommended)* / *Review section by section first*. Do not stop at a v0.x draft without offering this.
+Related files: `asking-decisions.md` (how to ask and how to handle answers) and `diagrams.md` (how to draw).
 
 ## Starting point
 
 Classify the input first:
 
-- **Vague input** — essentials are missing (for example "build an app for my business", or one line without users or purpose). Start with the **intake** below.
-- **Partial input** — some essentials are answered. Run the intake only for the missing items.
-- **Rich input** (notes, existing docs, tickets, a codebase, a handoff): skip the intake, follow `existing-context.md` when decisions already exist, and create Draft v0.1 in the first turn, marking every proposal not backed by the input as 🟡.
-- **Fast mode requested** ("just write it", "viết luôn"): skip the loop, draft the full document, and list every unconfirmed item as an assumption.
-
-### Intake (vague or partial input)
-
-Turn 1 is a short intake form — not a draft, not directions yet. One sentence restating what you understood, then the missing items from this list (at most 7) through the choice tool:
-
-| Item | Ask |
+| Input | First turn |
 |---|---|
-| Project name | Free text (or "suggest one") |
-| Purpose / problem | What pain or goal this solves — 3–4 domain-typical problems as options |
-| Primary users | Who uses it first — typical roles in this domain |
+| **Vague**: essentials missing ("build an app for my business", one line with no users or purpose) | Intake form (below) |
+| **Partial**: some essentials answered | Intake form for the missing items only |
+| **Rich**: notes, docs, tickets, a codebase, a handoff | Skip intake. Follow `existing-context.md` when decisions already exist; otherwise create Draft v0.1 now, marking every proposal not backed by the input as 🟡 |
+| **Fast mode requested** | Skip the loop. Draft the full document and list every unconfirmed item as an assumption |
+
+### Intake
+
+Turn 1 is a short intake form: not a draft, not directions yet. Write one sentence restating what you understood, then ask the missing items (at most 7) through the choice tool:
+
+| Item | Suggested answers |
+|---|---|
+| Project name | Free text, or "suggest one" |
+| Purpose / problem | 3–4 problems typical of the domain |
+| Primary users | Typical roles in the domain |
 | Platform | Web, mobile, both, internal tool |
 | Must-have capabilities | Multi-select from the domain's core capabilities |
 | Business model / context | Personal use, internal company tool, commercial product (SaaS, marketplace) |
-| Constraints | Deadline, budget, compliance, existing systems — multi-select plus "none yet" |
+| Constraints | Multi-select: deadline, budget, compliance, existing systems, "none yet" |
 
-Rules:
-- **Every item has suggested answers** drawn from your knowledge of the domain, recommended one first, so the user can click instead of writing. Only the name is free text. Mark multi-select items as such.
-- **Every item can be skipped**: say in the intro that the user can leave anything for you to decide; skipped items become 🟡 assumptions.
-- **Do not ask what the input already answers.** Show those as "Understood: …" in the intro.
-- **Fit the host's limits**: ChatGPT / Codex `request_user_input_async` takes all items in one call (omit `options` for free text); Claude `AskUserQuestion` takes 4 questions per call — ask the 4 most important, then the rest in the next turn; plain text — a numbered list the user can answer in one message.
+- **Suggest answers for every item** from your domain knowledge, recommended first, so the user can click instead of type. Only the name is free text.
+- **Every item can be skipped.** Say so in the intro; skipped items become 🟡 assumptions.
+- **Don't ask what the input already answers.** Show it as "Understood: …".
+- Fit the host's per-call limit (see `asking-decisions.md`): ask the most important items first and the rest on the next turn.
 
-### After the intake: enrich with domain knowledge
+### Enrich with domain knowledge
 
-When the answers arrive, before drafting:
+When the intake answers arrive, before drafting:
 
-1. **Restate** the project in 3–5 lines from the answers.
-2. **Domain notes** — what an expert in this domain would add: standard workflows, regulations and compliance rules, calculations and edge cases that usually bite, features users expect, common pitfalls and anti-patterns, and typical success metrics. Mark each as 🟡 proposal. Facts that change over time (laws, tax and price rules, platform policies) need a source and date, or the label "verify" when you cannot check them.
-3. If the answers still allow very different products, propose 2–3 directions (target user × core value × MVP shape) with a diagram for the recommended one and ask which to pursue; otherwise go straight to Draft v0.1.
-4. Publish the stages and the decision agenda (see *Decision agenda and when to stop*), then ask the first decision.
+1. **Restate** the project in 3–5 lines.
+2. **Add domain notes**, marked 🟡: standard workflows, regulations, calculations and edge cases that usually cause problems, features users expect, common pitfalls, typical success metrics. Facts that change over time (laws, tax and pricing rules, platform policies) need a source and date, or the label "verify".
+3. **If the answers still allow very different products**, propose 2–3 directions (target user × core value × MVP shape), diagram the recommended one, and ask which to pursue. Otherwise go straight to Draft v0.1.
+4. **Publish the stages and the decision agenda** (below), then ask the first decision.
 
-## Which decision to ask next
+## The turn
 
-Ask the decision whose answer would change the most downstream content. Typical order for a PRD, adjusted to what is already known:
+Every guided turn has this shape. Skip a part only when it adds nothing.
 
-1. Problem and target user (who exactly, which situation)
+1. **Understanding + key insight.** Two to four sentences restating what you understood, then one **bold, opinionated insight**: the most important thing you would do differently or watch out for. Lead with a point of view, not a question.
+2. **Diagram.** One small diagram of the current shape of the idea. On later turns, update the same diagram and mark what is now decided.
+3. **Structure table** (when useful). Capabilities, user types, or scope with a one-line role per row. Call out one subtle distinction the user is likely to miss.
+4. **Draft vN.** Update the PRD file and say what changed (see *Versioned drafts*).
+5. **Progress line.** `Agenda: 4/9 decided · next: <topic> · then: <topic>, <topic>`
+6. **Roadmap** (optional). A short phased plan when the idea is larger than one release, each phase with a one-line reason for its position.
+7. **The next decision**, through the choice tool, then end the turn and wait.
+
+**Decisions per turn:** ask the one decision that most blocks progress. Batch up to 3 in one call only when they are independent, for example confirming an interpreted answer plus the next decision.
+
+When the user answers, even loosely across several topics, start the next turn with "Updated based on your decisions:", fold **every** stated decision into the diagram and draft, then raise the next decision.
+
+**Every turn ends with a decision until v1.0.** Never end with only a list of open questions, a "reply 'yes' if correct" sentence, or a summary.
+
+## Which decision next
+
+Ask the decision whose answer changes the most downstream content. The usual order, adjusted to what is already known:
+
+1. Problem and target user (who exactly, in which situation)
 2. Product direction / value proposition vs. alternatives
-3. MVP scope — what is Must vs. later (MoSCoW)
+3. MVP scope: Must vs. later (MoSCoW)
 4. Primary user journey for the Must scope
 5. Success metric and target
 6. Constraints and rollout (deadline, platforms, compliance)
 
-Challenge weak inputs while doing this: a vague problem, an oversized MVP, or an unmeasurable goal deserves a sharper counter-proposal. If the idea does not survive scrutiny (no real problem or user), say so plainly and suggest what to validate first.
+Challenge weak inputs along the way: a vague problem, an oversized MVP, or an unmeasurable goal deserves a sharper counter-proposal. If the idea does not survive scrutiny (no real problem or user), say so plainly and suggest what to validate first.
 
 ## Decision agenda and when to stop
 
-The loop must have a visible end. Plan it, keep it short, and close it.
+The loop must have a visible end.
 
-**0. Stages with approval gates.** Build the document in stages — Context & goals → Users & journeys → Domain model & business rules → Functional requirements & acceptance criteria → Metrics, scope & release — and show them as a checklist with status (✅ approved · 🔄 in progress · ⏳ not started). A stage closes only when the user approves it; ask for that approval through the choice tool (*Approve <stage> (recommended)* / *Needs changes*), bundled with the first decision of the next stage. Approved stages are not reopened unless the user asks or a later answer changes them (then use *Answers to an already-decided question*).
-
-**Documentation sets.** If the user asks for a whole set of documents ("build the docs for my app"), first show a short document map — each document, what it covers, which skill produces it, and the order (product requirements first, then architecture) — and confirm it before starting the first one. Do not draft documents another skill owns.
-
-**1. Publish the agenda first.** On the first guided turn, list the decisions that must be made before v1.0 — usually **6–10** — as a numbered checklist (`D-1 … D-n`, one line each, recommended answer in brackets when you already have one). This is the scope of the conversation. Show it again, with ✅ / 🟡 / ⏳ marks, whenever it changes.
-
-**2. Ask only one-way-door decisions.** A question earns a place on the agenda only if the answer is hard to reverse later or changes the structure of the document, for example: target user, product direction, MVP scope (Must vs. later), primary journey, primary success metric, a hard constraint such as platform or compliance.
-
-**3. Decide the rest yourself as defaults.** Two-way-door and implementation-level details — for example default categories, list sort order, copy and labels, notification wording, minor validation rules, exact non-primary metrics — are not asked one by one. Choose a sensible default, record it as 🟡 in a *Defaults (review anytime)* table in the draft (item, default, one-line reason), and mention new defaults in one line per turn. The user can override any default by replying; that does not reopen the loop.
-
-**4. Batch to move faster.** Ask up to 3 independent agenda items in one choice-tool call. Never ask the same topic twice unless the user reopens it.
-
-**5. New agenda items need a reason.** Add a decision to the agenda only when an answer or a user idea creates a new one-way door; say why it was added and show the new total (`Agenda: 6/9 decided · +1 added: <topic> because <reason>`).
-
-**6. Stop rules.**
-- Close the loop when every agenda item is ✅ or explicitly deferred, and problem, target user, MVP scope, primary journey, primary metric, and hard constraints are confirmed. Remaining unknowns that do not block implementation go to *Open questions (non-blocking)*.
-- If the asked decisions reach about **10** and items remain, stop adding: offer *Finalize v1.0 with the remaining items as 🟡 defaults (recommended)* / *Continue with the remaining <n> decisions* / *Review the defaults table first*.
-
-**7. Keep the conversation light.** The draft file is the memory, not the chat: show only what changed, the progress line, and the diagram when it changed. If the conversation is getting long, suggest continuing in a new chat that starts from the latest draft file and its decision log, so nothing is lost.
-
-## Asking for a decision
-
-Every decision is asked through the host's **choice tool** when one is available — on **every** turn of the loop, not only the first. Plain-text A/B/C lists are only the fallback for hosts without such a tool. After calling the tool, **end your turn and wait**: do not continue drafting content that depends on the answer.
-
-### Host choice tools
-
-| Host | Tool | How to fill it |
-|---|---|---|
-| ChatGPT, Codex | `request_user_input_async` | `questions: [{"title": "<full question with the context needed>", "options": ["<recommended> (recommended)", "<option>", "<option>"]}]` — options are plain strings |
-| Codex Plan mode | `request_user_input` | 1–3 questions, each `{"id": "snake_case", "header": "≤12 chars", "options": [{"label": "1–5 words (Recommended)", "description": "one-sentence trade-off"}, …]}` with 2–3 options |
-| Claude (Claude Code, Desktop, claude.ai) | `AskUserQuestion` or the host's equivalent | 1–4 questions, each with a short `header`, 2–4 options with `label` + `description`, and `multiSelect` (true when several answers are allowed); add "(Recommended)" to the first option's label |
-| Self-built forms (inline widgets, visualizations, HTML cards) | the form you render | same rules below, **plus** an "Other — type your own answer" option with a text input |
-
-Rules for every choice tool:
-
-- **Give every decision a stable ID** (`D-1`, `D-2`, …) and put it at the start of the question title (for example "D-3 · Primary user: …"). Use the same ID in the draft's decision log, so any answer can be traced to its question.
-- **Recommended option first**, with "(recommended)" in its label in the user's language. Several hosts preselect the first option.
-- **"Other" depends on what renders the form:**
-  - **Native question tools** listed above (`request_user_input_async`, `request_user_input`, `AskUserQuestion`): do **not** add an "Other" option — they add free-text input automatically.
-  - **Any form you build yourself** — an inline widget, visualization, HTML/React card, or custom form with radio buttons and a submit button: you **must** add a last option **"Other — type your own answer"** with a text input that is submitted as the answer. These forms have no built-in free text; without it the user can only pick your options.
-  - If unsure which one you are using, add the "Other" option with a text input.
-- **Short labels, consequences in descriptions** (or after a dash when options are plain strings). 2–4 mutually exclusive options in the user's domain terms.
-- **The title is self-contained**: the user may see only the form, so include the context needed to answer.
-- **Up to 3 questions in one call** when they are independent (for example, confirming an interpreted answer plus the next decision). Otherwise one.
-- **Multiple-choice questions** (the user may pick several, for example which features go into the MVP, which platforms, which user roles):
-  - Claude `AskUserQuestion`: set `multiSelect: true`.
-  - Any other tool with a multi-select flag: use it.
-  - ChatGPT / Codex (single-select plus free text): say in the title that several can be chosen and how to type them (for example "Choose one set, or type your own combination such as \"A, C, D\""). Offer ready-made sets as options, recommended set first — for example "Core set (recommended): A + B + D", "All of them", "Only A". Do not split one multi-select question into many yes/no questions.
-  - Plain-text fallback: label the items A, B, C… and end with "Reply with one or more letters (for example \"A, C\"), your own answer, or \"you decide\"".
-  - Record every selected item as its own decision in the draft (for example each chosen feature as Must), and the unselected ones as Later / out of scope.
-- **Never put instructions in options or titles** such as "update the PRD and ask the next question". The selection the user submits should read as their answer only.
-
-### Fallback: plain text
-
-Only when the host has no choice tool:
-
-```text
-### Decision needed before <next step>
-
-<Question?>
-
-A) <Option> — <what it means / consequence> ← recommended: <one-line reason>
-B) <Option> — <what it means / consequence>
-C) <Option> — <what it means / consequence>
-
-Reply with a letter, your own answer, or "you decide".
-```
-
-### Handling answers
-
-- Options are concrete and mutually exclusive; the consequence of each is visible so the user decides on trade-offs, not labels.
-- "You decide" → take the recommendation and record it as 🟡 assumption, not ✅ confirmed.
-- A typed answer takes priority over a selected option. If it is unclear or contradicts the options, record your interpretation as 🟡 and confirm it through the choice tool on the next turn (see *Keep the loop moving until v1.0*); mark it ✅ only after the user agrees.
-- **Answers to an already-decided question.** Hosts keep old forms clickable, so the user may scroll up and pick a different option for an earlier `D-n`. Never overwrite silently:
-  1. Say which decision it changes ("This changes D-2 · Primary user from *Individual gamers* to *Collectors*").
-  2. List what depends on it: later decisions, requirements, metrics, and diagram nodes that would change or become invalid.
-  3. Ask through the choice tool: *Keep <current value> (recommended unless the user clearly meant to change it)* / *Change to <new value> and update the affected parts*.
-  4. On *Change*: bump the draft version, update every affected part, mark dependent decisions 🟡 for re-confirmation, and record the old and new value in the change log. On *Keep*: change nothing and continue with the pending question.
-  - If a pending question is still open, answer handling for it comes first; then raise the change.
-
-### New ideas and side discussions
-
-The user may bring up something outside the pending question — a feature they just remembered, a constraint, a change of mind — and discuss it freely in chat. Never let it stay only in the conversation:
-
-1. Discuss it as long as the user wants; give your opinion and any trade-off they should know.
-2. When the discussion reaches a conclusion (or the user moves on), end the turn with a **short summary** of what was agreed — what it is, who it is for, and why — then ask through the choice tool how to capture it. Give it a new ID (`D-n`, or `FR-n` for a requirement) and options such as:
-   - *Add to the draft as <Must / MVP> (recommended when it serves the primary journey)*
-   - *Add as <Should / Later phase>*
-   - *Record as an open question to decide later*
-   - *Don't add it*
-3. On an *Add* answer: update the draft, diagram, and scope table, bump the version, and log it in the change log. If it conflicts with or changes an earlier decision, handle it like *Answers to an already-decided question* (show impact, ask keep or change).
-4. If a decision was pending before the side discussion, ask it again in the **same** choice tool call as the capture question, so the loop continues.
-
-## Diagrams
-
-Write diagrams as Mermaid in fenced code blocks tagged `mermaid` — that is the portable source kept in the document file (GitHub, IDEs, Claude, most Markdown viewers render it). Keep each diagram to roughly 12 nodes or fewer — split rather than cram.
-
-**Make sure the user actually sees a diagram, not code.** Some surfaces show Mermaid as plain text — notably ChatGPT's chat, canvas, and document views. There:
-
-1. Keep the ```` ```mermaid ```` block in the saved document, unchanged.
-2. In the chat, **also render the diagram visually** with the host's own tool (inline visualization, image, or diagram tool) so the user sees boxes and lines.
-3. If no visual tool is available, show a readable fallback instead of raw Mermaid: for an ER diagram, a relationship table (`Entity | Relationship | Entity | Cardinality`, for example `Branch | manages | Vehicle | 1 : N`); for flows, a short numbered list or an indented text tree.
-4. Never leave unrendered Mermaid as the only view in chat. If the user says a diagram "is broken" or shows as code, switch to steps 2–3 for the rest of the conversation.
-
-Write Mermaid that renders: one relationship per line, entity names in `UPPER_SNAKE` or `PascalCase` without spaces, labels with spaces in quotes (`ROOM ||--o{ CONTRACT : "rented under"`), and no attributes or types in conceptual ER diagrams.
-
-Pick by purpose:
-
-| Purpose | Diagram |
-|---|---|
-| Who interacts with the product and what surrounds it | `flowchart` context diagram: users → product → external systems |
-| Main user journey | `flowchart LR` of steps, or `journey` |
-| Scope and phasing | `flowchart` grouping Must / Should / Later, or a table |
-| States of a key object (order, request, subscription) | `stateDiagram-v2` |
-
-Mark decision status on nodes so the diagram doubles as a decision map:
-
-```mermaid
-flowchart TD
-    A["Admin CMS ✅"] --> C["Shared catalog ✅"]
-    W["Public website 🟡<br/>features TBD"] --> C
-    C --> S["Online sources ✅"]
-    C --> I["Internal storage ✅"]
-```
-
-- ✅ confirmed by the user · 🟡 proposed or assumed · `TBD` unknown — never fill an unknown with an invented detail.
-- When a diagram becomes fully confirmed, title it "Agreed …" so the user sees progress.
+- **Stages with approval gates.** Build the document in stages: Context & goals → Users & journeys → Domain model & business rules → Functional requirements & acceptance criteria → Metrics, scope & release. Show them as a checklist (✅ approved · 🔄 in progress · ⏳ not started). A stage closes when the user approves it through the choice tool (*Approve <stage> (recommended)* / *Needs changes*), bundled with the first decision of the next stage. Approved stages are reopened only when the user asks or a later answer changes them.
+- **Documentation sets.** If the user asks for a whole set of documents ("build the docs for my app"), first show a document map (each document, what it covers, which skill produces it, the order: product requirements first, then architecture) and confirm it. Do not draft documents another skill owns.
+- **Publish the agenda first.** On the first guided turn after intake, list the **6–10** decisions needed before v1.0 as `D-1 … D-n`, one line each, with your recommended answer in brackets when you have one. Show it again with ✅ / 🟡 / ⏳ whenever it changes.
+- **Only one-way doors go on the agenda**: answers that are hard to reverse or that change the document's structure, such as target user, product direction, MVP scope, primary journey, primary success metric, or a hard constraint like platform or compliance.
+- **Decide two-way doors yourself.** Default categories, sort order, copy and labels, notification wording, minor validation rules, and secondary metrics are not asked one by one. Choose a sensible default, record it in a *Defaults (review anytime)* table in the draft (item, default, one-line reason), and mention new defaults in one line per turn. The user can override any default; that does not reopen the loop.
+- **New agenda items need a reason.** Add one only when an answer creates a new one-way door: `Agenda: 6/9 decided · +1 added: <topic> because <reason>`.
+- **Open questions are the queue.** Each blocking `Q-n` in the draft is asked in a later turn, highest impact first. Questions that change nothing move to *Open questions (non-blocking)* without being asked.
+- **Stop** when every agenda item is ✅ or explicitly deferred and the essentials are confirmed: problem, target user, MVP scope, primary journey, primary metric, hard constraints. Then ask: *Finalize v1.0 (recommended)* / *Review section by section first*. Never stop at a v0.x draft without offering this.
+- **Budget.** If about **10** decisions have been asked and items remain, offer: *Finalize v1.0 with the remaining items as 🟡 defaults (recommended)* / *Continue with the remaining <n> decisions* / *Review the defaults table first*.
 
 ## Versioned drafts
 
-- Save to the PRD file from the start (default `docs/requirements/<feature-name>.md`; inline if there is no project). Update the same file each turn — do not create a new file per version.
-- Bump the version in the header on every substantive update: v0.1, v0.2, … Reserve v1.0 for the version the user approves.
-- Keep a **Change log** at the end of the document: version → decisions applied → sections changed.
-- Mark content inline: unconfirmed proposals carry 🟡, unknowns say `TBD`. The *Decisions, assumptions, and open questions* section is the decision log.
-- Keep v0.x drafts compact: labeled bullets (**Pain:** / **Who:** / **Why now:** / **Assumptions:**) rather than prose, and omit sections with nothing decided yet instead of filling them with TBD. Expand to full prose and tables on the way to v1.0.
-- In chat, show only what changed and the diagram — not the whole document.
+- **The draft file is the memory, not the chat.** Save to the PRD file from the start (default `docs/requirements/<feature-name>.md`; inline when there is no project) and update the same file every turn.
+- Bump the version on every substantive update: v0.1, v0.2, … v1.0 is reserved for the version the user approves.
+- Keep a **Change log** at the end: version → decisions applied → sections changed.
+- Mark content inline: 🟡 for unconfirmed proposals, `TBD` for unknowns. The *Decisions, assumptions, and open questions* section is the decision log.
+- Keep v0.x drafts compact: labeled bullets (**Pain:** / **Who:** / **Why now:** / **Assumptions:**), and omit sections with nothing decided yet rather than filling them with TBD. Expand to full prose and tables on the way to v1.0.
+- In chat, show only what changed, the progress line, and the diagram when it changed. If the conversation gets long, suggest continuing in a new chat from the latest draft file and its decision log.
 
 ## Clarification notes
 
-When a term or boundary could be misread, add a short **Note:** after the table or diagram that pins down the meaning (for example, which users count as "admin", or whether an external service counts as part of the product). These notes prevent most rework.
+When a term or boundary could be misread, add a short **Note:** after the table or diagram that pins down the meaning (for example which users count as "admin", or whether an external service is part of the product). These notes prevent most rework.
 
 ## Finishing
 
-Move to the outline/quality pass when the essentials are ✅: problem, target user, MVP scope, primary journey, primary metric, and hard constraints. Then complete acceptance criteria, run the quality checklist, ask the user to approve v1.0, and offer the handoff to `architecture-requirements`.
+When the essentials are ✅, complete the remaining sections from the template, write acceptance criteria, run the quality checklist, ask the user to approve v1.0, and offer the handoff to `architecture-requirements`.

@@ -8,7 +8,9 @@
     "Write user stories and acceptance criteria for password reset.",
     "We need a feature spec for exporting reports to CSV before sprint planning.",
     "Help me spec out the collaborative editing feature of my app.",
-    "I'm building a new card game app — interview me and help me figure out the MVP requirements."
+    "I'm building a new card game app — interview me and help me figure out the MVP requirements.",
+    "Viết PRD cho app quản lý phòng trọ.",
+    "What are the acceptance criteria we should have for the checkout flow?"
   ],
   "should_not_trigger": [
     "Design the database schema and API endpoints for the calendar feature.",
@@ -16,6 +18,9 @@
     "Fix the failing unit test in auth_service.py.",
     "Review this pull request for bugs.",
     "Write a marketing email announcing our new feature.",
-    "Do a deep competitor and market-size analysis for the meal-kit industry."
+    "Do a deep competitor and market-size analysis for the meal-kit industry.",
+    "Write an ADR for choosing Postgres over MongoDB.",
+    "Write release notes for version 2.0.",
+    "Turn this PRD into a technical design with services and APIs."
   ]
 }
