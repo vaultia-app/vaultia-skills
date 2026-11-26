@@ -90,7 +90,7 @@ cp -R skills/product-requirements skills/architecture-requirements ~/.claude/ski
 ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
 ```
 
-Thêm lựa chọn, cài cho cả team và cách cập nhật: [plugin-distribution.md](plugin-distribution.md).
+Thêm lựa chọn, cài cho cả team và cách cập nhật: [hướng dẫn phân phối plugin](plugin-distribution.md).
 
 ## Cách dùng
 

@@ -90,7 +90,7 @@ cp -R skills/product-requirements skills/architecture-requirements ~/.claude/ski
 ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
 ```
 
-More options, team setup, and updating: [docs/plugin-distribution.md](docs/plugin-distribution.md).
+More options, team setup, and updating: [plugin distribution guide](docs/locales/en/plugin-distribution.md).
 
 ## Usage
 
@@ -105,7 +105,7 @@ In Claude Code you can also call a skill directly, for example `/product-require
 
 ## Contributing
 
-Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/skill-authoring.md).
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/locales/en/skill-authoring.md).
 
 ## License
 

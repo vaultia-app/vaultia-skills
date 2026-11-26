@@ -22,7 +22,7 @@ Requires Python 3.10+, no third-party dependencies.
 
 ## Make the change
 
-1. Edit or add a skill under `skills/<skill-name>/`, following [docs/skill-authoring.md](docs/skill-authoring.md). Never edit `plugins/` by hand.
+1. Edit or add a skill under `skills/<skill-name>/`, following [the skill authoring guide](docs/locales/en/skill-authoring.md). Never edit `plugins/` by hand.
 2. Run the checks:
    ```bash
    python3 scripts/validate.py
@@ -50,6 +50,6 @@ Version numbers and releases are handled by maintainers; don't change `version` 
 
 - One canonical copy per skill; do not create per-platform copies by hand.
 - Use full, descriptive `kebab-case` names; avoid unclear abbreviations.
-- Write all skill content in English. Docs are written in English first; translations live in `docs/locales/<lang>/` and are updated in the same pull request.
+- Write all skill content in English. Docs live in `docs/locales/<lang>/` (English in `docs/locales/en/`, the source of truth); translations are updated in the same pull request.
 - Do not commit secrets, credentials, or private product data.
 - Review any executable script and its dependencies before adding it.

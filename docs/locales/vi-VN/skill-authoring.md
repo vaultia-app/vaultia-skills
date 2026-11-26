@@ -1,6 +1,6 @@
 # Hướng dẫn viết skill
 
-[English](../../skill-authoring.md) · **Tiếng Việt**
+[English](../en/skill-authoring.md) · **Tiếng Việt**
 
 Cách viết một skill cho repo này để nó chạy được trên Codex, Claude Code, Cursor và các agent khác tương thích Agent Skills.
 
@@ -108,7 +108,7 @@ Giữ mỗi file reference dưới khoảng 2.000 từ. File lớn hơn thườn
 
 Nội dung skill viết bằng tiếng Anh. Skill có thể yêu cầu agent trả lời theo ngôn ngữ của người dùng. Prompt bằng ngôn ngữ khác đặt trong `tests/` dưới dạng trigger case hoặc behavior case, không đặt thành chỉ dẫn trong nội dung skill.
 
-Bản dịch của README và các file trong `docs/` nằm ở `docs/locales/<lang>/`, giữ nguyên tên file như bản tiếng Anh (`README.md`, `skill-authoring.md`, …). Tiếng Việt nằm ở `docs/locales/vi/`. Bản tiếng Anh là bản gốc: sửa bản tiếng Anh trước, rồi cập nhật mọi bản dịch trong cùng pull request. Muốn thêm ngôn ngữ, tạo `docs/locales/<lang>/` với bản dịch của mọi doc tiếng Anh và thêm ngôn ngữ đó vào dòng chuyển ngôn ngữ ở đầu mỗi file.
+Tài liệu nằm trong `docs/locales/<lang>/`, mỗi ngôn ngữ một thư mục với cùng tên file: tiếng Anh ở `docs/locales/en/`, tiếng Việt ở `docs/locales/vi/`. `README.md` tiếng Anh vẫn nằm ở thư mục gốc của repo để GitHub hiển thị; mỗi bản dịch có `docs/locales/<lang>/README.md` riêng. Bản tiếng Anh là bản gốc: sửa bản tiếng Anh trước, rồi cập nhật mọi bản dịch trong cùng pull request. Muốn thêm ngôn ngữ, tạo `docs/locales/<lang>/` với bản dịch của mọi doc tiếng Anh và README, rồi thêm ngôn ngữ đó vào dòng chuyển ngôn ngữ ở đầu mỗi file.
 
 ## Test
 

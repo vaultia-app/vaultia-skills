@@ -1,6 +1,6 @@
 # Plugin Distribution
 
-**English** · [Tiếng Việt](locales/vi/plugin-distribution.md)
+**English** · [Tiếng Việt](../vi/plugin-distribution.md)
 
 Canonical skills in `skills/` are packaged for each platform by `scripts/build_plugins.py`. Plugins and marketplaces are committed so platforms can install straight from GitHub. **Never edit generated files by hand**: change `skills/` and rebuild.
 
@@ -90,7 +90,7 @@ Upload each `<skill>-skill.zip` from the release (or `dist/skills/<skill>.zip` w
 
 ## Release checklist
 
-Releases are published by the [Release workflow](../.github/workflows/release.yml) when you push a version tag.
+Releases are published by the [Release workflow](../../../.github/workflows/release.yml) when you push a version tag.
 
 1. Bump `version` in `pyproject.toml` and the release badge in every README (a test checks they match).
 2. In `CHANGELOG.md`, move the *Unreleased* entries under a new `## [X.Y.Z] - YYYY-MM-DD` heading. That section becomes the release notes.
