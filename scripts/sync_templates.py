@@ -97,7 +97,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     with tempfile.TemporaryDirectory() as tmp:
-        source = args.source.resolve() if args.source else clone_main(Path(tmp) / "vaultia-templates")
+        try:
+            source = args.source.resolve() if args.source else clone_main(Path(tmp) / "vaultia-templates")
+        except (OSError, subprocess.CalledProcessError) as exc:
+            print(f"ERROR could not clone {TEMPLATES_REPO} (branch main): {exc}")
+            return 1
         try:
             changes = plan(source, REPO_ROOT, BUNDLES)
         except (OSError, ValueError, KeyError) as exc:
