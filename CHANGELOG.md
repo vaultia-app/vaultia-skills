@@ -6,17 +6,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [0.2.4] - 2026-11-26
 
-### Added (release)
+### Added
 - Release workflow (`.github/workflows/release.yml`): pushing a `vX.Y.Z` tag checks the tag against `pyproject.toml` and `CHANGELOG.md`, runs validation and tests, builds the zips, and publishes a GitHub release with them attached.
 - `scripts/release_notes.py`: prints a version's CHANGELOG section as release notes, and checks a tag before release.
-
-### Changed (product-requirements restructure)
-- `product-requirements` SKILL.md slimmed to a router: short First reply rules, one-line workflow steps that point to references, no duplicated loop content.
-- `collaborative-loop.md` split: choice tools, multi-select, fallback and answer handling move to `references/asking-decisions.md`; Mermaid rules move to `references/diagrams.md`. Host tool names now appear in one table only.
-- Conflicting rules unified: one blocking decision per turn, batch up to 3 only when independent; fast mode defined once.
-- `docs/skill-authoring.md` restored and extended (router principle, one rule per place, split references by moment, examples, behavior cases).
-
-### Added
 - Translated documentation under `docs/locales/<lang>/`, starting with Vietnamese (`docs/locales/vi/`: README, skill authoring, plugin distribution), with a language switch at the top of each file. English stays the source of truth.
 - README header: language switch with flags, release / skills / platforms / Python / license badges, CI / stars / last-commit badges, and a hero image (`assets/vaultia-brand-kit/readme/hero.svg`). A test keeps the release badge in sync with `pyproject.toml`.
 - `docs/plugin-distribution.md` restored and updated (GitHub owner, plugin zips, release steps).
@@ -24,6 +16,17 @@ All notable changes to this project are documented here. The format follows [Kee
 - `product-requirements/references/example-prd.md`: a complete small-feature PRD for calibrating depth.
 - `tests/behavior-cases.json` for `product-requirements`, checked by `scripts/validate.py`.
 - More trigger cases, including near-miss negatives (ADR, release notes, technical design).
+
+### Changed
+- `product-requirements` SKILL.md slimmed to a router: short First reply rules, one-line workflow steps that point to references, no duplicated loop content.
+- `collaborative-loop.md` split: choice tools, multi-select, fallback and answer handling move to `references/asking-decisions.md`; Mermaid rules move to `references/diagrams.md`. Host tool names now appear in one table only.
+- Conflicting rules unified: one blocking decision per turn, batch up to 3 only when independent; fast mode defined once.
+- `docs/skill-authoring.md` restored and extended (router principle, one rule per place, split references by moment, examples, behavior cases).
+- CI uses `actions/checkout@v5` and `actions/setup-python@v6` (Node 24).
+
+## [0.2.3] and earlier
+
+### Added
 - `product-requirements` skill with requirements template, discovery questions, acceptance-criteria guide, and quality checklist.
 - `architecture-requirements` skill with architecture template, patterns, non-functional requirements, API design, data model, and security checklist references.
 - Trigger cases for both skills.

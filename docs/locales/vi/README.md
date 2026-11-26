@@ -100,25 +100,9 @@ Cứ hỏi agent bằng ngôn ngữ tự nhiên, tiếng Việt cũng được:
 
 Trong Claude Code bạn cũng có thể gọi trực tiếp, ví dụ `/product-requirements`. Muốn bỏ qua phần hỏi đáp để có bản nháp ngay thì nói *"viết luôn"*.
 
-## Phát triển
+## Đóng góp
 
-Cần Python 3.10+, không có thư viện ngoài.
-
-```bash
-python3 scripts/validate.py              # kiểm tra tất cả skill
-python3 scripts/build_plugins.py         # sinh lại plugin sau khi sửa skills/
-python3 -m unittest discover -s tests    # chạy test
-```
-
-Đọc [CONTRIBUTING.md](../../../CONTRIBUTING.md) và [skill-authoring.md](skill-authoring.md) trước khi thêm hoặc sửa skill.
-
-## Lộ trình
-
-- [x] `product-requirements` và `architecture-requirements`, validator, test, CI
-- [x] Plugin cho Claude Code và Codex / ChatGPT, marketplace, file zip để upload
-- [ ] Trình cài đặt cho kiểu copy thủ công (global / project, dry-run, gỡ cài đặt)
-- [ ] Plugin cho Cursor
-- [ ] Thêm skill: `product-discovery`, `user-experience-design`, `api-design`, `database-design`, `software-testing`, `software-deployment`
+Rất hoan nghênh issue và pull request. Xem [CONTRIBUTING.md](../../../CONTRIBUTING.md) và [hướng dẫn viết skill](skill-authoring.md).
 
 ## Giấy phép
 

@@ -100,25 +100,9 @@ Ask your agent naturally:
 
 In Claude Code you can also call a skill directly, for example `/product-requirements`. To skip the questions and get a draft right away, say *"just write it"*.
 
-## Development
+## Contributing
 
-Requires Python 3.10+, no third-party dependencies.
-
-```bash
-python3 scripts/validate.py              # validate all skills
-python3 scripts/build_plugins.py         # regenerate plugins after changing skills/
-python3 -m unittest discover -s tests    # run tests
-```
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/skill-authoring.md](docs/skill-authoring.md) before adding or changing a skill.
-
-## Roadmap
-
-- [x] `product-requirements` and `architecture-requirements`, validator, tests, CI
-- [x] Claude Code and Codex / ChatGPT plugins, marketplaces, upload zips
-- [ ] Installer for manual copies (global / project, dry-run, uninstall)
-- [ ] Cursor plugin
-- [ ] More skills: `product-discovery`, `user-experience-design`, `api-design`, `database-design`, `software-testing`, `software-deployment`
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [skill authoring guide](docs/skill-authoring.md).
 
 ## License
 
