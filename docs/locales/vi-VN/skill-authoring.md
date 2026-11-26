@@ -85,7 +85,7 @@ Tách file reference theo lúc agent cần đến chúng, không theo chủ đ�
 | `collaborative-loop.md` | Mỗi lượt ở guided mode: intake, cấu trúc lượt, agenda, quy tắc dừng |
 | `asking-decisions.md` | Mỗi lượt đặt câu hỏi hoặc nhận câu trả lời |
 | `diagrams.md` | Chỉ khi vẽ sơ đồ |
-| `requirements-template.md` | Chỉ khi các thông tin cốt lõi đã được xác nhận |
+| `docs-structure.md` | Chỉ khi tạo file nháp đầu tiên |
 
 Giữ mỗi file reference dưới khoảng 2.000 từ. File lớn hơn thường đang trộn nhiều thời điểm và nên được tách.
 
@@ -93,7 +93,7 @@ Giữ mỗi file reference dưới khoảng 2.000 từ. File lớn hơn thườn
 
 - Một ví dụ tốt và một ví dụ xấu dạy được nhiều hơn một đoạn quy tắc.
 - Các bảng so sánh ("mơ hồ → kiểm thử được", "lỗi → cách sửa") đặc biệt hiệu quả.
-- Với skill tạo tài liệu, hãy kèm một đầu ra mẫu ngắn, hoàn chỉnh (như `references/example-prd.md`) để agent biết cần chi tiết tới đâu. Chỉ có placeholder thì không thể hiện được mức độ chính xác mong muốn.
+- Với skill tạo tài liệu, hãy kèm một đầu ra mẫu ngắn, hoàn chỉnh (như `references/example-feature-spec.md`) để agent biết cần chi tiết tới đâu. Chỉ có placeholder thì không thể hiện được mức độ chính xác mong muốn.
 
 ## Skill tương tác
 

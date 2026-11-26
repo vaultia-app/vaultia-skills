@@ -16,7 +16,7 @@ This is the only place host-specific tool names appear. Elsewhere, say "the choi
 
 ## Rules for every question
 
-- **Stable ID first.** Start the title with the decision ID (`D-3 · Primary user: …`) and use the same ID in the draft's decision log.
+- **Stable ID first.** Start the title with the decision ID (`D-003 · Primary user: …`): the next free number in `docs/09-working/decisions-log.md`. Use the same ID when you log the answer.
 - **Recommended option first**, labeled "(recommended)" in the user's language. Several hosts preselect the first option.
 - **Self-contained title.** The user may see only the form, so include the context needed to answer.
 - **2–4 mutually exclusive options** in the user's domain terms: short labels, consequences in the description (or after a dash when options are plain strings), so the user decides on trade-offs, not labels.
@@ -59,7 +59,7 @@ Hosts keep old forms clickable, so the user may pick a different option for an e
 1. Name the change: "This changes D-2 · Primary user from *Individual gamers* to *Collectors*."
 2. List what depends on it: later decisions, requirements, metrics, and diagram nodes that would change.
 3. Ask: *Keep <current value>* / *Change to <new value> and update the affected parts*. Recommend *Keep* unless the user clearly meant to change it.
-4. On *Change*: bump the version, update every affected part, mark dependent decisions 🟡 for re-confirmation, and record old and new values in the change log. On *Keep*: change nothing.
+4. On *Change*: bump the version, update every affected part, mark dependent decisions 🟡 for re-confirmation, record old and new values in the spec's change log, and add a new decision to the decisions log that supersedes the old one (the old entry stays, marked superseded). On *Keep*: change nothing.
 
 If another question is still pending, handle its answer first, then raise the change.
 

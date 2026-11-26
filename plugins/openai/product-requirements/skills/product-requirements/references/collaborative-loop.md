@@ -84,7 +84,7 @@ The loop must have a visible end.
 
 - **Stages with approval gates.** Build the document in stages: Context & goals → Users & journeys → Domain model & business rules → Functional requirements & acceptance criteria → Metrics, scope & release. Show them as a checklist (✅ approved · 🔄 in progress · ⏳ not started). A stage closes when the user approves it through the choice tool (*Approve <stage> (recommended)* / *Needs changes*), bundled with the first decision of the next stage. Approved stages are reopened only when the user asks or a later answer changes them.
 - **Documentation sets.** If the user asks for a whole set of documents ("build the docs for my app"), first show a document map (each document, what it covers, which skill produces it, the order: product requirements first, then architecture) and confirm it. Do not draft documents another skill owns.
-- **Publish the agenda first.** On the first guided turn after intake, list the **6–10** decisions needed before v1.0 as `D-1 … D-n`, one line each, with your recommended answer in brackets when you have one. Show it again with ✅ / 🟡 / ⏳ whenever it changes.
+- **Publish the agenda first.** On the first guided turn after intake, list the **6–10** decisions needed before v1.0 with the next free decision IDs from the decisions log (`D-004 … D-012`), one line each, with your recommended answer in brackets when you have one. Show it again with ✅ / 🟡 / ⏳ whenever it changes.
 - **Only one-way doors go on the agenda**: answers that are hard to reverse or that change the document's structure, such as target user, product direction, MVP scope, primary journey, primary success metric, or a hard constraint like platform or compliance.
 - **Decide two-way doors yourself.** Default categories, sort order, copy and labels, notification wording, minor validation rules, and secondary metrics are not asked one by one. Choose a sensible default, record it in a *Defaults (review anytime)* table in the draft (item, default, one-line reason), and mention new defaults in one line per turn. The user can override any default; that does not reopen the loop.
 - **New agenda items need a reason.** Add one only when an answer creates a new one-way door: `Agenda: 6/9 decided · +1 added: <topic> because <reason>`.
@@ -94,12 +94,13 @@ The loop must have a visible end.
 
 ## Versioned drafts
 
-- **The draft file is the memory, not the chat.** Save to the PRD file from the start (default `docs/requirements/<feature-name>.md`; inline when there is no project) and update the same file every turn.
+- **The draft file is the memory, not the chat.** The draft is the feature file `docs/03-functional-specs/F<nn>-<slug>.md`, created at v0.1 right after the intake (scaffold `docs/` first if needed; see `docs-structure.md`). Update the same file every turn.
 - Bump the version on every substantive update: v0.1, v0.2, … v1.0 is reserved for the version the user approves.
-- Keep a **Change log** at the end: version → decisions applied → sections changed.
-- Mark content inline: 🟡 for unconfirmed proposals, `TBD` for unknowns. The *Decisions, assumptions, and open questions* section is the decision log.
+- Keep the spec's **Change log** current: version → date → decisions applied and sections changed.
+- Mark content inline: 🟡 for unconfirmed proposals, `TBD` for unknowns.
+- **Decisions and questions live in the shared files.** A confirmed decision is added to `docs/09-working/decisions-log.md`; a question that waits is added to `docs/09-working/open-questions.md`. The spec lists their IDs. Agenda items use the `D-xxx` numbers they will have in the log.
 - Keep v0.x drafts compact: labeled bullets (**Pain:** / **Who:** / **Why now:** / **Assumptions:**), and omit sections with nothing decided yet rather than filling them with TBD. Expand to full prose and tables on the way to v1.0.
-- In chat, show only what changed, the progress line, and the diagram when it changed. If the conversation gets long, suggest continuing in a new chat from the latest draft file and its decision log.
+- In chat, show only what changed, the progress line, and the diagram when it changed. If the conversation gets long, suggest continuing in a new chat from the latest feature file and the decisions log.
 
 ## Clarification notes
 
