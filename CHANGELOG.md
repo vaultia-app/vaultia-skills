@@ -11,6 +11,10 @@ All notable changes to this project are documented here. The format follows [Kee
 - `docs/skill-authoring.md` restored and extended (router principle, one rule per place, split references by moment, examples, behavior cases).
 
 ### Added
+- Translated documentation under `docs/locales/<lang>/`, starting with Vietnamese (`docs/locales/vi/`: README, skill authoring, plugin distribution), with a language switch at the top of each file. English stays the source of truth.
+- README header: language switch with flags, release / skills / platforms / Python / license badges, CI / stars / last-commit badges, and a hero image (`assets/vaultia-brand-kit/readme/hero.svg`). A test keeps the release badge in sync with `pyproject.toml`.
+- `docs/plugin-distribution.md` restored and updated (GitHub owner, plugin zips, release steps).
+- `tests/test_docs.py`: every locale translates every English doc, and local links in docs resolve.
 - `product-requirements/references/example-prd.md`: a complete small-feature PRD for calibrating depth.
 - `tests/behavior-cases.json` for `product-requirements`, checked by `scripts/validate.py`.
 - More trigger cases, including near-miss negatives (ADR, release notes, technical design).

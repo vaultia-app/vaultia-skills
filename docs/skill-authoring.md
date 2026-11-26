@@ -1,5 +1,7 @@
 # Skill Authoring Guide
 
+**English** · [Tiếng Việt](locales/vi/skill-authoring.md)
+
 How to write a skill for this repository so it works across Codex, Claude Code, Cursor, and other Agent Skills–compatible agents.
 
 ## Anatomy
@@ -106,6 +108,8 @@ Keep each reference file under about 2,000 words. Larger files usually mix sever
 
 Write skill content in English. Skills may tell the agent to answer in the user's language. Prompts in other languages belong in `tests/` as trigger or behavior cases, not as instructions in the body.
 
+Translations of the README and `docs/` live in `docs/locales/<lang>/`, using the same file names as the English source (`README.md`, `skill-authoring.md`, …). Vietnamese is in `docs/locales/vi/`. English is the source of truth: change the English file first, then update every translation in the same pull request. To add a language, create `docs/locales/<lang>/` with a translation of every English doc and add it to the language switch at the top of each file.
+
 ## Tests
 
 ### Trigger cases
@@ -151,4 +155,4 @@ Negative cases are most valuable when they are *near misses*: prompts that share
 - [ ] No rule is stated in two places; host tool names appear in one table only.
 - [ ] Trigger cases include near-miss negatives; behavior cases cover the key guardrails.
 - [ ] Tested by hand in at least one agent with a realistic prompt.
-- [ ] `README.md` skill table and `CHANGELOG.md` updated.
+- [ ] Skill tables in `README.md` and each `docs/locales/<lang>/README.md`, and `CHANGELOG.md`, updated.

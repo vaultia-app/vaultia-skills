@@ -13,13 +13,13 @@ Thanks for improving Vaultia Skills.
    python3 -m unittest discover -s tests
    ```
 4. Test the skill by hand in at least one agent (Claude Code, Codex, or Cursor) using the prompts in its `tests/trigger-cases.json`.
-5. Update the skill table in `README.md` and add an entry to `CHANGELOG.md`.
+5. Update the skill table in `README.md` and each `docs/locales/<lang>/README.md`, and add an entry to `CHANGELOG.md`.
 6. Open a pull request describing what changed and how you tested it.
 
 ## Rules
 
 - One canonical copy per skill; do not create per-platform copies by hand.
 - Use full, descriptive `kebab-case` names; avoid unclear abbreviations.
-- Write all skill content and docs in English.
+- Write all skill content in English. Docs are written in English first; translations live in `docs/locales/<lang>/` and are updated in the same pull request.
 - Do not commit secrets, credentials, or private product data.
 - Review any executable script and its dependencies before adding it.

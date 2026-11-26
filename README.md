@@ -5,129 +5,121 @@
   </picture>
 </p>
 
-# Vaultia Skills
+<p align="center">
+  <strong>🇺🇸 English</strong> | <a href="docs/locales/vi/README.md">🇻🇳 Tiếng Việt</a>
+</p>
 
-Reusable AI Agent Skills for Codex, Claude Code, Cursor, and other agents that support the [Agent Skills](https://agentskills.io/specification) format.
+<p align="center">
+  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.2.4-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.2.4"></a>
+  <a href="skills"><img src="https://img.shields.io/badge/skills-2-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 2"></a>
+  <a href="#installation"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/license-TBD-8A8A8A?style=for-the-badge&labelColor=3a3a3a" alt="License: TBD">
+</p>
 
-Each skill is a folder with a `SKILL.md` (when to use it, workflow, outputs, guardrails) and supporting reference files that the agent loads only when needed. One canonical copy lives in `skills/`; it works on every supported platform.
+<p align="center">
+  <a href="https://github.com/vaultia-app/vaultia-skills/actions/workflows/validate.yml"><img src="https://github.com/vaultia-app/vaultia-skills/actions/workflows/validate.yml/badge.svg" alt="Validate"></a>
+  <a href="https://github.com/vaultia-app/vaultia-skills/stargazers"><img src="https://img.shields.io/github/stars/vaultia-app/vaultia-skills?style=flat&logo=github&label=stars" alt="GitHub stars"></a>
+  <a href="https://github.com/vaultia-app/vaultia-skills/commits/main"><img src="https://img.shields.io/github/last-commit/vaultia-app/vaultia-skills?style=flat" alt="Last commit"></a>
+</p>
+
+<p align="center">
+  AI Agent Skills that turn a product idea into build-ready specs: a PRD first, then the system design.<br>They work <strong>with</strong> you, proposing options and asking one decision at a time instead of guessing.
+</p>
+
+<p align="center">
+  <img src="assets/vaultia-brand-kit/readme/hero.svg" alt="Vaultia Skills: idea, then PRD (what and why), then architecture (how and constraints), then build" width="100%">
+</p>
 
 ## Skills
 
-| Skill | What it does | Status |
+| Skill | What it does | Answers |
 |---|---|---|
-| [`product-requirements`](skills/product-requirements/SKILL.md) | Product requirements documents (PRDs): goals, users, journeys, functional requirements, acceptance criteria, success metrics, scope, rollout. Answers **WHAT / WHY**. | Available |
-| [`architecture-requirements`](skills/architecture-requirements/SKILL.md) | Architecture and system design: drivers, components, APIs, data models, NFRs, security, deployment, ADRs. Answers **HOW / CONSTRAINTS**. | Available |
-
-Planned: `product-discovery`, `market-research`, `user-experience-design`, `api-design`, `database-design`, `code-review`, `software-testing`, `software-deployment`.
-
-### Core workflow
-
-```text
-Product idea
-  → product-requirements       (WHAT / WHY)
-  → architecture-requirements  (HOW / CONSTRAINTS)
-  → implementation
-```
+| [`product-requirements`](skills/product-requirements/SKILL.md) | Product requirements documents (PRDs): goals, users, journeys, functional requirements, acceptance criteria, success metrics, scope, rollout | **WHAT / WHY** |
+| [`architecture-requirements`](skills/architecture-requirements/SKILL.md) | Architecture and system design: drivers, components, APIs, data models, NFRs, security, deployment, ADRs | **HOW / CONSTRAINTS** |
 
 Each skill also works on its own when enough input is available.
 
 ## Installation
 
-Replace `OWNER` with the GitHub account hosting this repository. Full details: [docs/plugin-distribution.md](docs/plugin-distribution.md).
-
-### Claude Code (plugin)
+### Claude Code
 
 ```bash
-claude plugin marketplace add OWNER/vaultia-skills
+claude plugin marketplace add vaultia-app/vaultia-skills
 claude plugin install vaultia-skills@vaultia-skills        # all skills
 claude plugin install product-requirements@vaultia-skills  # or a single skill
 ```
 
-### Codex CLI and ChatGPT (plugin)
+### Codex CLI and ChatGPT
 
 ```bash
-codex plugin marketplace add OWNER/vaultia-skills
+codex plugin marketplace add vaultia-app/vaultia-skills
 codex plugin add vaultia-skills@vaultia-skills
 ```
 
-The ChatGPT desktop app shows marketplaces added this way in its **Plugins** directory. Workspace admins can import the GitHub marketplace for everyone.
+The ChatGPT desktop app shows marketplaces added this way in its **Plugins** directory.
 
-### claude.ai or ChatGPT (upload a skill)
+### claude.ai or ChatGPT (upload)
 
-```bash
-python3 scripts/build_plugins.py --zip
-```
+Download the zip files from the [latest release](https://github.com/vaultia-app/vaultia-skills/releases/latest), or build them yourself with `python3 scripts/build_plugins.py --zip`.
 
-Upload `dist/skills/<skill>.zip` in claude.ai under **Settings → Capabilities → Skills**, or in ChatGPT under **Plugins → Skills → Upload from computer**.
+| Platform | Upload | Where |
+|---|---|---|
+| claude.ai | `product-requirements.zip`, `architecture-requirements.zip` (from `dist/skills/`) | **Settings → Capabilities → Skills** |
+| ChatGPT | `vaultia.zip` (from `dist/plugins/`) | **Plugins → Upload** |
 
 ### Manual copy (any agent)
 
-Copy (or symlink) a skill folder into your agent's skills directory.
+Copy or symlink a skill folder into your agent's skills directory:
 
-| Platform | Project scope | User / global scope |
+| Platform | Project scope | User scope |
 |---|---|---|
-| Codex | `.agents/skills/` | `~/.agents/skills/` |
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+| Codex | `.agents/skills/` | `~/.agents/skills/` |
 | Cursor | `.cursor/skills/` | `~/.cursor/skills/` |
-
-Examples:
 
 ```bash
 # Claude Code, available in every project
 mkdir -p ~/.claude/skills
 cp -R skills/product-requirements skills/architecture-requirements ~/.claude/skills/
 
-# Cursor, only for one project
-mkdir -p /path/to/project/.cursor/skills
-cp -R skills/product-requirements /path/to/project/.cursor/skills/
-
 # Local development: symlink so edits are picked up immediately
-ln -s "$PWD/skills/product-requirements" ~/.agents/skills/product-requirements
+ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
 ```
 
-Then ask your agent naturally, for example: *"Write a PRD for team calendars"* or *"Turn this PRD into a technical design."* Claude Code also lets you invoke a skill directly with `/product-requirements`.
+More options, team setup, and updating: [docs/plugin-distribution.md](docs/plugin-distribution.md).
 
-An automated installer for manual copies (`scripts/install.py` with global / project / hybrid scopes) is planned — see [the roadmap](#roadmap).
+## Usage
 
-## Repository layout
+Ask your agent naturally:
 
-```text
-skills/<skill-name>/
-├── SKILL.md            # Instructions + portable frontmatter (name, description)
-├── references/         # Templates, checklists, guidelines (loaded on demand)
-├── scripts/            # Optional deterministic helpers
-├── assets/             # Optional output resources
-└── tests/              # Trigger cases (should / should not activate)
-plugins/claude/         # Generated Claude Code plugins (do not edit)
-plugins/openai/         # Generated Codex / ChatGPT plugins (do not edit)
-.claude-plugin/         # Generated Claude Code marketplace
-.agents/plugins/        # Generated Codex / ChatGPT marketplace
-scripts/validate.py     # Skill validator
-scripts/build_plugins.py# Plugin, marketplace and zip builder
-tests/                  # Repository tests
-docs/                   # Authoring and architecture docs
-assets/vaultia-brand-kit/ # README logo and OpenAI plugin icons (only assets in use)
-```
+- *"Write a PRD for a personal expense tracking app."*
+- *"Turn these meeting notes into requirements with acceptance criteria."*
+- *"Turn this PRD into a technical design."*
+- *"Review this architecture for gaps and risks."*
+
+In Claude Code you can also call a skill directly, for example `/product-requirements`. To skip the questions and get a draft right away, say *"just write it"*.
 
 ## Development
 
-Requires Python 3.10+. No third-party dependencies.
+Requires Python 3.10+, no third-party dependencies.
 
 ```bash
 python3 scripts/validate.py              # validate all skills
 python3 scripts/build_plugins.py         # regenerate plugins after changing skills/
-python3 -m unittest discover -s tests    # run tests (pytest also works)
+python3 -m unittest discover -s tests    # run tests
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/skill-authoring.md](docs/skill-authoring.md) before adding or changing a skill.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/skill-authoring.md](docs/skill-authoring.md) before adding or changing a skill.
 
 ## Roadmap
 
-1. **Phase 1 — MVP (done):** `product-requirements`, `architecture-requirements`, shared format, validator, tests, CI.
-2. **Plugins (done):** plugin builder, Claude Code and Codex / ChatGPT plugins and marketplaces, upload zips.
-3. **Next:** installer (global / project / hybrid, dry-run, uninstall), Cursor plugin, versioned releases.
-4. **Phase 4:** Additional skills as usage warrants.
+- [x] `product-requirements` and `architecture-requirements`, validator, tests, CI
+- [x] Claude Code and Codex / ChatGPT plugins, marketplaces, upload zips
+- [ ] Installer for manual copies (global / project, dry-run, uninstall)
+- [ ] Cursor plugin
+- [ ] More skills: `product-discovery`, `user-experience-design`, `api-design`, `database-design`, `software-testing`, `software-deployment`
 
 ## License
 
-Not yet chosen. A license must be selected before public distribution.
+Not yet chosen. A license will be added before the first public release.

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Vaultia Skills</title>
+  <desc id="desc">Product and architecture specs, built with you. Idea, then PRD (what and why), then architecture (how and constraints), then build. Works with Claude Code, Codex, ChatGPT, and Cursor.</desc>
+  <defs>
+    <radialGradient id="glowLeft" cx="0.18" cy="0.35" r="0.55">
+      <stop offset="0" stop-color="#FFC533" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#FFC533" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRight" cx="0.85" cy="0.75" r="0.5">
+      <stop offset="0" stop-color="#E8743B" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#E8743B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFC533"/>
+      <stop offset="1" stop-color="#FFB020"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#FFC533"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="640" rx="24" fill="#141414"/>
+  <rect width="1280" height="640" rx="24" fill="url(#glowLeft)"/>
+  <rect width="1280" height="640" rx="24" fill="url(#glowRight)"/>
+  <rect x="0.5" y="0.5" width="1279" height="639" rx="24" fill="none" stroke="#2B2924"/>
+
+  <g font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <!-- Works with -->
+    <text x="457" y="93" text-anchor="end" font-size="15" fill="#8F8A80">Works with</text>
+    <g font-size="15" font-weight="600" fill="#F7F3E7" text-anchor="middle">
+      <rect x="473" y="70" width="124" height="34" rx="17" fill="#1F1E1B" stroke="#37342D"/>
+      <text x="535" y="92">Claude Code</text>
+      <rect x="607" y="70" width="84" height="34" rx="17" fill="#1F1E1B" stroke="#37342D"/>
+      <text x="649" y="92">Codex</text>
+      <rect x="701" y="70" width="104" height="34" rx="17" fill="#1F1E1B" stroke="#37342D"/>
+      <text x="753" y="92">ChatGPT</text>
+      <rect x="815" y="70" width="92" height="34" rx="17" fill="#1F1E1B" stroke="#37342D"/>
+      <text x="861" y="92">Cursor</text>
+    </g>
+
+    <!-- Title -->
+    <text x="640" y="192" text-anchor="middle" font-size="76" font-weight="800" letter-spacing="-1.5">
+      <tspan fill="url(#title)">Vaultia</tspan><tspan fill="#F7F3E7"> Skills</tspan>
+    </text>
+    <text x="640" y="244" text-anchor="middle" font-size="30" font-weight="700" fill="#F7F3E7">Product &amp; architecture specs, built with you</text>
+    <text x="640" y="292" text-anchor="middle" font-size="19" fill="#A8A39A">Proposes options, draws the diagram, and asks one decision at a time,</text>
+    <text x="640" y="320" text-anchor="middle" font-size="19" fill="#A8A39A">so your PRD and system design are built on decisions, not guesses.</text>
+
+    <!-- Install command -->
+    <rect x="320" y="352" width="640" height="52" rx="12" fill="#0B0B0A" stroke="#37342D"/>
+    <text x="640" y="385" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#F7F3E7"><tspan fill="#FFC533">$</tspan> claude plugin install vaultia-skills@vaultia-skills</text>
+
+    <!-- Workflow -->
+    <g>
+      <rect x="105" y="450" width="230" height="120" rx="16" fill="#1B1A18" stroke="#2F2D28"/>
+      <text x="220" y="481" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#8F8A80">START</text>
+      <text x="220" y="520" text-anchor="middle" font-size="28" font-weight="700" fill="#F7F3E7">Idea</text>
+      <text x="220" y="550" text-anchor="middle" font-size="15" fill="#A8A39A">notes, a ticket, one line</text>
+
+      <rect x="385" y="450" width="230" height="120" rx="16" fill="#221F17" stroke="#FFC533" stroke-opacity="0.7"/>
+      <text x="500" y="481" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#C9B98A">product-requirements</text>
+      <text x="500" y="520" text-anchor="middle" font-size="28" font-weight="700" fill="#F7F3E7">PRD</text>
+      <text x="500" y="550" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="1" fill="#FFC533">WHAT / WHY</text>
+
+      <rect x="665" y="450" width="230" height="120" rx="16" fill="#221F17" stroke="#FFC533" stroke-opacity="0.7"/>
+      <text x="780" y="481" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#C9B98A">architecture-requirements</text>
+      <text x="780" y="520" text-anchor="middle" font-size="28" font-weight="700" fill="#F7F3E7">Architecture</text>
+      <text x="780" y="550" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="1" fill="#FFC533">HOW / CONSTRAINTS</text>
+
+      <rect x="945" y="450" width="230" height="120" rx="16" fill="#1B1A18" stroke="#2F2D28"/>
+      <text x="1060" y="481" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#8F8A80">THEN</text>
+      <text x="1060" y="520" text-anchor="middle" font-size="28" font-weight="700" fill="#F7F3E7">Build</text>
+      <text x="1060" y="550" text-anchor="middle" font-size="15" fill="#A8A39A">with your team</text>
+
+      <g stroke="#FFC533" stroke-width="2.5" marker-end="url(#arrow)">
+        <line x1="343" y1="510" x2="375" y2="510"/>
+        <line x1="623" y1="510" x2="655" y2="510"/>
+        <line x1="903" y1="510" x2="935" y2="510"/>
+      </g>
+    </g>
+
+    <text x="640" y="612" text-anchor="middle" font-size="15" fill="#6F6A61">Agent Skills format · versioned drafts · stable IDs · testable acceptance criteria</text>
+  </g>
+</svg>
