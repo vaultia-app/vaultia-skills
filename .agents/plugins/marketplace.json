@@ -29,6 +29,18 @@
       "category": "Productivity"
     },
     {
+      "name": "ui-ux-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/openai/ui-ux-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "vaultia-skills",
       "source": {
         "source": "local",

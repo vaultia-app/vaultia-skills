@@ -2,13 +2,15 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "vaultia-skills",
   "version": "0.3.1",
-  "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
+  "description": "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams.",
   "author": {
     "name": "Vaultia"
   },
   "keywords": [
     "requirements",
     "product-management",
+    "ui-ux",
+    "design-system",
     "architecture",
     "software-design"
   ],
@@ -16,8 +18,8 @@
     "com.openai": {
       "interface": {
         "displayName": "Vaultia",
-        "shortDescription": "Product and architecture specs",
-        "longDescription": "Requirements skills for software teams. product-requirements turns an idea into a testable PRD (WHAT and WHY); architecture-requirements turns the PRD into a system design with APIs, data models, non-functional requirements, and ADRs (HOW and CONSTRAINTS). Both work step by step with you: they propose options, show diagrams, and ask one decision at a time.",
+        "shortDescription": "Product, UI, and architecture",
+        "longDescription": "Skills for software teams. product-requirements turns an idea into a testable PRD (WHAT and WHY); ui-ux-design turns it into screens built with a ready-made Base UI React kit; architecture-requirements turns it into a system design with APIs, data models, non-functional requirements, and ADRs (HOW and CONSTRAINTS). They work step by step with you: they propose options, show diagrams, and ask only the decisions that matter.",
         "developerName": "Vaultia",
         "category": "Productivity",
         "capabilities": [
@@ -26,8 +28,8 @@
         ],
         "defaultPrompt": [
           "Write a PRD for a personal expense tracking app",
-          "Turn this PRD into a technical design",
-          "Review this requirements document for gaps"
+          "Design the screens for this feature spec",
+          "Turn this PRD into a technical design"
         ],
         "screenshots": [],
         "logo": "./assets/brand/logo-512.png",

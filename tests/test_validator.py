@@ -49,7 +49,7 @@ class RepositorySkillsTest(unittest.TestCase):
 
     def test_core_skills_exist(self) -> None:
         names = {p.name for p in validate.discover_skills()}
-        self.assertTrue({"product-requirements", "architecture-requirements"} <= names)
+        self.assertTrue({"product-requirements", "architecture-requirements", "ui-ux-design"} <= names)
 
 
 class ValidateSkillTest(unittest.TestCase):

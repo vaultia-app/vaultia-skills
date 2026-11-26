@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ui-ux-design",
+  "version": "0.3.1",
+  "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
+  "author": {
+    "name": "Vaultia"
+  },
+  "keywords": [
+    "requirements",
+    "product-management",
+    "ui-ux",
+    "design-system",
+    "architecture",
+    "software-design"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Ui Ux Design",
+        "shortDescription": "Design and build UI screens",
+        "longDescription": "Turn requirements into screens people can use, with a different playbook for portals, landing pages, and storefronts: screen maps, user flows, layouts, every UI state, accessibility, SEO and performance where they matter, and brand themes. Builds the screens in React with a ready-made Base UI and Tailwind CSS kit of about 60 components, so projects start from a complete design system instead of from scratch. Also reviews existing UIs for usability problems.",
+        "developerName": "Vaultia",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Design the screens for this feature spec",
+          "Build a landing page for our app launch",
+          "Review this page for usability and accessibility"
+        ],
+        "screenshots": [],
+        "logo": "./assets/brand/logo-512.png",
+        "composerIcon": "./assets/brand/composer-light-192.png",
+        "composerIconDark": "./assets/brand/composer-dark-192.png",
+        "brandColor": "#141414",
+        "brandColorDark": "#FFC533"
+      }
+    }
+  }
+}

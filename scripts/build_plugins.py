@@ -44,7 +44,7 @@ import validate  # noqa: E402
 MARKETPLACE_NAME = "vaultia-skills"
 BUNDLE_NAME = "vaultia-skills"
 BUNDLE_DISPLAY_NAME = "Vaultia"
-BUNDLE_DESCRIPTION = "All Vaultia skills: product requirements and architecture requirements for software teams."
+BUNDLE_DESCRIPTION = "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams."
 AUTHOR = {"name": "Vaultia"}
 OPENAI_PLUGIN_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 OPENAI_CATEGORY = "Productivity"
@@ -81,22 +81,39 @@ OPENAI_LISTING = {
             "Review this architecture for gaps and risks",
         ],
     },
+    "ui-ux-design": {
+        "shortDescription": "Design and build UI screens",
+        "longDescription": (
+            "Turn requirements into screens people can use, with a different playbook for portals, "
+            "landing pages, and storefronts: screen maps, user flows, layouts, every UI state, "
+            "accessibility, SEO and performance where they matter, and brand themes. Builds the screens "
+            "in React with a ready-made "
+            "Base UI and Tailwind CSS kit of about 60 components, so projects start from a complete "
+            "design system instead of from scratch. Also reviews existing UIs for usability problems."
+        ),
+        "defaultPrompt": [
+            "Design the screens for this feature spec",
+            "Build a landing page for our app launch",
+            "Review this page for usability and accessibility",
+        ],
+    },
 }
 OPENAI_LISTING[BUNDLE_NAME] = {
-    "shortDescription": "Product and architecture specs",
+    "shortDescription": "Product, UI, and architecture",
     "longDescription": (
-        "Requirements skills for software teams. product-requirements turns an idea into a testable "
-        "PRD (WHAT and WHY); architecture-requirements turns the PRD into a system design with APIs, "
-        "data models, non-functional requirements, and ADRs (HOW and CONSTRAINTS). Both work step by "
-        "step with you: they propose options, show diagrams, and ask one decision at a time."
+        "Skills for software teams. product-requirements turns an idea into a testable PRD (WHAT and "
+        "WHY); ui-ux-design turns it into screens built with a ready-made Base UI React kit; "
+        "architecture-requirements turns it into a system design with APIs, data models, "
+        "non-functional requirements, and ADRs (HOW and CONSTRAINTS). They work step by step with "
+        "you: they propose options, show diagrams, and ask only the decisions that matter."
     ),
     "defaultPrompt": [
         "Write a PRD for a personal expense tracking app",
+        "Design the screens for this feature spec",
         "Turn this PRD into a technical design",
-        "Review this requirements document for gaps",
     ],
 }
-KEYWORDS = ["requirements", "product-management", "architecture", "software-design"]
+KEYWORDS = ["requirements", "product-management", "ui-ux", "design-system", "architecture", "software-design"]
 
 # OpenAI plugin branding: `interface-snippet.json` lists the interface fields
 # (logo, composer icons, brand colors); each "./assets/brand/<file>" it names is

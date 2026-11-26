@@ -18,6 +18,8 @@
       "keywords": [
         "requirements",
         "product-management",
+        "ui-ux",
+        "design-system",
         "architecture",
         "software-design"
       ]
@@ -32,6 +34,24 @@
       "keywords": [
         "requirements",
         "product-management",
+        "ui-ux",
+        "design-system",
+        "architecture",
+        "software-design"
+      ]
+    },
+    {
+      "name": "ui-ux-design",
+      "displayName": "Ui Ux Design",
+      "source": "./plugins/claude/ui-ux-design",
+      "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
+      "version": "0.3.1",
+      "category": "productivity",
+      "keywords": [
+        "requirements",
+        "product-management",
+        "ui-ux",
+        "design-system",
         "architecture",
         "software-design"
       ]
@@ -40,12 +60,14 @@
       "name": "vaultia-skills",
       "displayName": "Vaultia",
       "source": "./plugins/claude/vaultia-skills",
-      "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
+      "description": "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams.",
       "version": "0.3.1",
       "category": "productivity",
       "keywords": [
         "requirements",
         "product-management",
+        "ui-ux",
+        "design-system",
         "architecture",
         "software-design"
       ]

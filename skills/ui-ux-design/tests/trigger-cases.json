@@ -1,0 +1,32 @@
+{
+  "skill": "ui-ux-design",
+  "should_trigger": [
+    "Design the screens for the member management feature in docs/03-functional-specs/F04-members.md.",
+    "Build an admin portal layout with a sidebar, a dashboard, and a users table.",
+    "Set up a UI kit for our new Next.js monorepo so we don't build components from scratch.",
+    "Turn this PRD into wireframes and then into React pages.",
+    "Review the checkout page for usability and accessibility problems.",
+    "Create a brand theme with our color #0F766E and add dark mode.",
+    "What should the empty, loading, and error states of the orders list look like?",
+    "Thiết kế giao diện màn hình quản lý phòng cho app nhà trọ.",
+    "Dựng giao diện portal quản trị dùng bộ UI kit có sẵn.",
+    "Design a mobile-first booking flow with a bottom sheet for picking time slots.",
+    "Build a landing page for our habit-tracking app launch with pricing and FAQ.",
+    "Design the product listing, product detail, cart, and checkout pages for our online shop.",
+    "Làm landing page giới thiệu sản phẩm, có nút đăng ký dùng thử.",
+    "Thiết kế giao diện storefront bán quần áo, có giỏ hàng và thanh toán."
+  ],
+  "should_not_trigger": [
+    "Write a PRD for a team calendar feature.",
+    "Define acceptance criteria for password reset.",
+    "Design the database schema and REST API for the booking service.",
+    "Which message queue should we use for order events?",
+    "Fix the failing unit test in auth_service.py.",
+    "Write a marketing landing page copy for our launch email.",
+    "Set up CI to deploy the API to Cloudflare Workers.",
+    "Viết PRD cho app quản lý phòng trọ.",
+    "Review this pull request for security issues.",
+    "Write SEO blog posts for our store.",
+    "Integrate the Stripe payment API on the backend."
+  ]
+}

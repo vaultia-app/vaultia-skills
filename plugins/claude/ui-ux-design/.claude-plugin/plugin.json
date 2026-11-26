@@ -1,0 +1,18 @@
+{
+  "name": "ui-ux-design",
+  "displayName": "Ui Ux Design",
+  "version": "0.3.1",
+  "description": "Design and build user interfaces for portals, landing pages, and storefronts.",
+  "author": {
+    "name": "Vaultia"
+  },
+  "keywords": [
+    "requirements",
+    "product-management",
+    "ui-ux",
+    "design-system",
+    "architecture",
+    "software-design"
+  ],
+  "icon": "./assets/brand/logo-512.png"
+}

@@ -2,13 +2,15 @@
   "name": "vaultia-skills",
   "displayName": "Vaultia",
   "version": "0.3.1",
-  "description": "All Vaultia skills: product requirements and architecture requirements for software teams.",
+  "description": "All Vaultia skills: product requirements, UI/UX design, and architecture requirements for software teams.",
   "author": {
     "name": "Vaultia"
   },
   "keywords": [
     "requirements",
     "product-management",
+    "ui-ux",
+    "design-system",
     "architecture",
     "software-design"
   ],

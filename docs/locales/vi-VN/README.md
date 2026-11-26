@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.3.1-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.3.1"></a>
-  <a href="../../../skills"><img src="https://img.shields.io/badge/skills-2-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 2"></a>
+  <a href="../../../skills"><img src="https://img.shields.io/badge/skills-3-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 3"></a>
   <a href="#cài-đặt"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-TBD-8A8A8A?style=for-the-badge&labelColor=3a3a3a" alt="License: TBD">
@@ -32,11 +32,13 @@
 | Skill | Làm gì | Trả lời câu hỏi |
 |---|---|---|
 | [`product-requirements`](../../../skills/product-requirements/SKILL.md) | Tài liệu yêu cầu sản phẩm (PRD): mục tiêu, người dùng, hành trình, yêu cầu chức năng, tiêu chí chấp nhận, chỉ số thành công, phạm vi, kế hoạch phát hành | **CÁI GÌ / TẠI SAO** |
+| [`ui-ux-design`](../../../skills/ui-ux-design/SKILL.md) | Sơ đồ màn hình, user flow, bố cục, các trạng thái giao diện, accessibility và theme thương hiệu, dựng thành màn hình React bằng [Base UI React kit](https://github.com/vaultia-app/vaultia-templates/tree/main/src/frontend/base-ui-react-kit) có sẵn | **TRÔNG RA SAO / DÙNG THẾ NÀO** |
 | [`architecture-requirements`](../../../skills/architecture-requirements/SKILL.md) | Kiến trúc và thiết kế hệ thống: yếu tố dẫn dắt, thành phần, API, mô hình dữ liệu, NFR, bảo mật, triển khai, ADR | **NHƯ THẾ NÀO / RÀNG BUỘC** |
 
 ```text
 Ý tưởng sản phẩm
   → product-requirements       (CÁI GÌ / TẠI SAO)
+  → ui-ux-design               (TRÔNG RA SAO / DÙNG THẾ NÀO)
   → architecture-requirements  (NHƯ THẾ NÀO / RÀNG BUỘC)
   → triển khai
 ```
