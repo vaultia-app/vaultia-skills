@@ -32,18 +32,18 @@ The PRD includes a **conceptual** domain model: business objects, relationships,
 
 1. **Gather context.** Read every document, file, or note the user provided. If the project already has `docs/PRD.md` or the `docs/` structure, read it first (`references/docs-structure.md`). If the input already contains decisions (handoff, BRD/SRS, ADRs, ERD, codebase), follow `references/existing-context.md`. When editing an existing PRD, read all of it before changing anything.
 2. **Classify the request:** new document, update, or review. For a review, go to step 8 and report findings before editing.
-3. **Choose the mode** and tell the user which one you use (they can switch at any time): guided (default) → step 4; fast → list gaps with `references/discovery-questions.md`, record them as assumptions and open questions, then go to step 6.
+3. **Choose the mode** and tell the user which one you use. Only the user switches modes; never switch to fast mode yourself, not when the agenda is done nor when the question budget is reached: guided (default) → step 4; fast → list gaps with `references/discovery-questions.md`, record them as assumptions and open questions, then go to step 6.
 4. **Run the collaborative loop** in `references/collaborative-loop.md`: propose → diagram → draft vN → ask one decision → update. The draft is the single PRD file, placed as described in `references/docs-structure.md`. Ask decisions as described in `references/asking-decisions.md`, and draw diagrams as described in `references/diagrams.md`.
 5. **Close the loop** when problem, target user, MVP scope, primary journey, primary metric, and hard constraints are confirmed. Tell the user you are completing the remaining sections.
 6. **Complete the document.** Each feature subsection follows the starter kit's `03-functional-specs/_template.md` (the bundled one is `assets/docs-starter/03-functional-specs/_template.md`); update the shared sections it depends on (feature list, domain model, business rules, decisions, open questions) as listed in `references/docs-structure.md`. Extend the existing draft and keep its version history. Omit sections that do not apply; keep the order. `references/example-feature-spec.md` shows the expected depth.
 7. **Write acceptance criteria** for each functional requirement, following `references/acceptance-criteria.md`.
 8. **Quality check** with `references/quality-checklist.md`. Fix what you can; list the rest as open questions.
 9. **Scope checklist.** Let the user tick what ships in this release and check the dependencies of the selection, as in *Scope checklist* in `references/collaborative-loop.md` (fast mode: tick the recommended set and do not ask). Then ask the user to approve v1.0.
-10. **Deliver v1.0** as in *Delivering v1.0* in `references/docs-structure.md`: return the single file in the chat, summarize key decisions, top assumptions, and blocking open questions, then offer: keep the single file, export to the `docs/` template (zip), hand off to `architecture-requirements`, or add the next feature. Export only when the user chooses it.
+10. **Deliver v1.0** as in *Delivering v1.0* in `references/docs-structure.md`: return the single file in the chat, summarize key decisions, top assumptions, and blocking open questions, then offer: keep the single file, export to the `docs/` template (zip), hand off to `architecture-requirements`, or add the next feature. This choice ends every mode, fast mode included; never create the export or a zip unless the user picks it.
 
 ## Outputs
 
-- One PRD file, `docs/PRD.md` (returned in the chat at v1.0), with acceptance criteria for each functional requirement and a scope checklist of what ships in this release
+- One PRD file, `docs/PRD.md` (returned in the chat at v1.0), with acceptance criteria for each functional requirement, product-wide non-functional requirements and the SLA decision, and a scope checklist of what ships in this release
 - On request only: the export to the `docs/` template, as a zip in chat hosts
 - In a project that already has the `docs/` structure: the feature spec `docs/03-functional-specs/F<nn>-<slug>.md` and the shared files it changed
 - Confirmed decisions separated from assumptions and open questions

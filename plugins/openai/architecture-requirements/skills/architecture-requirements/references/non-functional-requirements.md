@@ -44,6 +44,19 @@ Mark these clearly as **assumptions** and ask for confirmation when they drive d
 | Encryption | TLS 1.2+ in transit, AES-256 at rest |
 | Log retention | 30 days hot, 1 year archived (subject to privacy rules) |
 
+## From SLA to design
+
+The PRD states what the business promises customers (SLA) and what users notice (NFRs). Turn each into an internal target (SLO), the measurement behind it (SLI), a design response, and a check:
+
+| PRD commitment | SLO (internal target) | SLI (what is measured) | Design response | Verification |
+|---|---|---|---|---|
+| Uptime 99.5% per month | 99.9% per month | Share of successful requests at the load balancer | Two app instances behind health checks; managed database with automatic failover | Synthetic checks every minute; monthly SLO report |
+| Data restored to ≤ 24 h old within 8 h | RPO ≤ 1 h, RTO ≤ 4 h | Age of the latest restorable backup; restore drill time | Point-in-time recovery; backups in a second region | Quarterly restore drill |
+
+- Set the SLO stricter than the SLA, so the team is alerted before the promise is broken. The gap is the error budget.
+- Trace each row to its PRD ID (`NFR-002`, the SLA table). A commitment with no design response is a blocking finding.
+- When the PRD has no SLA, record "No SLA" and still set SLOs for the key flows.
+
 ## Trade-offs to make explicit
 
 - Consistency vs. availability during partitions.

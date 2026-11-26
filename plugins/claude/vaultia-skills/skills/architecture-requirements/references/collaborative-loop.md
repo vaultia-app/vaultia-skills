@@ -75,7 +75,7 @@ Ask the decision that changes the most of the design. The usual order, adjusted 
 2. System boundary and integrations
 3. Core domain model: the central entities and their relationships
 4. Data ownership: sources of truth, where files and data live, consistency needs
-5. Quality drivers with numbers: scale, latency, availability, data sensitivity
+5. Quality drivers with numbers: scale, latency, availability, data sensitivity, and the SLA from the PRD
 6. Stack and deployment constraints: existing stack, hosting, team skills
 
 Challenge risky choices along the way: an unnecessary new data store, a missing source of truth, or an unmeasurable NFR deserves a sharper counter-proposal that names the driver.

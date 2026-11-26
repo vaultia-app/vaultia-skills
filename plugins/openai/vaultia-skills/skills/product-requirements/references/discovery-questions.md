@@ -46,6 +46,12 @@ Use this list to find gaps and pick probing questions, not as a questionnaire. I
 - Are there platform constraints (web, iOS, Android, desktop, API-only)?
 - Any decisions already made that we must respect?
 
+## Quality and service
+
+- How fast must the key actions feel to users? When must the product be usable (business hours, 24/7)?
+- How much recent data can the business afford to lose, and how long can it wait to get it back?
+- Is the product sold with a service promise (SLA): uptime, support response time, maintenance windows, credits?
+
 ## Rollout
 
 - Big-bang, phased, beta, or feature-flagged?

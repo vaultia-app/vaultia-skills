@@ -33,7 +33,7 @@ Pick the first case that matches:
 
 ## The single file
 
-Sections in this order. Each maps to one starter-kit file: take its tables and columns from there, and the export puts it back there. Omit sections with nothing in them yet; keep the order.
+Sections in this order. Each maps to one starter-kit file: take its tables and columns from there, and the export puts it back there. Omit sections with nothing in them yet, except section 9: an undecided NFR or SLA is written as `TBD`, or `N/A` with a reason. Keep the order.
 
 | # | Section | Taken from (and exported to) |
 |---|---|---|
@@ -46,7 +46,7 @@ Sections in this order. Each maps to one starter-kit file: take its tables and c
 | 6 | Workflows | `01-business/04-workflows.md` |
 | 7 | Features and MVP scope: the feature table, then the scope checklist (`collaborative-loop.md`) | `02-requirements/01-feature-list.md` |
 | 8 | Feature specs: one `### F<nn> — <name>` subsection per feature, with the sections of `03-functional-specs/_template.md` as `####` headings (its header table becomes the feature's row in section 7) | `03-functional-specs/F<nn>-<slug>.md` |
-| 9 | Non-functional requirements | `02-requirements/02-non-functional-requirements.md` |
+| 9 | Non-functional requirements and service commitments (SLA) | `02-requirements/02-non-functional-requirements.md` |
 | 10 | Decisions | `09-working/decisions-log.md` |
 | 11 | Open questions | `09-working/open-questions.md` |
 
@@ -74,7 +74,7 @@ After the scope checklist (`collaborative-loop.md`) and the user's approval:
    - *Export to the `docs/` template (zip)*
    - *Hand off to architecture-requirements*
    - *Add the next feature*
-4. **Export only when the user chooses it.** Never run the export as part of finishing.
+4. **Export only when the user chooses it** in this question. Finishing, fast mode, and the question budget never trigger it, and "package it for review" is not a reason to zip on your own.
 
 ## Exporting to the `docs/` template
 

@@ -13,6 +13,8 @@ Run before delivering a PRD or feature spec, and use as the rubric when reviewin
 - [ ] Business objects this feature uses are in the domain model (`01-business/02-domain-model.md` in a `docs/` project) with relationships and lifecycles (conceptual only: no column types or storage).
 - [ ] Every calculation or money rule (`BR-xxx`) has a worked example, rounding, and boundary behavior.
 - [ ] Success metrics have a baseline (or "unknown"), a target, a timeframe, and a measurement method.
+- [ ] Product-wide non-functional requirements are measurable as users notice them (performance, availability, security and privacy, accessibility, localization, compliance, data recovery), or marked `N/A` with a reason.
+- [ ] The SLA is decided: commitments with targets, or "No SLA" with a reason. A product sold to customers does not leave it `TBD` at v1.0.
 - [ ] Scope, rollout, and dependencies are stated.
 - [ ] Risks have mitigations.
 - [ ] Every success metric can be computed from named events or an existing data source.
@@ -77,6 +79,8 @@ Run before delivering a PRD or feature spec, and use as the rubric when reviewin
 | Untestable adjective ("intuitive UI") | Replace with a measurable criterion or a usability-test target. |
 | Missing failure behavior | Add ACs for errors, limits, and permission denials. |
 | Everything is "Must" | Force-rank; ask what ships if time is cut by half. |
+| NFRs missing or written as adjectives ("fast", "always available") | Propose measurable 🟡 defaults per category and confirm the ones that matter. |
+| Technical targets in the PRD ("p95 300 ms at 200 req/s") | Restate as users notice it; move the technical target to the architecture notes. |
 | Metric without baseline | Record "baseline unknown" and add a question to measure it. |
 | Scope confirmed while the target user is TBD | Downgrade scope to proposed; resolve the user decision first. |
 | Edge case listed but never specified | Add an AC that states the system's behavior in that case. |
