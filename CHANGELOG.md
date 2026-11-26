@@ -4,13 +4,27 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-11-26
+
+### Added
+- Rulesets in `.github/rulesets/` to protect `main` (pull request and passing CI required, no force push) and release tags (admins only).
+
+### Changed
+- README shows only what users need: the roadmap, hero image, and development section are removed; a short Contributing section links to `CONTRIBUTING.md`.
+- `CONTRIBUTING.md` describes the fork-based workflow for outside contributors and leaves versioning to maintainers.
+- CI uses `actions/checkout@v5` and `actions/setup-python@v6` (Node 24).
+
+### Fixed
+- Release workflow: create the release as a draft, upload the zips with retries, then publish. Uploading right after creating a release could fail with HTTP 404 and leave a draft without assets.
+- Release assets get distinct names (`<skill>-skill.zip`, `<plugin>-plugin.zip`); skill and plugin zips with the same file name used to overwrite each other.
+
 ## [0.2.4] - 2026-11-26
 
 ### Added
 - Release workflow (`.github/workflows/release.yml`): pushing a `vX.Y.Z` tag checks the tag against `pyproject.toml` and `CHANGELOG.md`, runs validation and tests, builds the zips, and publishes a GitHub release with them attached.
 - `scripts/release_notes.py`: prints a version's CHANGELOG section as release notes, and checks a tag before release.
 - Translated documentation under `docs/locales/<lang>/`, starting with Vietnamese (`docs/locales/vi/`: README, skill authoring, plugin distribution), with a language switch at the top of each file. English stays the source of truth.
-- README header: language switch with flags, release / skills / platforms / Python / license badges, and CI / stars / last-commit badges. A test keeps the release badge in sync with `pyproject.toml`.
+- README header: language switch with flags, release / skills / platforms / Python / license badges, CI / stars / last-commit badges, and a hero image. A test keeps the release badge in sync with `pyproject.toml`.
 - `docs/plugin-distribution.md` restored and updated (GitHub owner, plugin zips, release steps).
 - `tests/test_docs.py`: every locale translates every English doc, and local links in docs resolve.
 - `product-requirements/references/example-prd.md`: a complete small-feature PRD for calibrating depth.
@@ -22,7 +36,6 @@ All notable changes to this project are documented here. The format follows [Kee
 - `collaborative-loop.md` split: choice tools, multi-select, fallback and answer handling move to `references/asking-decisions.md`; Mermaid rules move to `references/diagrams.md`. Host tool names now appear in one table only.
 - Conflicting rules unified: one blocking decision per turn, batch up to 3 only when independent; fast mode defined once.
 - `docs/skill-authoring.md` restored and extended (router principle, one rule per place, split references by moment, examples, behavior cases).
-- CI uses `actions/checkout@v5` and `actions/setup-python@v6` (Node 24).
 
 ## [0.2.3] and earlier
 

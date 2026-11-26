@@ -10,3 +10,4 @@ build/
 .env
 .env.*
 .claude/settings.local.json
+release-assets/

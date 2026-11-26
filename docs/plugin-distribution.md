@@ -12,8 +12,8 @@ Canonical skills in `skills/` are packaged for each platform by `scripts/build_p
 | `plugins/claude/<plugin>/` | Yes | Claude Code | Installable plugin |
 | `.agents/plugins/marketplace.json` | Yes | Codex CLI, ChatGPT | Marketplace listing every plugin |
 | `plugins/openai/<plugin>/` | Yes | Codex CLI, ChatGPT | Installable plugin, with brand icons |
-| `dist/skills/<skill>.zip` | No (release asset) | claude.ai | Single skill upload |
-| `dist/plugins/<plugin>.zip` | No (release asset) | ChatGPT, Claude Desktop | Plugin upload |
+| `dist/skills/<skill>.zip` | No (release asset `<skill>-skill.zip`) | claude.ai | Single skill upload |
+| `dist/plugins/<plugin>.zip` | No (release asset `<plugin>-plugin.zip`) | ChatGPT, Claude Desktop | Plugin upload |
 
 | Plugin | Contains |
 |---|---|
@@ -78,7 +78,7 @@ Start a new Codex session after installing. Update with `codex plugin marketplac
 ChatGPT reads the same plugin format as Codex:
 
 1. **Desktop app:** add the marketplace with `codex plugin marketplace add …` and install from the **Plugins** directory, then start a new chat.
-2. **Upload:** upload `dist/plugins/vaultia.zip`.
+2. **Upload:** upload `vaultia-plugin.zip` from the release (or `dist/plugins/vaultia.zip` when building yourself).
 3. **Workspace (Business / Enterprise / Edu):** an admin can import this GitHub marketplace in the workspace plugin settings.
 4. **Public listing:** submit through OpenAI's plugin submission portal (requires a license, a privacy policy, and review).
 
@@ -86,7 +86,7 @@ Skill availability differs by ChatGPT plan and surface; check OpenAI's current d
 
 ## claude.ai (web, desktop, mobile)
 
-Upload each `dist/skills/<skill>.zip` under **Settings → Capabilities → Skills → Upload skill**. Each zip contains a single `<skill-name>/` folder with `SKILL.md` at its top. To update, remove the old skill and upload the new zip.
+Upload each `<skill>-skill.zip` from the release (or `dist/skills/<skill>.zip` when building yourself) under **Settings → Capabilities → Skills → Upload skill**. Each zip contains a single `<skill-name>/` folder with `SKILL.md` at its top. To update, remove the old skill and upload the new zip.
 
 ## Release checklist
 
@@ -108,6 +108,6 @@ Releases are published by the [Release workflow](../.github/workflows/release.ym
    git push origin vX.Y.Z
    ```
 
-The workflow then checks that the tag matches `pyproject.toml` and that `CHANGELOG.md` has a section for it, runs validation and tests, builds the zips, and creates the GitHub release with `dist/skills/*.zip` and `dist/plugins/*.zip` attached. Pushing the same tag again (after deleting it) updates the existing release.
+The workflow then checks that the tag matches `pyproject.toml` and that `CHANGELOG.md` has a section for it, runs validation and tests, builds the zips, and creates the GitHub release with the zips attached as `<skill>-skill.zip` and `<plugin>-plugin.zip` (skill and plugin zips share names in `dist/`). Pushing the same tag again (after deleting it) updates the existing release.
 
 Preview the release notes locally with `python3 scripts/release_notes.py X.Y.Z`.

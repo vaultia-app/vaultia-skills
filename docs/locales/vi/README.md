@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.2.4-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.2.4"></a>
+  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.2.5-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.2.5"></a>
   <a href="../../../skills"><img src="https://img.shields.io/badge/skills-2-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 2"></a>
   <a href="#cài-đặt"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
@@ -64,12 +64,12 @@ codex plugin add vaultia-skills@vaultia-skills
 
 ### claude.ai hoặc ChatGPT (upload)
 
-Tải file zip từ [bản release mới nhất](https://github.com/vaultia-app/vaultia-skills/releases/latest), hoặc tự build bằng `python3 scripts/build_plugins.py --zip`.
+Tải file zip từ [bản release mới nhất](https://github.com/vaultia-app/vaultia-skills/releases/latest), hoặc tự build bằng `python3 scripts/build_plugins.py --zip` (skill nằm trong `dist/skills/`, plugin trong `dist/plugins/`).
 
 | Nền tảng | File upload | Ở đâu |
 |---|---|---|
-| claude.ai | `product-requirements.zip`, `architecture-requirements.zip` (trong `dist/skills/`) | **Settings → Capabilities → Skills** |
-| ChatGPT | `vaultia.zip` (trong `dist/plugins/`) | **Plugins → Upload** |
+| claude.ai | `product-requirements-skill.zip`, `architecture-requirements-skill.zip` | **Settings → Capabilities → Skills** |
+| ChatGPT | `vaultia-plugin.zip` | **Plugins → Upload** |
 
 ### Copy thủ công (mọi agent)
 
