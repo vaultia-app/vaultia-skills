@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # full history and tags, for the "Full Changelog" link
 
       - uses: actions/setup-python@v6
         with:
@@ -39,7 +41,14 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Build zips
-        run: python scripts/build_plugins.py --zip
+        run: |
+          python scripts/build_plugins.py --zip
+          # Skill and plugin zips share file names (product-requirements.zip in
+          # both folders); give release assets distinct names.
+          mkdir -p release-assets
+          for f in dist/skills/*.zip; do cp "$f" "release-assets/$(basename "$f" .zip)-skill.zip"; done
+          for f in dist/plugins/*.zip; do cp "$f" "release-assets/$(basename "$f" .zip)-plugin.zip"; done
+          ls -l release-assets
 
       - name: Write release notes
         run: |
@@ -60,25 +69,54 @@ jobs:
           codex plugin add vaultia-skills@vaultia-skills
           ```
 
-          **Upload:** `product-requirements.zip` and `architecture-requirements.zip` (skills) for claude.ai, `vaultia.zip` (plugin) for ChatGPT.
+          **Upload:** `product-requirements-skill.zip` and `architecture-requirements-skill.zip` for claude.ai, `vaultia-plugin.zip` for ChatGPT.
           EOF
+
+          repo_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+          previous=$(git describe --tags --abbrev=0 --match 'v*.*.*' "$GITHUB_REF_NAME^" 2>/dev/null || true)
+          if [ -n "$previous" ]; then
+            link="$repo_url/compare/$previous...$GITHUB_REF_NAME"
+          else
+            link="$repo_url/commits/$GITHUB_REF_NAME"
+          fi
+          printf '\n**Full Changelog**: %s\n' "$link" >> "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md"
 
       - name: Create or update the GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           shopt -s nullglob
-          assets=(dist/skills/*.zip dist/plugins/*.zip)
+          assets=(release-assets/*.zip)
           if [ ${#assets[@]} -eq 0 ]; then
             echo "::error::no zip files were built"
             exit 1
           fi
-          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release edit "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md"
-            gh release upload "$GITHUB_REF_NAME" "${assets[@]}" --clobber
+          tag="$GITHUB_REF_NAME"
+
+          # 1. Create the release as a draft (or reuse one left by an earlier run).
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --title "$tag" --notes-file "$RUNNER_TEMP/notes.md"
           else
-            gh release create "$GITHUB_REF_NAME" "${assets[@]}" \
-              --title "$GITHUB_REF_NAME" \
-              --notes-file "$RUNNER_TEMP/notes.md" \
-              --verify-tag
+            gh release create "$tag" --draft --verify-tag \
+              --title "$tag" --notes-file "$RUNNER_TEMP/notes.md"
           fi
+
+          # 2. Upload each zip, retrying: the upload endpoint can return 404
+          #    for a few seconds right after the release is created.
+          for file in "${assets[@]}"; do
+            for attempt in 1 2 3 4 5; do
+              if gh release upload "$tag" "$file" --clobber; then
+                break
+              fi
+              if [ "$attempt" -eq 5 ]; then
+                echo "::error::could not upload $file"
+                exit 1
+              fi
+              echo "upload of $file failed (attempt $attempt), retrying..."
+              sleep $((attempt * 5))
+            done
+          done
+
+          # 3. Publish only once every asset is attached.
+          gh release edit "$tag" --draft=false --latest

@@ -1,6 +1,6 @@
 # Skill Authoring Guide
 
-**English** · [Tiếng Việt](locales/vi/skill-authoring.md)
+**English** · [Tiếng Việt](../vi-VN/skill-authoring.md)
 
 How to write a skill for this repository so it works across Codex, Claude Code, Cursor, and other Agent Skills–compatible agents.
 
@@ -108,7 +108,7 @@ Keep each reference file under about 2,000 words. Larger files usually mix sever
 
 Write skill content in English. Skills may tell the agent to answer in the user's language. Prompts in other languages belong in `tests/` as trigger or behavior cases, not as instructions in the body.
 
-Translations of the README and `docs/` live in `docs/locales/<lang>/`, using the same file names as the English source (`README.md`, `skill-authoring.md`, …). Vietnamese is in `docs/locales/vi/`. English is the source of truth: change the English file first, then update every translation in the same pull request. To add a language, create `docs/locales/<lang>/` with a translation of every English doc and add it to the language switch at the top of each file.
+Docs live in `docs/locales/<lang>/`, one folder per language with the same file names: English in `docs/locales/en-US/`, Vietnamese in `docs/locales/vi-VN/`. The English `README.md` stays at the repository root so GitHub shows it; each translation has its own `docs/locales/<lang>/README.md`. English is the source of truth: change the English file first, then update every translation in the same pull request. To add a language, create `docs/locales/<lang>/` with a translation of every English doc and the README, and add it to the language switch at the top of each file.
 
 ## Tests
 
