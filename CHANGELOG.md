@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-26
+
 ### Added
 - `product-requirements` writes into one standard `docs/` structure that can be used as-is. The first feature scaffolds it from the new starter kit (`assets/docs-starter/`: README, introduction, glossary, conventions, actors and permissions, domain model, business rules, workflows, feature list, non-functional requirements, feature spec template, open questions, decisions log).
 - Each feature is one file, `docs/03-functional-specs/F<nn>-<slug>.md`; shared actors, objects, rules, terms, decisions, and questions are written once in the shared files and referenced by ID.
