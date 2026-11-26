@@ -4,7 +4,7 @@ Thanks for improving Vaultia Skills.
 
 ## Workflow
 
-1. Create a branch from `main`.
+1. Create a branch from `main`. Direct pushes to `main` are blocked; every change goes through a pull request with passing CI.
 2. Edit or add a skill under `skills/<skill-name>/` following [docs/skill-authoring.md](docs/skill-authoring.md).
 3. Run the checks:
    ```bash
