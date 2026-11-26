@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  AI Agent Skills that turn a product idea into build-ready specs: a PRD first, then the system design.<br>They work <strong>with</strong> you, proposing options and asking one decision at a time instead of guessing.
+  AI Agent Skills that turn a product idea into build-ready specs: a PRD first, then the screens and the system design.<br>They work <strong>with</strong> you, proposing options and asking one decision at a time instead of guessing.
 </p>
 
 ## Skills
@@ -85,7 +85,7 @@ Copy or symlink a skill folder into your agent's skills directory:
 ```bash
 # Claude Code, available in every project
 mkdir -p ~/.claude/skills
-cp -R skills/product-requirements skills/architecture-requirements ~/.claude/skills/
+cp -R skills/product-requirements skills/ui-ux-design skills/architecture-requirements ~/.claude/skills/
 
 # Local development: symlink so edits are picked up immediately
 ln -s "$PWD/skills/product-requirements" ~/.claude/skills/product-requirements
@@ -99,6 +99,7 @@ Ask your agent naturally:
 
 - *"Write a PRD for a personal expense tracking app."*
 - *"Turn these meeting notes into requirements with acceptance criteria."*
+- *"Design the admin portal screens from this PRD."*
 - *"Turn this PRD into a technical design."*
 - *"Review this architecture for gaps and risks."*
 

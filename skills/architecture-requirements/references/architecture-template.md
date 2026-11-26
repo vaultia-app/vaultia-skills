@@ -141,7 +141,7 @@ Cover where relevant: performance, scalability, availability, resilience, observ
 ## 15. Decisions, assumptions, and open questions
 
 ### Confirmed decisions
-- D-1: <decision> — <who / when>
+- D-xxx: <decision> — <who / when>
 
 ### Assumptions
 - A-1: <assumption> — <how to validate>

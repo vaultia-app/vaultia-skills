@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- `product-requirements` drafts and delivers the PRD as one Markdown file, `docs/PRD.md`, using the starter kit's sections and conventions (one subsection per feature). At v1.0 the file is returned in the chat, followed by a choice: keep the single file, export to the `docs/` template (a zip in chat hosts), hand off to `architecture-requirements`, or add the next feature. The export runs only when the user chooses it. Projects that already use the `docs/` structure keep working in it.
+
+### Added
+- `product-requirements` scope checklist before v1.0: the user ticks the functional requirements that ship in this release (recommended set pre-ticked), the skill checks the selection for broken dependencies, an incomplete primary journey, orphan rules, and actors left without a capability, and asks how to fix each conflict. Unticked items move to a later release with their reason.
+- `architecture-requirements` splits `references/collaborative-loop.md` into the loop itself, `references/asking-decisions.md`, and `references/diagrams.md`, matching `product-requirements`, and tightens the wording: a guided turn now loads about 3,700 words instead of 5,000.
+- Documentation cleanup across skills: decision IDs use one format (`D-001`, `Q-001`) in every skill, and `architecture-requirements` continues the project's decision numbering when it has one; host tool names appear only in each skill's *Host choice tools* table; consistent *First reply* headings and agenda numbering; `ui-ux-design` reads and records decisions in `docs/PRD.md`; the README and the plugin distribution guide list `ui-ux-design`; domain-neutral Mermaid example.
+
 ## [0.3.2] - 2026-11-26
 
 ### Added

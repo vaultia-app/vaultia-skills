@@ -8,12 +8,14 @@ Read what exists, in this order:
 
 | Source | Take from it |
 |---|---|
-| Feature spec (`docs/03-functional-specs/F<nn>-*.md`) | Journeys (`J-x`), functional requirements (`FR-x`), acceptance criteria, edge cases |
+| PRD (`docs/PRD.md`, one `F<nn>` subsection per feature) or feature spec (`docs/03-functional-specs/F<nn>-*.md`) | Journeys (`J-x`), functional requirements (`FR-x`), acceptance criteria, edge cases |
 | `docs/01-business/01-actors-and-permissions.md` | Who sees which screen and action |
 | `docs/01-business/02-domain-model.md` | Objects, fields, and lifecycles (statuses) to display |
 | `docs/01-business/03-business-rules.md` | Validation and conditional UI |
 | `docs/00-overview/02-glossary.md` | The words to use in the UI |
 | The request or existing UI | Everything else |
+
+In a project with `docs/PRD.md`, the same content is in its matching sections (actors and permissions, domain model, business rules, glossary).
 
 Missing information becomes an assumption you state, or a question if it blocks the layout.
 
@@ -78,4 +80,4 @@ S01 Member list (Page, Admin)
 
 - Show the screen map, flows, and outlines in the conversation.
 - When the project uses the standard `docs/` structure, save them to `docs/04-ui/` (for example `docs/04-ui/01-screen-map.md` and one section per flow), and reference requirement IDs instead of repeating requirements.
-- Record design decisions in `docs/09-working/decisions-log.md` and open questions in `docs/09-working/open-questions.md` when those files exist.
+- Record design decisions and open questions where the project keeps them: the *Decisions* and *Open questions* sections of `docs/PRD.md`, or `docs/09-working/decisions-log.md` and `docs/09-working/open-questions.md`.

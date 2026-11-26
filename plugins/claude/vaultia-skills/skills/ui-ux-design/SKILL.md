@@ -17,7 +17,7 @@ Screens built on unexamined guesses look finished but encode the wrong flows.
 
 - Name the surface you identified. If it is unclear, ask it first, because it changes every later choice.
 - If the input is a one-line idea with no requirements, propose a **screen map** (screens, who uses them, main flow) and ask the decisions that shape the UI; do not write page code yet.
-- If the project has feature specs (`docs/03-functional-specs/`) or a PRD, read them and propose the screen map and flows for the requested feature directly.
+- If the project has a PRD (`docs/PRD.md`) or feature specs (`docs/03-functional-specs/`), read them and propose the screen map and flows for the requested feature directly.
 - If the user asks for a review, inspect the UI first and report findings before changing anything.
 - Ask decisions as described in `references/asking-decisions.md`. Build immediately only when the user says so ("just build it") or the input already settles platform, users, main flow, and brand.
 

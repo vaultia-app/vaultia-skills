@@ -22,7 +22,7 @@ After asking, end the turn and wait. Do not build screens that depend on the ans
 - **Self-contained question.** The user may see only the form; include the context.
 - **At most 4 questions per turn**, and only independent ones.
 - **Use a preview** (ASCII layout or short code) when the user must compare layouts, if the tool supports it.
-- **Record answers** as decisions; when the project has `docs/09-working/decisions-log.md`, add them there with the next `D-xxx`.
+- **Record answers** as decisions. When the project keeps decisions (the *Decisions* section of `docs/PRD.md`, or `docs/09-working/decisions-log.md`), add them there with the next `D-xxx`.
 
 ## Decisions worth asking
 

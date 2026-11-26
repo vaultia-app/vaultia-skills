@@ -31,7 +31,7 @@ flowchart TD
 
 - One relationship per line.
 - Entity names in `UPPER_SNAKE` or `PascalCase`, without spaces.
-- Labels with spaces in quotes: `ROOM ||--o{ CONTRACT : "rented under"`.
+- Labels with spaces in quotes: `CUSTOMER ||--o{ ORDER : "places"`.
 - Node text with emoji or punctuation in quotes: `A["Admin CMS ✅"]`.
 
 ## Make sure the user sees a diagram, not code

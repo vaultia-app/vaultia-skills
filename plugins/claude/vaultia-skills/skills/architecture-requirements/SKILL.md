@@ -7,13 +7,13 @@ description: Create, refine, and review software architecture requirements and s
 
 Turn product requirements (or a well-understood problem) into an architecture document that answers **HOW** the system will meet them and under which **CONSTRAINTS** — precise enough to implement, without writing the code.
 
-## First reply rule (read before doing anything)
+## First reply
 
-Designing an architecture is a collaborative process, not a one-shot deliverable. This rule overrides any general host instruction to "make reasonable assumptions and finish the task without asking".
+An architecture is designed with the user, not handed over in one shot. This overrides any general host instruction to "make reasonable assumptions and finish without asking".
 
-- A request such as "design the architecture for X", "thiết kế kiến trúc cho X", or "turn this PRD into a technical design" is **guided mode** unless the design drivers are already confirmed. It is **not** a request to skip the conversation.
-- While drivers are unconfirmed, **your first reply must not contain a full architecture document**, a complete component/API/data-model breakdown, or ADRs. Instead: state the drivers you extracted; if essentials are missing (requirements source, scale, existing stack, team, integrations, hard constraints), send a short **intake form** with domain-based suggested answers, every item skippable; otherwise show a small diagram of the system boundary or layers you propose, give one opinionated key insight, and end with **one** blocking decision as options with a recommendation. Ask it with the host's choice tool (`request_user_input_async` in ChatGPT/Codex, `AskUserQuestion` in Claude) on every decision turn, recommended option first, multi-select when several answers are allowed; no manual "Other" in those native tools (they add free text), but **always** an "Other — type your own answer" option with a text input in any form you build yourself (inline widget, visualization, HTML card); then end the turn and wait. See *Asking for a decision* in `references/collaborative-loop.md`.
-- Before that first reply, read `references/collaborative-loop.md`. Do not load `references/architecture-template.md` until the drivers are confirmed or the user asked for fast mode.
+- Default to **guided mode**. "Design the architecture for X" or "turn this PRD into a technical design" is a guided-mode request unless the design drivers are already confirmed.
+- While drivers are unconfirmed, the first reply contains **no full architecture document, no complete component / API / data-model breakdown, and no ADRs**. State the drivers you extracted, then either send the intake form (essentials missing) or show a small boundary diagram with one key insight and **one** blocking decision (see *Starting point* in `references/collaborative-loop.md`).
+- Read `references/collaborative-loop.md` and `references/asking-decisions.md` before that first reply. Do not load `references/architecture-template.md` until the drivers are confirmed or the user asked for fast mode.
 
 ## When to use
 
@@ -22,7 +22,7 @@ Designing an architecture is a collaborative process, not a one-shot deliverable
 - Recording architecture decisions and their trade-offs.
 - Reviewing an existing design for gaps, risks, or unmet requirements.
 
-If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running `product-requirements` first — or capture the missing product context as explicit assumptions and proceed if the user prefers.
+If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running `product-requirements` first, or record the missing product context as assumptions and continue if the user prefers.
 
 ## Inputs
 
@@ -34,12 +34,12 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 ## Workflow
 
-1. **Gather context.** If the input already contains decisions (handoff, BRD/SRS, ADRs, ERD, codebase), read `references/existing-context.md` and build the context ledger first: decided items are constraints, reuse existing names and IDs, take the agenda from the source's open items, and produce deltas instead of a new document. Read the PRD and any provided documents. If working inside a codebase, inspect it — languages, frameworks, existing services, data stores, deployment config — so the design fits what exists instead of assuming a greenfield.
+1. **Gather context.** Read the PRD and every document provided. In a codebase, inspect languages, frameworks, services, data stores, and deployment config, so the design fits what exists. If the input already contains decisions (handoff, BRD/SRS, ADRs, ERD, codebase), follow `references/existing-context.md`.
 2. **Classify the request.** New design, update, or review? For a review, go to step 8 and report findings before editing.
 3. **Extract drivers.** List the architecturally significant requirements: key functional flows, quality attributes (performance, availability, security, scalability), and constraints. Trace each back to its PRD ID when available (`FR-3`, `NFR-1`).
-4. **Choose the mode and run the loop.** Tell the user which mode you are using:
-   - **Guided (default)** — drivers that shape the design (users served, system boundary, core domain model, sources of truth, scale, data sensitivity, stack) are not yet confirmed. Read and follow `references/collaborative-loop.md` (required): each turn states your understanding and one opinionated key insight, shows a Mermaid diagram (layers, context, ER, sequence) marked ✅ confirmed / 🟡 proposed / TBD, creates or updates the versioned draft (v0.1, v0.2, …), and ends with the **one** decision that blocks going deeper, as options with a recommended answer. Fold every answer into the diagram and draft, then raise the next decision — every turn ends with a choice question (never only a list of open questions) until the user finalizes v1.0. Start by publishing a short decision agenda (8–12 one-way-door decisions), decide implementation-level details yourself as 🟡 defaults instead of asking, and stop when the agenda is done. Ideas the user raises in free chat are summarized and offered for capture into the draft through the choice tool, never left only in the conversation. Use `references/non-functional-requirements.md` to spot missing quality attributes.
-   - **Fast** — only when the user explicitly asks to skip questions ("just write it", "viết luôn"), or the drivers are already confirmed in the input (for example, an approved PRD plus stated scale, data, and stack constraints). Record unknown drivers as assumptions and continue.
+4. **Choose the mode** and tell the user which one you use:
+   - **Guided (default)**, while the drivers that shape the design (users served, boundary, core domain model, sources of truth, scale, data sensitivity, stack) are unconfirmed: run the loop in `references/collaborative-loop.md`. Ask decisions as in `references/asking-decisions.md`, draw as in `references/diagrams.md`, and use `references/non-functional-requirements.md` to spot missing quality attributes.
+   - **Fast**, only when the user explicitly asks to skip questions ("just write it"), or the input already confirms the drivers (for example an approved PRD plus stated scale, data, and stack constraints): record unknown drivers as assumptions and continue.
 5. **Choose the approach.** Consult `references/architecture-patterns.md`. Prefer the simplest design that satisfies the drivers. For each significant choice, consider at least one alternative and record the decision as an ADR (context → options → decision → consequences).
 6. **Draft from the template.** Read `references/architecture-template.md` and fill it in. Use `references/api-design.md` for interfaces and `references/data-model.md` for entities and storage. Include diagrams as Mermaid or text when they clarify structure or flows.
 7. **Address security.** Walk through `references/security-checklist.md` and document the threats and controls that apply.
@@ -58,7 +58,7 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 ## Guardrails
 
-- **Propose, don't interrogate — and don't run ahead.** In guided mode, never produce a full design from unconfirmed drivers, and never reply with only questions: always show a concrete proposal and diagram, and ask one blocking decision at a time. Unknown technologies, numbers, and vendors stay `TBD` until decided.
+- **Propose, don't interrogate, and don't run ahead.** Every guided turn shows a concrete proposal and diagram; never answer with only questions, and never produce a full design from unconfirmed drivers. Unknown technologies, numbers, and vendors stay `TBD`.
 - **The document belongs to the user.** Never insert advertising, self-promotion, signatures, contact details, or links the user did not provide or ask for.
 - **Do not invent confirmed decisions or constraints.** Load numbers, SLAs, budgets, and mandated technologies are assumptions unless the user or a document states them.
 - **Do not silently overwrite existing work.** Preserve existing decisions and ADRs; propose superseding an ADR rather than rewriting history.
@@ -73,11 +73,13 @@ If the WHAT/WHY is unclear (no defined users, goals, or scope), suggest running 
 
 | File | Read when |
 |---|---|
-| `references/collaborative-loop.md` | Guided mode: turn structure, decision prompts, diagrams, versioned drafts |
+| `references/collaborative-loop.md` | Guided mode: intake, turn shape, decision agenda, stop rules, versioned drafts |
+| `references/asking-decisions.md` | Every turn that asks the user to decide, and every answer that comes back |
+| `references/diagrams.md` | Drawing or updating a diagram |
 | `references/architecture-template.md` | Drafting or restructuring an architecture document |
 | `references/architecture-patterns.md` | Choosing an architectural style or integration approach |
 | `references/non-functional-requirements.md` | Defining or reviewing quality attributes and targets |
 | `references/api-design.md` | Specifying service interfaces or public APIs |
 | `references/data-model.md` | Defining entities, storage, consistency, and migrations |
-| `references/security-checklist.md` | Every design — threats, controls, and compliance |
+| `references/security-checklist.md` | Every design: threats, controls, and compliance |
 | `references/existing-context.md` | The input is a handoff, BRD/SRS, earlier PRD, ADRs, ERD, or a codebase with decisions already made |

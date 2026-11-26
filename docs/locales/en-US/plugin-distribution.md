@@ -18,6 +18,7 @@ Canonical skills in `skills/` are packaged for each platform by `scripts/build_p
 | Plugin | Contains |
 |---|---|
 | `product-requirements` | `product-requirements` |
+| `ui-ux-design` | `ui-ux-design` |
 | `architecture-requirements` | `architecture-requirements` |
 | `vaultia-skills` (display name "Vaultia", zip `vaultia.zip`) | every skill |
 
