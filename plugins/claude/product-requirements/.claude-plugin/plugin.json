@@ -1,7 +1,7 @@
 {
   "name": "product-requirements",
   "displayName": "Product Requirements",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "Create, refine, and review product requirements documents (PRDs) for software products and features.",
   "author": {
     "name": "Vaultia"

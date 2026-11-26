@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-11-26
+
 ### Added
 - `ui-ux-design` skill: classifies pages into three surfaces by design intent (landing page: polished and animated; storefront: clear and specific; portal: business logic and interaction with just-enough visuals) that set the defaults for polish, motion, content, and interaction, plans screens, user flows, and every UI state from requirements, then builds them as React screens with the Base UI React kit from [vaultia-templates](https://github.com/vaultia-app/vaultia-templates) (`frontend/base-ui-react-kit`: about 60 Base UI + Tailwind CSS v4 + cva components, DTCG tokens, generated themes, English and Vietnamese locales). Sets the kit up in projects that have none, creates brand themes through tokens, and reviews existing UIs for usability and accessibility.
 

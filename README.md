@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.3.1-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.3.1"></a>
+  <a href="https://github.com/vaultia-app/vaultia-skills/releases/latest"><img src="https://img.shields.io/badge/release-v0.3.3-FFC533?style=for-the-badge&labelColor=3a3a3a" alt="Release v0.3.3"></a>
   <a href="skills"><img src="https://img.shields.io/badge/skills-3-2EA043?style=for-the-badge&labelColor=3a3a3a" alt="Skills: 3"></a>
   <a href="#installation"><img src="https://img.shields.io/badge/works_with-Claude_Code_%C2%B7_Codex_%C2%B7_ChatGPT_%C2%B7_Cursor-6E40C9?style=for-the-badge&labelColor=3a3a3a" alt="Works with Claude Code, Codex, ChatGPT, Cursor"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-D9A400?style=for-the-badge&labelColor=3a3a3a&logo=python&logoColor=white" alt="Python 3.10+">
