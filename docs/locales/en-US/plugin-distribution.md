@@ -103,7 +103,7 @@ Releases are published by the [Release workflow](../../../.github/workflows/rele
    python3 scripts/build_plugins.py
    python3 -m unittest discover -s tests
    ```
-4. Commit `skills/`, `plugins/`, both `marketplace.json` files, and the docs on a branch, open a pull request, and merge it once CI passes. `main` is protected: direct pushes are blocked (see `.github/rulesets/`).
+4. Commit `skills/`, `plugins/`, both `marketplace.json` files, and the docs on a branch, open a pull request, and merge it once CI passes. `main` is protected: direct pushes are blocked (repository rulesets are managed centrally by Vaultia maintainers).
 5. Update your local `main`, then tag and push the tag (only repository admins can create `v*` tags):
    ```bash
    git switch main && git pull
