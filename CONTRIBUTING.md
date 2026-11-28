@@ -50,6 +50,6 @@ Version numbers and releases are handled by maintainers; don't change `version` 
 
 - One canonical copy per skill; do not create per-platform copies by hand.
 - Use full, descriptive `kebab-case` names; avoid unclear abbreviations.
-- Write all skill content in English. Docs live in `docs/locales/<lang>/` (English in `docs/locales/en-US/`, the source of truth); translations are updated in the same pull request.
+- Write all skill content in English. All source comments, docstrings, workflow comments, and developer-facing messages must also be in English. Intentional multilingual test inputs and language-selection labels are exempt. Docs live in `docs/locales/<lang>/` (English in `docs/locales/en-US/`, the source of truth); translations are updated in the same pull request.
 - Do not commit secrets, credentials, or private product data.
 - Review any executable script and its dependencies before adding it.
